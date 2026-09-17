@@ -87,9 +87,9 @@ h1 em { color: var(--cyan); font-style: normal; }
 .button-secondary { color: white; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.05); }
 
 .hero-visual { min-height: 520px; display: grid; place-items: center; }
-.custode-hero-photo { position:relative; z-index:4; width:min(100%,620px); margin:0; overflow:hidden; border:1px solid rgba(255,255,255,.18); border-radius:38px; background:#201031; box-shadow:0 35px 75px rgba(0,0,0,.42); animation:float 5s ease-in-out infinite; }
+.custode-hero-photo { position:relative; z-index:4; width:min(100%,500px); max-height:650px; margin:0; overflow:hidden; border:1px solid rgba(255,255,255,.18); border-radius:38px; background:#f4f5f4; box-shadow:0 35px 75px rgba(0,0,0,.42); animation:float 5s ease-in-out infinite; }
 .custode-hero-photo::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,transparent 68%,rgba(2,10,18,.68)); }
-.custode-hero-photo img { display:block; width:100%; height:auto; }
+.custode-hero-photo img { display:block; width:100%; height:min(650px,72vh); object-fit:contain; object-position:center; }
 .custode-hero-photo figcaption { position:absolute; z-index:2; left:1.3rem; bottom:1.1rem; display:flex; align-items:center; gap:.55rem; color:#e6f4fb; font-size:.68rem; font-weight:800; letter-spacing:.12em; }
 .custode-hero-photo figcaption i { width:8px; height:8px; border-radius:50%; background:#42f3a2; box-shadow:0 0 12px #42f3a2; }
 .orbit { position: absolute; border: 1px solid rgba(84,227,221,.24); border-radius: 50%; }
