@@ -4,7 +4,7 @@ const translations = {
     heroEyebrow: "TECHNOLOGY THAT ADAPTS TO THE PERSON",
     heroTitle: "Communicate, learn and participate with support built <em>around the person.</em>",
     heroLead: "DNAqi is an open, modular assistive operating system combining augmentative communication, educational activities and social robotics.",
-    discover: "Discover DNAqi", meetCustode: "Meet CUSTODE", realPrototype: "CUSTODE PROTOTYPE · DNAqi OS", statPerson: "The person at the centre", statModules: "Adaptable modules", statOpen: "Open architecture",
+    discover: "Discover DNAqi", meetCustode: "Meet CUSTODE", projectBy: "A PROJECT BY", realPrototype: "CUSTODE PROTOTYPE · DNAqi OS", statPerson: "The person at the centre", statModules: "Adaptable modules", statOpen: "Open architecture",
     projectEyebrow: "WHY DNAqi", projectTitle: "Not the same activity for everyone.<br>An environment that can adapt.",
     projectText: "DNAqi grows from a family's daily experience and the need to connect tools that often remain separate: communication, learning, play, observation and relationships.",
     cardCommunicationTitle: "Accessible communication", cardCommunicationText: "Words, images, gestures and buttons can coexist in the same pathway.",

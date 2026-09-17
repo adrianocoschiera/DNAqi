@@ -81,6 +81,9 @@ h1 { max-width: 880px; margin: 0; font-size: clamp(3rem, 6vw, 6.4rem); letter-sp
 h1 em { color: var(--cyan); font-style: normal; }
 .hero-lead { max-width: 700px; margin: 1.8rem 0 0; color: #c4d2e2; font-size: clamp(1.03rem, 1.5vw, 1.25rem); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.1rem; }
+.project-signature { display:flex; align-items:center; gap:.9rem; width:max-content; max-width:100%; margin-top:2rem; padding:.65rem .9rem; border:1px solid rgba(255,255,255,.13); border-radius:14px; background:rgba(255,255,255,.94); box-shadow:0 12px 30px rgba(0,0,0,.16); }
+.project-signature > span { flex:0 0 auto; color:#536273; font-size:.61rem; font-weight:800; letter-spacing:.14em; }
+.project-signature img { display:block; width:min(270px,44vw); height:auto; }
 .button { display: inline-flex; justify-content: center; align-items: center; min-height: 54px; padding: .85rem 1.4rem; border-radius: 999px; text-decoration: none; font-size: .9rem; font-weight: 800; transition: transform .2s, box-shadow .2s; }
 .button:hover { transform: translateY(-2px); }
 .button-primary { color: var(--navy); background: linear-gradient(120deg, var(--cyan), #89f5dc); box-shadow: 0 12px 35px rgba(84,227,221,.18); }
@@ -178,6 +181,7 @@ footer { display:flex; align-items:center; gap:2rem; padding:2.2rem clamp(1.2rem
   .site-header { gap:.7rem; }.language-button { font-size:.72rem; }
   h1 { font-size:clamp(2.7rem,14vw,4rem); }.hero { gap:2rem; }.hero-visual { min-height:390px; transform:scale(.8); margin:-40px -50px; }
   .hero-stats { flex-direction:column; }.hero-stats div { padding:1rem 0; border-right:0; }
+  .project-signature { align-items:flex-start; flex-direction:column; gap:.4rem; }.project-signature img { width:min(280px,70vw); }
   .principles-grid, .module-grid { grid-template-columns:1fr; }.principle-card { min-height:auto; }
   .custode-frame { min-height:480px; }.wire-robot { transform:scale(.78); }.feature-list { grid-template-columns:1fr; }
   footer { flex-direction:column; align-items:flex-start; gap:.5rem; }.footer-small { margin-left:0; }
