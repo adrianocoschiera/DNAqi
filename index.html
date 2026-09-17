@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DNAqi è un sistema operativo assistivo che integra comunicazione aumentativa, attività educative e robotica sociale."
+    />
+    <meta name="theme-color" content="#071426" />
+    <title>DNAqi — Tecnologia assistiva, comunicazione e robotica sociale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Vai al contenuto</a>
+
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="DNAqi, torna all'inizio">
+        <span class="brand-mark" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+        </span>
+        <span>DNA<span>qi</span></span>
+      </a>
+
+      <button class="menu-button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Apri il menu</span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navigazione principale">
+        <a href="#progetto" data-i18n="navProject">Il progetto</a>
+        <a href="#custode">CUSTODE</a>
+        <a href="#moduli" data-i18n="navModules">Moduli</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#sostieni" data-i18n="navSupport">Sostieni</a>
+      </nav>
+
+      <button class="language-button" type="button" aria-label="Change language">
+        <span class="active-lang">IT</span><span aria-hidden="true">/</span><span>EN</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <section id="home" class="hero">
+        <div class="hero-glow glow-one"></div>
+        <div class="hero-glow glow-two"></div>
+        <div class="hero-copy reveal">
+          <p class="eyebrow" data-i18n="heroEyebrow">TECNOLOGIA CHE SI ADATTA ALLA PERSONA</p>
+          <h1 data-i18n="heroTitle">
+            Comunicare, imparare e partecipare con un aiuto costruito <em>intorno alla persona.</em>
+          </h1>
+          <p class="hero-lead" data-i18n="heroLead">
+            DNAqi è un sistema operativo assistivo aperto e modulare che unisce comunicazione aumentativa,
+            attività educative e robotica sociale.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#progetto" data-i18n="discover">Scopri DNAqi</a>
+            <a class="button button-secondary" href="#custode" data-i18n="meetCustode">Conosci CUSTODE</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Rappresentazione di CUSTODE e dei moduli DNAqi">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="robot-card">
+            <div class="robot-head">
+              <div class="robot-face"><span></span><span></span></div>
+            </div>
+            <div class="robot-neck"></div>
+            <div class="robot-body">
+              <div class="robot-screen">
+                <strong>CUSTODE</strong>
+                <small>ONLINE</small>
+              </div>
+            </div>
+          </div>
+          <div class="floating-chip chip-one"><span>CAA</span></div>
+          <div class="floating-chip chip-two"><span>AI</span></div>
+          <div class="floating-chip chip-three"><span>OAK-D</span></div>
+        </div>
+
+        <div class="hero-stats reveal">
+          <div><strong>01</strong><span data-i18n="statPerson">La persona al centro</span></div>
+          <div><strong>∞</strong><span data-i18n="statModules">Moduli adattabili</span></div>
+          <div><strong>OS</strong><span data-i18n="statOpen">Architettura aperta</span></div>
+        </div>
+      </section>
+
+      <section id="progetto" class="section section-light">
+        <div class="section-heading reveal">
+          <p class="eyebrow dark" data-i18n="projectEyebrow">PERCHÉ DNAqi</p>
+          <h2 data-i18n="projectTitle">Non un'attività uguale per tutti.<br />Un ambiente che può adattarsi.</h2>
+          <p data-i18n="projectText">
+            DNAqi nasce dall'esperienza quotidiana di una famiglia e dalla necessità di collegare strumenti
+            che spesso restano separati: comunicazione, apprendimento, gioco, osservazione e relazione.
+          </p>
+        </div>
+
+        <div class="principles-grid">
+          <article class="principle-card reveal">
+            <span class="card-number">01</span>
+            <div class="line-icon communication-icon" aria-hidden="true"></div>
+            <h3 data-i18n="cardCommunicationTitle">Comunicazione accessibile</h3>
+            <p data-i18n="cardCommunicationText">Parole, immagini, gesti e pulsanti possono convivere nello stesso percorso.</p>
+          </article>
+          <article class="principle-card reveal">
+            <span class="card-number">02</span>
+            <div class="line-icon learning-icon" aria-hidden="true"></div>
+            <h3 data-i18n="cardLearningTitle">Apprendimento graduale</h3>
+            <p data-i18n="cardLearningText">Attività strutturate con difficoltà, tempi e aiuti regolabili.</p>
+          </article>
+          <article class="principle-card reveal">
+            <span class="card-number">03</span>
+            <div class="line-icon data-icon" aria-hidden="true"></div>
+            <h3 data-i18n="cardDataTitle">Dati comprensibili</h3>
+            <p data-i18n="cardDataText">Risultati utili per famiglie e professionisti, nel rispetto della privacy.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="custode" class="section custode-section">
+        <div class="custode-image reveal">
+          <div class="custode-frame">
+            <div class="status-pill"><i></i><span data-i18n="prototypeStatus">PROTOTIPO ATTIVO</span></div>
+            <div class="wire-robot" aria-hidden="true">
+              <div class="wire-head"><span></span><span></span></div>
+              <div class="wire-neck"></div>
+              <div class="wire-torso"><b>DNAqi</b></div>
+              <div class="wire-arm left"></div><div class="wire-arm right"></div>
+            </div>
+          </div>
+        </div>
+        <div class="custode-copy reveal">
+          <p class="eyebrow" data-i18n="custodeEyebrow">IL PRIMO CORPO DI DNAqi</p>
+          <h2>CUSTODE</h2>
+          <p class="large-copy" data-i18n="custodeLead">
+            Un robot sociale assistivo costruito per sperimentare interazioni più naturali, accessibili e misurabili.
+          </p>
+          <p data-i18n="custodeText">
+            CUSTODE integra voce, schermo, movimento, visione artificiale e strumenti di comunicazione. Il prototipo
+            è reale e in evoluzione: ogni funzione viene provata in modo progressivo, documentato e prudente.
+          </p>
+          <ul class="feature-list">
+            <li data-i18n="featureVoice">Voce e interazione guidata</li>
+            <li data-i18n="featureVision">Visione artificiale rispettosa della privacy</li>
+            <li data-i18n="featureMovement">Movimenti ed espressioni robotiche</li>
+            <li data-i18n="featureTablet">Controllo tramite tablet</li>
+          </ul>
+          <div class="notice" data-i18n="notice">
+            DNAqi è un progetto assistivo sperimentale: non formula diagnosi e non sostituisce professionisti sanitari o educativi.
+          </div>
+        </div>
+      </section>
+
+      <section id="moduli" class="section modules-section">
+        <div class="section-heading centered reveal">
+          <p class="eyebrow dark" data-i18n="modulesEyebrow">UN SISTEMA, MOLTI PERCORSI</p>
+          <h2 data-i18n="modulesTitle">Moduli che lavorano insieme</h2>
+          <p data-i18n="modulesText">Ogni componente può essere utilizzato da solo oppure collegato agli altri attraverso DNAqi.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card reveal"><span>01</span><h3 data-i18n="moduleCaa">Comunicazione CAA</h3><p data-i18n="moduleCaaText">Tabelle, simboli e scelte accessibili.</p></article>
+          <article class="module-card reveal"><span>02</span><h3 data-i18n="moduleLearning">Apprendimento</h3><p data-i18n="moduleLearningText">Sequenze, lettura e attività adattive.</p></article>
+          <article class="module-card reveal"><span>03</span><h3 data-i18n="modulePlay">Gioco</h3><p data-i18n="modulePlayText">Esperienze digitali e nel mondo reale.</p></article>
+          <article class="module-card reveal"><span>04</span><h3 data-i18n="moduleStories">Storie</h3><p data-i18n="moduleStoriesText">Narrazioni interattive e personalizzabili.</p></article>
+          <article class="module-card reveal"><span>05</span><h3 data-i18n="moduleObservation">Osservazione</h3><p data-i18n="moduleObservationText">Risposte e progressi resi leggibili.</p></article>
+          <article class="module-card reveal"><span>06</span><h3 data-i18n="moduleRobot">Robotica sociale</h3><p data-i18n="moduleRobotText">Voce, sguardo, gesti e presenza fisica.</p></article>
+        </div>
+      </section>
+
+      <section id="roadmap" class="section roadmap-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow" data-i18n="roadmapEyebrow">DAL PROTOTIPO ALLA COMUNITÀ</p>
+          <h2 data-i18n="roadmapTitle">Una crescita trasparente, passo dopo passo.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item complete reveal"><span>01</span><div><small data-i18n="complete">COMPLETATO</small><h3 data-i18n="roadOne">Primo prototipo funzionante</h3><p data-i18n="roadOneText">Hardware, sistema DNAqi e controllo da tablet.</p></div></article>
+          <article class="timeline-item active reveal"><span>02</span><div><small data-i18n="inProgress">IN SVILUPPO</small><h3 data-i18n="roadTwo">Moduli assistivi integrati</h3><p data-i18n="roadTwoText">CAA, attività, gioco, voce e analisi visiva.</p></div></article>
+          <article class="timeline-item reveal"><span>03</span><div><small data-i18n="nextGoal">PROSSIMO OBIETTIVO</small><h3 data-i18n="roadThree">Sperimentazione con famiglie</h3><p data-i18n="roadThreeText">Protocolli, sicurezza e documentazione replicabile.</p></div></article>
+          <article class="timeline-item reveal"><span>04</span><div><small data-i18n="vision">VISIONE</small><h3 data-i18n="roadFour">Piattaforma aperta</h3><p data-i18n="roadFourText">Una comunità che sviluppa e condivide nuovi moduli.</p></div></article>
+        </div>
+      </section>
+
+      <section id="sostieni" class="support-section">
+        <div class="support-orb" aria-hidden="true"></div>
+        <div class="support-content reveal">
+          <p class="eyebrow" data-i18n="supportEyebrow">AIUTACI A FARE IL PROSSIMO PASSO</p>
+          <h2 data-i18n="supportTitle">CUSTODE esiste già.<br />Ora vogliamo renderlo utile a più persone.</h2>
+          <p data-i18n="supportText">
+            Stiamo preparando la prossima fase: maggiore sicurezza, nuovi moduli, documentazione aperta e prove con famiglie e professionisti.
+          </p>
+          <a class="button button-primary" href="mailto:info@dnaqi.it" data-i18n="contact">Parliamone</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#home"><span>DNA<span>qi</span></span></a>
+      <p data-i18n="footerText">Un progetto indipendente de I Custodi del DNA.</p>
+      <p class="footer-small">© <span id="year"></span> DNAqi · <a href="mailto:info@dnaqi.it">info@dnaqi.it</a></p>
+    </footer>
+  </body>
+</html>
