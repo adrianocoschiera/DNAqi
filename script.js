@@ -24,7 +24,7 @@ const translations = {
     roadOne: "First working prototype", roadOneText: "Hardware, DNAqi system and tablet control.", roadTwo: "Integrated assistive modules", roadTwoText: "AAC, activities, play, voice and visual analysis.",
     roadThree: "Trials with families", roadThreeText: "Protocols, safety and reproducible documentation.", roadFour: "Open platform", roadFourText: "A community developing and sharing new modules.",
     supportEyebrow: "HELP US TAKE THE NEXT STEP", supportTitle: "CUSTODE already exists.<br>Now we want it to help more people.", supportText: "We are preparing the next phase: enhanced safety, new modules, open documentation, and trials with families and professionals.",
-    contact: "Let's talk", footerText: "An independent project by I Custodi del DNA."
+    donate: "Support the project", contact: "Let's talk", footerText: "An independent project by I Custodi del DNA."
   }
 };
 
