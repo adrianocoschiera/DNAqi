@@ -86,6 +86,18 @@
                   <option value="other">Altra lingua</option>
                 </select>
               </label>
+              <label>Classe o fascia scolastica
+                <select name="schoolLevel">
+                  <option value="">Non indicata</option>
+                  <option value="infanzia">Scuola dell'infanzia</option>
+                  <option value="primaria">Scuola primaria</option>
+                  <option value="secondaria-1">Secondaria di primo grado</option>
+                  <option value="altro">Altro percorso</option>
+                </select>
+              </label>
+              <label>Adulto di riferimento
+                <input name="referenceAdult" maxlength="60" placeholder="Nome o ruolo">
+              </label>
             </div>
           </div>
 
@@ -112,6 +124,31 @@
                   <option value="mista">Mista</option>
                 </select>
               </label>
+              <label>Comprensione prevalente
+                <select name="comprehensionLevel">
+                  <option value="">Seleziona</option>
+                  <option value="parole">Parole singole</option>
+                  <option value="frasi-semplici">Frasi semplici</option>
+                  <option value="consegne-due-passi">Consegne in due passaggi</option>
+                  <option value="conversazione">Conversazione</option>
+                </select>
+              </label>
+              <label>Sistema CAA utilizzato
+                <input name="aacSystem" maxlength="100" placeholder="Es. pittogrammi, tabella, comunicatore">
+              </label>
+              <label>Livello di aiuto abituale
+                <select name="supportLevel">
+                  <option value="">Seleziona</option>
+                  <option value="autonomo">Autonomo</option>
+                  <option value="verbale">Aiuto verbale</option>
+                  <option value="gestuale">Aiuto gestuale</option>
+                  <option value="fisico">Aiuto fisico</option>
+                  <option value="variabile">Variabile</option>
+                </select>
+              </label>
+              <label>Parole, simboli o richieste già conosciute
+                <textarea name="knownCommunication" rows="3" maxlength="500" placeholder="Es. acqua, ancora, basta, aiuto"></textarea>
+              </label>
             </div>
           </div>
 
@@ -129,6 +166,24 @@
                   <option value="vivace">Vivace</option>
                 </select>
               </label>
+              <label>Rinforzi e attività motivanti
+                <textarea name="reinforcers" rows="3" maxlength="500" placeholder="Es. musica, bolle, disegno, complimenti"></textarea>
+              </label>
+              <label>Durata ideale di un'attività
+                <select name="activityDuration">
+                  <option value="">Seleziona</option>
+                  <option value="3-5">3–5 minuti</option>
+                  <option value="5-10">5–10 minuti</option>
+                  <option value="10-15">10–15 minuti</option>
+                  <option value="15-plus">Più di 15 minuti</option>
+                </select>
+              </label>
+              <label>Sensibilità o elementi da evitare
+                <textarea name="sensitivities" rows="3" maxlength="500" placeholder="Suoni, luci, immagini, contatto o altre indicazioni"></textarea>
+              </label>
+              <label>Modalità di pausa o calma preferita
+                <textarea name="calmingStrategies" rows="3" maxlength="500" placeholder="Es. silenzio, musica, oggetto preferito, agenda visiva"></textarea>
+              </label>
             </div>
           </div>
 
@@ -139,6 +194,30 @@
               <input name="demoConsent" type="checkbox" required>
               <span>Confermo di essere autorizzato a creare questo profilo dimostrativo e comprendo che non devo inserire dati sanitari nel prototipo. *</span>
             </label>
+            <div class="documents-demo">
+              <div>
+                <h3>Documentazione di supporto</h3>
+                <p>Nella demo i documenti restano esclusivamente su questo dispositivo. Non caricare dati sanitari reali.</p>
+              </div>
+              <div class="document-controls">
+                <label>Tipo di documento
+                  <select id="documentType">
+                    <option value="profilo-funzionale">Profilo funzionale</option>
+                    <option value="pei">PEI o progetto educativo</option>
+                    <option value="comunicazione">CAA e comunicazione</option>
+                    <option value="terapia">Relazione professionale</option>
+                    <option value="sicurezza">Indicazioni di sicurezza</option>
+                    <option value="altro">Altro</option>
+                  </select>
+                </label>
+                <label class="file-picker">Scegli uno o più file
+                  <input id="documentFiles" type="file" multiple accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg">
+                </label>
+              </div>
+              <button type="button" class="secondary" id="addDocuments">Aggiungi documenti alla demo</button>
+              <ul class="document-list" id="documentList" aria-live="polite"></ul>
+              <p class="document-note" id="documentNote"></p>
+            </div>
           </div>
 
           <div class="form-actions">

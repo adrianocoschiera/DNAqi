@@ -1,4 +1,7 @@
 const STORAGE_KEY = 'dnaqi_demo_profile_v1';
+const DOCUMENT_DB = 'dnaqi_demo_documents_v1';
+const DOCUMENT_STORE = 'documents';
+const MAX_DOCUMENT_SIZE = 10 * 1024 * 1024;
 let currentStep = 0;
 
 const screens = {
@@ -61,12 +64,101 @@ function populateForm() {
   const profile = readProfile();
   if (!profile) return;
   const form = document.querySelector('#profileForm');
+  form.elements.demoConsent.checked = Boolean(profile.consentAccepted);
   Object.entries(profile).forEach(([key, value]) => {
     const field = form.elements.namedItem(key);
     if (!field) return;
     if (field.type === 'checkbox') field.checked = Boolean(value);
     else field.value = value ?? '';
   });
+}
+
+function openDocumentDb() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DOCUMENT_DB, 1);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(DOCUMENT_STORE)) {
+        db.createObjectStore(DOCUMENT_STORE, {keyPath: 'id', autoIncrement: true});
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function getDocuments() {
+  const db = await openDocumentDb();
+  return new Promise((resolve, reject) => {
+    const request = db.transaction(DOCUMENT_STORE, 'readonly').objectStore(DOCUMENT_STORE).getAll();
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function storeDocument(file, type) {
+  const db = await openDocumentDb();
+  const record = {
+    name: file.name,
+    type,
+    mimeType: file.type || 'application/octet-stream',
+    size: file.size,
+    addedAt: new Date().toISOString(),
+    file,
+  };
+  return new Promise((resolve, reject) => {
+    const request = db.transaction(DOCUMENT_STORE, 'readwrite').objectStore(DOCUMENT_STORE).add(record);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function removeDocument(id) {
+  const db = await openDocumentDb();
+  return new Promise((resolve, reject) => {
+    const request = db.transaction(DOCUMENT_STORE, 'readwrite').objectStore(DOCUMENT_STORE).delete(id);
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+function readableSize(bytes) {
+  if (bytes < 1024 * 1024) return `${Math.ceil(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+async function renderDocuments() {
+  const list = document.querySelector('#documentList');
+  if (!list) return;
+  try {
+    const documents = await getDocuments();
+    list.innerHTML = '';
+    documents.forEach(documentRecord => {
+      const item = document.createElement('li');
+      item.className = 'document-item';
+      const info = document.createElement('span');
+      const name = document.createElement('strong');
+      name.textContent = documentRecord.name;
+      const meta = document.createElement('small');
+      meta.textContent = `${documentRecord.type.replaceAll('-', ' ')} · ${readableSize(documentRecord.size)}`;
+      info.append(name, meta);
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'remove-document';
+      remove.textContent = 'Rimuovi';
+      remove.addEventListener('click', async () => {
+        await removeDocument(documentRecord.id);
+        await renderDocuments();
+      });
+      item.append(info, remove);
+      list.appendChild(item);
+    });
+    document.querySelector('#documentNote').textContent = documents.length
+      ? `${documents.length} document${documents.length === 1 ? 'o' : 'i'} disponibile${documents.length === 1 ? '' : 'i'} solo su questo dispositivo.`
+      : 'Nessun documento aggiunto alla demo.';
+  } catch (_) {
+    document.querySelector('#documentNote').textContent = 'Archivio locale non disponibile in questo browser.';
+  }
 }
 
 function showFormStep(step) {
@@ -131,6 +223,7 @@ document.addEventListener('click', event => {
     if (destination === 'setup') {
       populateForm();
       showFormStep(0);
+      renderDocuments();
     }
     if (destination === 'home') refreshHome();
     showScreen(destination);
@@ -146,6 +239,29 @@ document.querySelector('#nextStep').addEventListener('click', () => {
 
 document.querySelector('#previousStep').addEventListener('click', () => {
   showFormStep(currentStep - 1);
+});
+
+document.querySelector('#addDocuments').addEventListener('click', async () => {
+  const input = document.querySelector('#documentFiles');
+  const note = document.querySelector('#documentNote');
+  const files = [...input.files];
+  if (!files.length) {
+    note.textContent = 'Scegli almeno un documento.';
+    return;
+  }
+  const oversized = files.find(file => file.size > MAX_DOCUMENT_SIZE);
+  if (oversized) {
+    note.textContent = `${oversized.name} supera il limite dimostrativo di 10 MB.`;
+    return;
+  }
+  const type = document.querySelector('#documentType').value;
+  try {
+    for (const file of files) await storeDocument(file, type);
+    input.value = '';
+    await renderDocuments();
+  } catch (_) {
+    note.textContent = 'Non è stato possibile conservare il documento su questo dispositivo.';
+  }
 });
 
 document.querySelector('#profileForm').addEventListener('submit', event => {
