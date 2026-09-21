@@ -1,5 +1,4 @@
 const STORAGE_KEY = 'dnaqi_demo_profile_v1';
-const CURRENT_YEAR = 2026;
 let currentStep = 0;
 
 const screens = {
@@ -11,28 +10,15 @@ const screens = {
 const themes = {
   junior: {
     title: 'DNAqi Junior',
-    subtitle: 'Interfaccia consigliata: 4–10 anni',
-    image: 'dnaqi_junior_1024x600.png',
+    subtitle: 'Interfaccia dedicata: 4–10 anni',
+    image: 'dnaqi_junior_home.jpg',
     areas: [
-      ['Comunicazione', 24, 30],
-      ['Apprendimento', 24, 57],
-      ['Mente', 24, 84],
-      ['Autonomia', 81, 30],
-      ['Storie e creativita', 81, 57],
-      ['Movimento', 81, 84],
-    ],
-  },
-  next: {
-    title: 'DNAqi Next',
-    subtitle: 'Interfaccia consigliata: dagli 11 anni',
-    image: 'dnaqi_next_1024x600.png',
-    areas: [
-      ['Comunicazione', 37.5, 41],
-      ['Apprendimento', 60.5, 41],
-      ['Mente', 83.5, 41],
-      ['Autonomia', 37.5, 80],
-      ['Storie e creativita', 60.5, 80],
-      ['Movimento', 83.5, 80],
+      ['Comunicazione', 10.5, 7.5, 30, 24],
+      ['Apprendimento', 10.5, 35.5, 30, 24],
+      ['Logica', 10.5, 63.5, 30, 24],
+      ['Autonomia', 68, 7.5, 29, 24],
+      ['Creatività', 68, 35.5, 29, 24],
+      ['Movimento', 68, 63.5, 29, 24],
     ],
   },
 };
@@ -46,11 +32,6 @@ function isComplete(profile) {
   return Boolean(profile && profile.displayName && profile.birthYear &&
     profile.adultRole && profile.communication && profile.responseMode &&
     profile.visualLoad && profile.consentAccepted);
-}
-
-function suggestedTheme(profile) {
-  const age = CURRENT_YEAR - Number(profile.birthYear);
-  return age <= 10 ? 'junior' : 'next';
 }
 
 function showScreen(name) {
@@ -72,9 +53,7 @@ function refreshHome() {
     card.classList.toggle('locked', !complete);
     card.setAttribute('aria-disabled', String(!complete));
     const label = card.querySelector('.lock-label');
-    if (label) label.textContent = complete
-      ? (card.dataset.theme === suggestedTheme(profile) ? 'Tema consigliato' : 'Apri questo tema')
-      : 'Completa prima il Setup';
+    if (label) label.textContent = complete ? 'Entra in DNAqi Junior' : 'Completa prima il Setup';
   });
 }
 
@@ -130,13 +109,15 @@ function openTheme(themeId) {
   document.querySelector('#themeImage').src = theme.image;
   const holder = document.querySelector('#hotspots');
   holder.innerHTML = '';
-  theme.areas.forEach(([label, x, y]) => {
+  theme.areas.forEach(([label, x, y, width, height]) => {
     const button = document.createElement('button');
     button.className = 'hotspot';
     button.textContent = label;
+    button.setAttribute('aria-label', `Apri ${label}`);
     button.style.left = `${x}%`;
     button.style.top = `${y}%`;
-    button.style.transform = 'translate(-50%,-50%)';
+    button.style.width = `${width}%`;
+    button.style.height = `${height}%`;
     button.addEventListener('click', () => alert(`${label}: collegamento modulo da configurare.`));
     holder.appendChild(button);
   });
@@ -177,12 +158,12 @@ document.querySelector('#profileForm').addEventListener('submit', event => {
   data.birthYear = Number(data.birthYear);
   data.consentAccepted = form.elements.demoConsent.checked;
   data.profileId = previous?.profileId || `DNAQI-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
-  data.preferredTheme = suggestedTheme(data);
+  data.preferredTheme = 'junior';
   data.profileVersion = 1;
   data.createdAt = previous?.createdAt || new Date().toISOString();
   data.updatedAt = new Date().toISOString();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  document.querySelector('#formMessage').textContent = `Profilo salvato. Tema suggerito: ${themes[suggestedTheme(data)].title}.`;
+  document.querySelector('#formMessage').textContent = 'Profilo salvato. DNAqi Junior è ora disponibile.';
   refreshHome();
   setTimeout(() => showScreen('home'), 700);
 });
