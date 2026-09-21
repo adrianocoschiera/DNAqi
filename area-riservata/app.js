@@ -12,22 +12,29 @@ const themes = {
     title: 'DNAqi Junior',
     subtitle: 'Interfaccia consigliata: 4–10 anni',
     image: 'dnaqi_junior_1024x600.png',
+    areas: [
+      ['Comunicazione', 24, 30],
+      ['Apprendimento', 24, 57],
+      ['Mente', 24, 84],
+      ['Autonomia', 81, 30],
+      ['Storie e creativita', 81, 57],
+      ['Movimento', 81, 84],
+    ],
   },
   next: {
     title: 'DNAqi Next',
     subtitle: 'Interfaccia consigliata: dagli 11 anni',
     image: 'dnaqi_next_1024x600.png',
+    areas: [
+      ['Comunicazione', 37.5, 41],
+      ['Apprendimento', 60.5, 41],
+      ['Mente', 83.5, 41],
+      ['Autonomia', 37.5, 80],
+      ['Storie e creativita', 60.5, 80],
+      ['Movimento', 83.5, 80],
+    ],
   },
 };
-
-const moduleAreas = [
-  ['Comunicazione', 31, 31],
-  ['Apprendimento', 55, 31],
-  ['Mente', 79, 31],
-  ['Autonomia', 31, 76],
-  ['Storie e creativita', 55, 76],
-  ['Movimento', 79, 76],
-];
 
 function readProfile() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
@@ -95,7 +102,7 @@ function openTheme(themeId) {
   document.querySelector('#themeImage').src = theme.image;
   const holder = document.querySelector('#hotspots');
   holder.innerHTML = '';
-  moduleAreas.forEach(([label, x, y]) => {
+  theme.areas.forEach(([label, x, y]) => {
     const button = document.createElement('button');
     button.className = 'hotspot';
     button.textContent = label;
