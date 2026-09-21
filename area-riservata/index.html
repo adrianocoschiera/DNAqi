@@ -63,15 +63,15 @@
           <h1>Creiamo il profilo DNAqi</h1>
           <p>I campi contrassegnati sono indispensabili per proporre un'esperienza iniziale adeguata.</p>
           <ol class="steps" aria-label="Passaggi setup">
-            <li class="current">Identita essenziale</li>
-            <li>Comunicazione</li>
-            <li>Accessibilita</li>
-            <li>Consenso</li>
+            <li class="current" data-step-nav="0">Identità essenziale</li>
+            <li data-step-nav="1">Comunicazione</li>
+            <li data-step-nav="2">Accessibilità</li>
+            <li data-step-nav="3">Consenso</li>
           </ol>
         </aside>
 
         <form id="profileForm" class="profile-form">
-          <div class="form-section">
+          <div class="form-section form-step" data-step="0">
             <h2>Dati essenziali</h2>
             <div class="fields two">
               <label>Nome o pseudonimo *
@@ -97,7 +97,7 @@
             </div>
           </div>
 
-          <div class="form-section">
+          <div class="form-section form-step" data-step="1" hidden>
             <h2>Comunicazione e risposta</h2>
             <div class="fields two">
               <label>Modalita comunicativa prevalente *
@@ -123,8 +123,8 @@
             </div>
           </div>
 
-          <div class="form-section">
-            <h2>Preferenze iniziali</h2>
+          <div class="form-section form-step" data-step="2" hidden>
+            <h2>Accessibilità e preferenze</h2>
             <div class="fields two">
               <label>Interesse principale
                 <input name="interest" maxlength="80" placeholder="Es. musica, animali, storie">
@@ -140,14 +140,20 @@
             </div>
           </div>
 
-          <label class="consent">
-            <input name="demoConsent" type="checkbox" required>
-            <span>Confermo di essere autorizzato a creare questo profilo dimostrativo e comprendo che non devo inserire dati sanitari nel prototipo. *</span>
-          </label>
+          <div class="form-section form-step" data-step="3" hidden>
+            <h2>Consenso e conferma</h2>
+            <p class="step-help">Controlla i dati inseriti e conferma l'autorizzazione prima di creare il profilo.</p>
+            <label class="consent">
+              <input name="demoConsent" type="checkbox" required>
+              <span>Confermo di essere autorizzato a creare questo profilo dimostrativo e comprendo che non devo inserire dati sanitari nel prototipo. *</span>
+            </label>
+          </div>
 
           <div class="form-actions">
+            <button type="button" class="secondary" id="previousStep" hidden>← Indietro</button>
             <button type="button" class="secondary" data-go="home">Annulla</button>
-            <button type="submit" class="primary">Salva e continua</button>
+            <button type="button" class="primary" id="nextStep">Avanti →</button>
+            <button type="submit" class="primary" id="saveProfile" hidden>Salva e continua</button>
           </div>
           <p class="form-message" id="formMessage" role="status"></p>
         </form>
