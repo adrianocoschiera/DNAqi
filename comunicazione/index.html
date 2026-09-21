@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071f35">
+  <title>DNAqi Junior · Comunicazione</title>
+  <meta name="description" content="Front page del modulo Comunicazione di DNAqi Junior per CUSTODE.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="pageTitle">
+      <img src="assets/dnaqi-junior-frontpage.jpg" alt="CUSTODE nella stanza DNAqi Junior con le aree educative">
+      <div class="hero-shade"></div>
+      <header class="topbar">
+        <button class="icon-button" id="homeButton" aria-label="Torna alla home DNAqi">⌂</button>
+        <div class="title-wrap">
+          <span class="section-label">DNAqi Junior · 4–10 anni</span>
+          <h1 id="pageTitle">Comunicazione</h1>
+        </div>
+        <button class="icon-button adult-button" id="adultButton" aria-label="Apri area adulto">⚙</button>
+      </header>
+
+      <div class="welcome-card">
+        <div class="robot-face" aria-hidden="true"><i></i><i></i></div>
+        <div>
+          <p class="hello" id="welcomeText">Ciao! Cosa vuoi fare?</p>
+          <p class="hint">Puoi scegliere un'attività oppure usare i pulsanti in basso.</p>
+        </div>
+      </div>
+
+      <nav class="activity-grid" aria-label="Attività di comunicazione">
+        <button class="activity-card recommended" data-activity="Voglio dire" data-color="cyan">
+          <span class="badge">Consigliata</span>
+          <span class="activity-icon" aria-hidden="true">💬</span>
+          <span><strong>Voglio dire</strong><small>Bisogni, scelte e simboli</small></span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="activity-card" data-activity="Parliamo insieme" data-color="violet">
+          <span class="activity-icon" aria-hidden="true">🤝</span>
+          <span><strong>Parliamo insieme</strong><small>Saluti, domande e turni</small></span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="activity-card" data-activity="Capisco e scelgo" data-color="amber">
+          <span class="activity-icon" aria-hidden="true">👆</span>
+          <span><strong>Capisco e scelgo</strong><small>Parole, consegne e decisioni</small></span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="activity-card" data-activity="Emozioni e situazioni" data-color="pink">
+          <span class="activity-icon" aria-hidden="true">😊</span>
+          <span><strong>Emozioni e situazioni</strong><small>Mi esprimo e chiedo aiuto</small></span>
+          <span class="arrow">›</span>
+        </button>
+      </nav>
+    </section>
+
+    <nav class="quick-talk" aria-label="Comunicazione rapida sempre disponibile">
+      <button data-say="Sì"><span>✓</span>Sì</button>
+      <button data-say="No"><span>✕</span>No</button>
+      <button data-say="Aiuto"><span>✋</span>Aiuto</button>
+      <button data-say="Pausa"><span>⏸</span>Pausa</button>
+      <button data-say="Ancora"><span>↻</span>Ancora</button>
+      <button data-say="Basta"><span>■</span>Basta</button>
+    </nav>
+  </main>
+
+  <dialog id="activityDialog" class="activity-dialog">
+    <button class="dialog-close" data-close aria-label="Chiudi">×</button>
+    <div class="dialog-icon" id="dialogIcon">💬</div>
+    <p class="dialog-label">Attività</p>
+    <h2 id="dialogTitle">Voglio dire</h2>
+    <p id="dialogDescription"></p>
+    <div class="demo-options" id="demoOptions"></div>
+    <button class="start-button" id="startButton">Inizia con CUSTODE</button>
+  </dialog>
+
+  <dialog id="adultDialog" class="adult-dialog">
+    <button class="dialog-close" data-close aria-label="Chiudi">×</button>
+    <p class="dialog-label">Area adulto protetta · Demo</p>
+    <h2>Personalizzazione Comunicazione</h2>
+    <div class="adult-grid">
+      <label>Nome bambino<input id="childName" value="Emma" maxlength="30"></label>
+      <label>Numero di scelte<select id="choiceCount"><option>2</option><option selected>4</option><option>6</option></select></label>
+      <label>Tempo di risposta<select id="waitTime"><option>5 secondi</option><option selected>8 secondi</option><option>12 secondi</option></select></label>
+      <label>Supporto prevalente<select id="supportMode"><option>Fotografie</option><option selected>Pittogrammi + voce</option><option>Voce + gesti</option></select></label>
+    </div>
+    <p class="privacy-note">Nel prototipo le preferenze restano soltanto su questo dispositivo. La documentazione clinica non viene caricata in questa demo.</p>
+    <button class="start-button" id="saveSettings">Salva preferenze</button>
+  </dialog>
+
+  <div class="speech-toast" id="speechToast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
