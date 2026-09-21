@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'dnaqi_demo_profile_v1';
 const CURRENT_YEAR = 2026;
+let currentStep = 0;
 
 const screens = {
   home: document.querySelector('#homeScreen'),
@@ -89,6 +90,33 @@ function populateForm() {
   });
 }
 
+function showFormStep(step) {
+  currentStep = Math.max(0, Math.min(3, step));
+  document.querySelectorAll('.form-step').forEach(section => {
+    section.hidden = Number(section.dataset.step) !== currentStep;
+  });
+  document.querySelectorAll('[data-step-nav]').forEach(item => {
+    const itemStep = Number(item.dataset.stepNav);
+    item.classList.toggle('current', itemStep === currentStep);
+    item.classList.toggle('completed', itemStep < currentStep);
+  });
+  document.querySelector('#previousStep').hidden = currentStep === 0;
+  document.querySelector('#nextStep').hidden = currentStep === 3;
+  document.querySelector('#saveProfile').hidden = currentStep !== 3;
+  document.querySelector('#formMessage').textContent = '';
+}
+
+function validateCurrentStep() {
+  const fields = document.querySelectorAll(`.form-step[data-step="${currentStep}"] input, .form-step[data-step="${currentStep}"] select`);
+  for (const field of fields) {
+    if (!field.checkValidity()) {
+      field.reportValidity();
+      return false;
+    }
+  }
+  return true;
+}
+
 function openTheme(themeId) {
   const profile = readProfile();
   if (!isComplete(profile)) {
@@ -119,13 +147,24 @@ document.addEventListener('click', event => {
   const go = event.target.closest('[data-go]');
   if (go) {
     const destination = go.dataset.go;
-    if (destination === 'setup') populateForm();
+    if (destination === 'setup') {
+      populateForm();
+      showFormStep(0);
+    }
     if (destination === 'home') refreshHome();
     showScreen(destination);
     return;
   }
   const theme = event.target.closest('[data-theme]');
   if (theme) openTheme(theme.dataset.theme);
+});
+
+document.querySelector('#nextStep').addEventListener('click', () => {
+  if (validateCurrentStep()) showFormStep(currentStep + 1);
+});
+
+document.querySelector('#previousStep').addEventListener('click', () => {
+  showFormStep(currentStep - 1);
 });
 
 document.querySelector('#profileForm').addEventListener('submit', event => {
