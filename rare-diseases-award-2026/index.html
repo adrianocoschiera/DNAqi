@@ -24,6 +24,7 @@
         <a href="#bisogno">Il bisogno</a>
         <a href="#funzionamento">Come funziona</a>
         <a href="#oggi">Cosa esiste</a>
+        <a href="#hardware">Hardware</a>
         <a href="#sicurezza">Sicurezza</a>
       </nav>
       <a class="back-link" href="../">Sito DNAqi</a>
@@ -207,8 +208,28 @@
           <div class="evidence-row" role="row"><strong role="cell">Sei aree DNAqi</strong><span class="state working" role="cell">Funzionante</span><p role="cell">Front page e attività organizzate per area.</p></div>
           <div class="evidence-row" role="row"><strong role="cell">Profilo personalizzabile</strong><span class="state testing" role="cell">In verifica</span><p role="cell">Preferenze, comunicazione, accessibilità e consenso.</p></div>
           <div class="evidence-row" role="row"><strong role="cell">Voce e movimenti</strong><span class="state testing" role="cell">In verifica</span><p role="cell">Risposte vocali e movimenti guidati e controllati.</p></div>
-          <div class="evidence-row" role="row"><strong role="cell">Analisi visiva</strong><span class="state experimental" role="cell">Sperimentale</span><p role="cell">Elaborazione locale con limiti e controllo umano.</p></div>
+          <div class="evidence-row" role="row"><strong role="cell">Analisi visiva</strong><span class="state experimental" role="cell">Sperimentale</span><p role="cell">Rileva segnali osservabili come presenza del volto, orientamento del capo e variazioni del movimento facciale. Non attribuisce emozioni, intenzioni o diagnosi.</p></div>
         </div>
+      </section>
+
+      <section id="hardware" class="award-section hardware-section">
+        <div class="section-intro light-copy">
+          <p class="eyebrow">HARDWARE DEL PROTOTIPO</p>
+          <h2>Componenti accessibili, modulari e sostituibili.</h2>
+          <p>CUSTODE integra componenti disponibili sul mercato e parti personalizzate. L'architettura separa elaborazione, percezione, movimento e interfaccia, così ogni elemento può essere verificato e aggiornato.</p>
+        </div>
+        <div class="hardware-grid">
+          <article><span>01</span><h3>Unità centrale</h3><strong>Raspberry Pi 5</strong><p>Esegue DNAqi, coordina i servizi locali e dialoga con il tablet sulla rete protetta.</p></article>
+          <article><span>02</span><h3>Visione 3D</h3><strong>Luxonis OAK-D Lite</strong><p>Acquisizione video e profondità per funzioni sperimentali basate su segnali osservabili.</p></article>
+          <article><span>03</span><h3>Ascolto e voce</h3><strong>Array a 4 microfoni e speaker</strong><p>Acquisizione vocale, sintesi e risposte sonore; l'elaborazione locale resta prioritaria.</p></article>
+          <article><span>04</span><h3>Movimento</h3><strong>Arduino Mega, PCA9685 e servomotori</strong><p>Controllo separato dei movimenti, con limiti software e arresto manuale.</p></article>
+          <article><span>05</span><h3>Interfaccia</h3><strong>Tablet Android con app Flutter</strong><p>Mostra le sei aree DNAqi, raccoglie le scelte e invia comandi espliciti a CUSTODE.</p></article>
+          <article><span>06</span><h3>Corpo e schermo</h3><strong>Struttura personalizzata e display</strong><p>Rende visibili contenuti, simboli e stato del robot, mantenendo l'hardware ispezionabile.</p></article>
+        </div>
+        <aside class="vision-boundary">
+          <strong>Cosa intendiamo per analisi visiva</strong>
+          <p>Il prototipo può misurare eventi tecnici e cambiamenti visibili. Non “legge la mente”, non stabilisce come si sente un bambino e non prende decisioni educative o cliniche in autonomia. Qualunque sperimentazione richiede consenso, supervisione umana e verifica professionale.</p>
+        </aside>
       </section>
 
       <section id="sicurezza" class="award-section safety-section">
