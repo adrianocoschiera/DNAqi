@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Gli Arcani dei Custodi: carte di riflessione per famiglie, tarocchi e I Ching. Un progetto de I Custodi del DNA APS.">
+<title>Gli Arcani dei Custodi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{--logo:url("data:image/png;base64,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")}
+/* Layout: una colonna centrata, schede a tab; tavolo chiaro e delicato con elica del DNA come motivo ricorrente. */
+:root{
+  --bg:#f2f5fb; --panel:#ffffff; --line:#dce2f1;
+  --ink:#232a4c; --muted:#5d6588; --accent:#2c7ea5; --onaccent:#ffffff;
+  --rose:#d9607e; --gold:#d9a536; --soft:#e7f1f8;
+  --card:#fffdf8; --cardink:#232a4c; --cardline:#c6d0e8;
+  --back1:#7cc0dd; --back2:#a99be0;
+  --display:"Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Nunito", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a2f; --panel:#1d2440; --line:#313a5f; --ink:#eef1fb; --muted:#a6aecd; --accent:#72c3e4; --onaccent:#0f1529;
+  --rose:#f08ca3; --gold:#f0c35e; --soft:#1f2c47; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a2f; --panel:#1d2440; --line:#313a5f; --ink:#eef1fb; --muted:#a6aecd; --accent:#72c3e4; --onaccent:#0f1529;
+  --rose:#f08ca3; --gold:#f0c35e; --soft:#1f2c47; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;padding:0 16px 48px}
+.wrap{max-width:980px;margin:0 auto}
+header{padding-block:26px 4px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.logo{display:block;width:52px;aspect-ratio:252/360;background:var(--ink);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+.lg{display:block;width:44%;aspect-ratio:252/360;background:#fff;opacity:.92;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,6.5vw,3rem);line-height:1.1;margin:0;text-wrap:balance}
+h1 span{color:var(--accent)}
+.sub{color:var(--muted);margin:0;font-style:italic}
+nav{display:flex;gap:2px;justify-content:center;margin:18px 0 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+nav button{font-family:var(--display);font-weight:600;font-size:1.08rem;background:none;border:0;color:var(--muted);padding:8px 14px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.intro{color:var(--muted);max-width:66ch;margin:0 auto 18px;text-align:center;font-size:.98rem}
+.ask{display:grid;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.lbl{font-family:var(--display);font-weight:600;font-size:1rem;color:var(--accent)}
+textarea,input[type=text],select{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+textarea{min-height:74px;resize:vertical}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:end}
+.row>.grow{flex:1 1 200px;min-width:0;display:grid;gap:6px}
+.check{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.95rem;padding-bottom:10px}
+.btn{font-family:var(--display);font-weight:600;font-size:1.05rem;background:var(--accent);color:var(--onaccent);border:0;border-radius:999px;padding:9px 22px;cursor:pointer}
+.btn:hover{filter:brightness(1.07)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.ghost{background:none;color:var(--accent);border:1.5px solid var(--accent)}
+.hint{color:var(--muted);font-size:.9rem;margin:0}
+
+/* ---------- carte ---------- */
+.table{display:flex;flex-wrap:wrap;gap:18px 14px;justify-content:center;margin:28px 0 10px}
+.slot{display:flex;flex-direction:column;align-items:center;gap:8px;width:clamp(98px,24vw,136px)}
+.pos{font-family:var(--display);font-weight:600;font-size:.82rem;color:var(--muted);text-align:center;min-height:2.5em;line-height:1.2;text-wrap:balance}
+.card{width:100%;aspect-ratio:7/12;perspective:900px}
+.inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.up .inner{transform:rotateY(180deg)}
+.back,.front{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 6px 16px rgba(20,30,70,.18)}
+.back{background:linear-gradient(160deg,var(--back1),var(--back2));border:4px solid var(--card);display:grid;place-items:center;color:#ffffffd9}
+.front{transform:rotateY(180deg);background:var(--card);color:var(--cardink);border:1px solid var(--cardline);padding:6px;overflow:hidden}
+.face{height:100%;border:1.5px solid var(--cardline);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:6px 4px 5px;transition:transform .5s}
+.face.rev{transform:rotate(180deg)}
+.num{font-family:var(--display);font-weight:600;font-size:.85rem;color:#5d6588}
+.name{font-family:var(--display);font-weight:600;font-size:clamp(.64rem,2.3vw,.8rem);text-align:center;line-height:1.1;text-wrap:balance}
+.emb{flex:1;width:100%;display:grid;place-items:center;align-content:center;gap:3px}
+.glyph{width:68%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:clamp(1.4rem,6vw,2rem);font-family:"Segoe UI Symbol","Noto Sans Symbols","Apple Symbols",serif;font-variant-emoji:text;color:#2c7ea5;background:#e7f1f8;border:1.5px solid #c6d0e8}
+.glyph.g{background:linear-gradient(160deg,#7cc0dd,#a99be0);color:#fff;border:0;font-family:"Baloo 2",system-ui,sans-serif;font-weight:700;font-size:clamp(1.05rem,4.6vw,1.6rem)}
+.gname{font-size:clamp(.55rem,2vw,.68rem);color:#d9607e;font-weight:700;text-align:center;line-height:1.1}
+.pips{display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:2px;width:86%}
+.pips svg{width:var(--s,22%);height:auto;color:#2c7ea5}
+.court{display:grid;place-items:center;gap:2px}
+.court svg{width:44%;color:#2c7ea5;margin:0 auto}
+.court b{font-family:"Baloo 2",system-ui,sans-serif;font-size:1.3rem;color:#232a4c}
+
+/* ---------- significati ---------- */
+.meanings{display:grid;gap:10px;margin-top:22px}
+.mean{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 16px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
+.mean .t{font-family:var(--display);font-weight:600;font-size:1.08rem}
+.mean .t small{color:var(--muted);font-family:var(--body);font-weight:400;font-size:.9rem}
+.mean .k{color:var(--accent);font-weight:600;font-size:.95rem}
+.mean p{margin:0;color:var(--muted);font-size:.95rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:0 8px;margin-left:6px;vertical-align:2px;font-family:var(--body);background:var(--soft);color:var(--rose)}
+.tag.g{color:var(--accent)}
+
+/* ---------- interpretazione ---------- */
+.oracle{margin-top:26px;border-top:1px solid var(--line);padding-top:20px;display:grid;gap:14px}
+.oracle h3{font-family:var(--display);font-weight:700;color:var(--accent);margin:0;font-size:1.4rem}
+.reading{max-width:68ch;font-size:1.04rem}
+.reading h4{font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--rose);margin:1.1em 0 .2em}
+.reading p{margin:.5em 0}
+.reading ul{margin:.4em 0;padding-left:1.2em}
+.reading .q{color:var(--muted);font-style:italic;border-left:3px solid var(--line);padding-left:10px;margin-top:1.4em}
+.thinking{color:var(--muted);font-style:italic}
+.byo{display:grid;gap:10px;background:var(--soft);border-radius:14px;padding:16px}
+.byo .row{gap:8px}
+.byo a.btn{text-decoration:none}
+.byo summary{cursor:pointer;color:var(--muted);font-size:.92rem}
+.byo textarea{margin-top:8px;font-size:.85rem}
+.aibox{display:grid;gap:12px}
+.follow{display:flex;gap:8px;flex-wrap:wrap}
+.follow input{flex:1 1 240px;min-width:0}
+.note{color:var(--muted);font-size:.88rem;font-style:italic;margin:0}
+
+/* ---------- carte dei Custodi ---------- */
+.ref{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:center;margin:28px 0 6px}
+.ref .slot{width:clamp(150px,40vw,200px)}
+.rcard .face{justify-content:center;gap:10px;padding:14px 10px;text-align:center}
+.rcard .glyph{width:60%}
+.rtitle{font-family:"Baloo 2",system-ui,sans-serif;font-weight:700;font-size:clamp(1rem,3.6vw,1.25rem);line-height:1.15;color:#232a4c;text-wrap:balance}
+.prompts{display:grid;gap:12px;flex:1 1 300px;min-width:0;max-width:520px}
+.pr{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.pr span{font-family:var(--display);font-weight:600;color:var(--rose);font-size:.95rem}
+.pr p{margin:2px 0 0;font-size:1.08rem}
+
+/* ---------- I Ching ---------- */
+.ching{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;margin:26px 0 6px;align-items:flex-start}
+.hexbox{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:150px}
+.hex{display:flex;flex-direction:column-reverse;gap:9px;width:150px}
+.ln{height:14px;display:flex;gap:16px;position:relative}
+.ln span{flex:1;background:var(--ink);border-radius:4px}
+.ln.empty span{background:transparent;border:1.5px dashed var(--line)}
+.ln.chg span{background:var(--rose)}
+.ln .mk{position:absolute;right:-26px;top:-4px;color:var(--rose);font-size:1rem;width:18px;text-align:center;font-style:normal}
+.hexnum{font-family:var(--display);font-weight:700;color:var(--accent);font-size:2rem;line-height:1}
+.hexname{font-family:var(--display);font-weight:600;font-size:1.15rem;text-align:center;max-width:220px;text-wrap:balance}
+.tri{color:var(--muted);font-size:.9rem;text-align:center}
+.arrow{align-self:center;color:var(--muted);font-size:2rem}
+.coins{display:flex;gap:8px;justify-content:center;min-height:46px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.coin{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;border:2px solid var(--gold);color:var(--gold);background:var(--panel)}
+.coin.t{border-color:var(--muted);color:var(--muted)}
+.coinlog{display:grid;gap:0;font-size:.9rem;color:var(--muted);text-align:center}
+.coinlog b{color:var(--ink)}
+
+/* ---------- diario ---------- */
+.diary{display:grid;gap:10px}
+.entry{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.entry summary{cursor:pointer;display:grid;gap:2px;list-style:none}
+.entry summary::-webkit-details-marker{display:none}
+.entry .d{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.entry .eq{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.entry .es{color:var(--accent);font-size:.92rem}
+.empty-state{color:var(--muted);text-align:center;font-style:italic;padding:30px 0}
+footer{margin-top:40px;color:var(--muted);font-size:.84rem;text-align:center;display:grid;gap:4px}
+footer b{font-family:var(--display);color:var(--ink);font-weight:600}
+@media (prefers-reduced-motion:reduce){.inner,.face{transition:none}}
+</style>
+<style>html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="helix" viewBox="0 0 40 64"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M8 2c0 14 24 16 24 30S8 46 8 62"/><path d="M32 2c0 14-24 16-24 30s24 14 24 30"/></g><g stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".7"><path d="M12 9h16M18 17h4M12 25h16M12 39h16M18 47h4M12 55h16"/></g></symbol>
+  <symbol id="s-coppe" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h14c0 5.2-2.8 8.4-6 9V18h3.2v2.4H7.8V18H11v-6C7.8 11.4 5 8.2 5 3z"/></symbol>
+  <symbol id="s-spade" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1l2 3.2V15h-4V4.2zM6 15.2h12v2H6zM11 17.2h2v3.6h-2z"/><circle cx="12" cy="21.8" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="s-bastoni" viewBox="0 0 24 24"><path fill="currentColor" d="M10.6 1.5h2.8l-.4 21h-2z"/><ellipse cx="15.6" cy="6" rx="2.6" ry="1.1" transform="rotate(-30 15.6 6)" fill="currentColor"/><ellipse cx="8.3" cy="11" rx="2.6" ry="1.1" transform="rotate(30 8.3 11)" fill="currentColor"/><ellipse cx="15.2" cy="15" rx="2.2" ry="1" transform="rotate(-30 15.2 15)" fill="currentColor"/></symbol>
+  <symbol id="s-denari" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M12 4.2l4.6 14.2L4.6 9.6h14.8L7.4 18.4z"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <span class="logo" role="img" aria-label="Logo de I Custodi del DNA"></span>
+    <h1>Gli Arcani <span>dei Custodi</span></h1>
+    <p class="sub">Ogni sindrome è una storia da raccontare</p>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" id="tab-custodi" aria-selected="true" data-tab="custodi">Carte dei Custodi</button>
+    <button role="tab" id="tab-tarot" aria-selected="false" data-tab="tarot">Tarocchi</button>
+    <button role="tab" id="tab-ching" aria-selected="false" data-tab="ching">I Ching</button>
+    <button role="tab" id="tab-diary" aria-selected="false" data-tab="diary">Diario</button>
+  </nav>
+
+  <!-- CARTE DEI CUSTODI -->
+  <section id="custodi" role="tabpanel" aria-labelledby="tab-custodi">
+    <p class="intro">Pesca una carta e usala per parlarvi in famiglia. Ogni carta è guidata da un Custode e porta una domanda per i più piccoli e una per gli adulti.</p>
+    <div class="ask">
+      <div class="row">
+        <div class="grow">
+          <label class="lbl" for="who">Per chi è la carta</label>
+          <select id="who">
+            <option value="bambino o bambina tra 4 e 7 anni">Bambini (4–7 anni)</option>
+            <option value="bambino o bambina tra 8 e 12 anni" selected>Bambini (8–12 anni)</option>
+            <option value="ragazzo o ragazza adolescente">Ragazzi (13–17 anni)</option>
+            <option value="genitore o adulto">Genitore / adulto</option>
+            <option value="famiglia intera, adulti e bambini insieme">Tutta la famiglia</option>
+          </select>
+        </div>
+        <div class="grow">
+          <label class="lbl" for="kidName">Nome di chi ascolta (facoltativo)</label>
+          <input type="text" id="kidName" placeholder="Es. Giulia">
+        </div>
+        <button class="btn" id="refBtn">Pesca una carta</button>
+      </div>
+    </div>
+    <div id="refOut"></div>
+  </section>
+
+  <!-- TAROCCHI -->
+  <section id="tarot" role="tabpanel" aria-labelledby="tab-tarot" hidden>
+    <p class="intro">Il mazzo Rider–Waite completo. Quattordici Arcani Maggiori hanno un Custode che li accompagna come immagine narrativa.</p>
+    <div class="ask">
+      <label class="lbl" for="tq">La tua domanda</label>
+      <textarea id="tq" placeholder="Scrivi quello su cui vuoi riflettere. Es.: Come posso affrontare con più calma questo periodo di cambiamenti?"></textarea>
+      <div class="row">
+        <div class="grow">
+          <label class="lbl" for="spread">Stesa</label>
+          <select id="spread"></select>
+        </div>
+        <label class="check"><input type="checkbox" id="revOn" checked> Carte rovesciate</label>
+        <button class="btn" id="drawBtn">Mescola e stendi</button>
+      </div>
+      <p class="hint" id="spreadHint"></p>
+    </div>
+    <div id="tarotOut"></div>
+  </section>
+
+  <!-- I CHING -->
+  <section id="ching" role="tabpanel" aria-labelledby="tab-ching" hidden>
+    <p class="intro">Il Libro dei Mutamenti: sei lanci di tre monete formano un esagramma, letto come invito a riflettere.</p>
+    <div class="ask">
+      <label class="lbl" for="cq">La tua domanda</label>
+      <textarea id="cq" placeholder="Es.: Qual è l'atteggiamento giusto in questa fase?"></textarea>
+      <div class="row">
+        <button class="btn" id="tossBtn">Lancia le tre monete</button>
+        <button class="btn ghost" id="tossAll">Lancia tutte le linee</button>
+        <button class="btn ghost" id="tossReset">Ricomincia</button>
+      </div>
+      <p class="hint">Testa vale 3, croce vale 2. Le linee si costruiscono dal basso verso l'alto; i valori 6 e 9 sono linee mutevoli.</p>
+    </div>
+    <div class="coins" id="coins" aria-live="polite"></div>
+    <div class="ching" id="chingOut"></div>
+    <div id="chingMeaning"></div>
+    <div id="chingOracle"></div>
+  </section>
+
+  <!-- DIARIO -->
+  <section id="diary" role="tabpanel" aria-labelledby="tab-diary" hidden>
+    <div class="row" style="justify-content:space-between;margin-bottom:14px">
+      <p class="hint">Il diario resta solo in questo browser: nessuno lo vede tranne te.</p>
+      <button class="btn ghost" id="clearDiary">Svuota diario</button>
+    </div>
+    <div class="diary" id="diaryList"></div>
+  </section>
+
+  <footer>
+    <b>Un progetto de I Custodi del DNA APS</b>
+    <span>Le carte sono uno strumento narrativo e di riflessione: non predicono il futuro e non sostituiscono medici, terapisti o consulenti.</span>
+    <span>Le estrazioni usano il generatore casuale crittografico del browser.</span>
+  </footer>
+</div>
+
+<script>
+/* ======================= CUSTODI ======================= */
+// Chi custodisce quale Arcano Maggiore: solo carte di forza, cura e luce.
+const G = {
+  pk:{n:"Professor K",i:"PK"}, ng:{n:"Nightgene",i:"NG"}, rt:{n:"Ruby-T",i:"RT"}, mm:{n:"M",i:"M"},
+  ka:{n:"Kairos",i:"KA"}, sk:{n:"Super K",i:"K"}, sa:{n:"Samuel",i:"S"}, ri:{n:"Riff",i:"R"},
+  sx:{n:"Super X",i:"X"}, ni:{n:"Nistagmo, il panda",i:"N"}, xn:{n:"Xia Nova",i:"XN"}, lu:{n:"Lumia",i:"L"},
+  fm:{n:"Fragile Mind",i:"FM"}, all:{n:"Tutti i Custodi",i:"★"}
+};
+const ARC_GUARD = {1:"pk",2:"ng",3:"rt",4:"mm",7:"ka",8:"sk",9:"sa",10:"ri",11:"sx",14:"ni",17:"xn",19:"lu",20:"fm",21:"all"};
+
+const REFLECT = [
+ ["sk","La forza gentile","Quando sei stato forte senza alzare la voce?","Dove hai usato la gentilezza come forza questa settimana?"],
+ ["sx","Unico come una X","Cosa sai fare in un modo tutto tuo?","Quale qualità di tuo figlio vorresti che il mondo vedesse per prima?"],
+ ["mm","Guardare da più in alto","Se vedessi la tua giornata dall'alto come un gigante, cosa noteresti?","Visto da lontano, quanto pesa davvero il problema di oggi?"],
+ ["ng","Il guardiano della notte","Cosa ti aiuta a sentirti tranquillo quando è buio?","Qual è il tuo piccolo rito per chiudere la giornata?"],
+ ["xn","Una stella nuova","Qual è un sogno che vuoi far brillare?","Quale piccolo progresso merita di essere festeggiato come una stella?"],
+ ["fm","Quando è tutto troppo","C'è stato un rumore o una cosa che oggi era troppo? Cosa ti ha aiutato?","Cosa rende la casa più calma per tutti?"],
+ ["ka","Il momento giusto","Quando è il momento migliore per chiedere un abbraccio?","Cosa stai forzando che potrebbe arrivare al suo tempo?"],
+ ["rt","Il cuore che accoglie","Chi ti ha fatto sentire benvenuto oggi?","Chi si prende cura di te, mentre tu ti prendi cura degli altri?"],
+ ["sa","Vedere con altri occhi","Chiudi gli occhi: cosa senti con le orecchie e con le mani?","Cosa hai scoperto guardando il mondo dal punto di vista di tuo figlio?"],
+ ["lu","Una piccola luce","Qual è stata la cosa più luminosa di oggi?","Quale momento di oggi vuoi ricordare?"],
+ ["ni","La calma del panda","Facciamo tre respiri lenti come un panda: com'è il tuo corpo adesso?","Dove puoi rallentare domani, anche solo per dieci minuti?"],
+ ["pk","La domanda curiosa","Cosa vorresti sapere sul tuo corpo o sul mondo?","Quale domanda non hai ancora fatto ai medici o alla scuola?"],
+ ["ri","Energia in movimento","Inventa un ballo di tre mosse per scaricare l'energia!","Come puoi trasformare l'agitazione di oggi in movimento?"],
+ ["sk","Anche gli eroi chiedono aiuto","A chi chiedi aiuto quando ne hai bisogno?","Chi potrebbe aiutarti, se glielo chiedessi?"],
+ ["xn","Parlare senza parole","Mostra con il viso come ti senti, senza dire niente.","Come comunica tuo figlio quando non usa le parole?"],
+ ["rt","Gli amici veri","Cosa rende un amico un vero amico?","Quali famiglie potrebbero diventare la vostra squadra?"],
+ ["lu","Il passo piccolo","Qual è una cosa nuova che hai imparato di recente?","Quale passo piccolo vale più di un grande risultato?"],
+ ["ng","Quando arriva la rabbia","Di che colore è la tua rabbia? Cosa la fa diventare più piccola?","Cosa ti dice la rabbia, la tua o la sua, quando arriva?"],
+ ["sa","La differenza che arricchisce","Cosa ti rende diverso e speciale?","Cosa ti ha insegnato la diversità che prima non sapevi?"],
+ ["all","La squadra","Chi fa parte della tua squadra speciale?","Di cosa ha bisogno oggi la vostra famiglia, tutta insieme?"]
+];
+
+/* ======================= TAROCCHI ======================= */
+const MAJ = [
+ ["Il Matto","♅","nuovi inizi, libertà, spontaneità, salto nel vuoto","imprudenza, esitazione, rischio sconsiderato","L'inizio del viaggio: fidarsi dell'ignoto con cuore leggero."],
+ ["Il Mago","☿","volontà, abilità, iniziativa, manifestazione","talenti non usati, confusione, inganno","Hai gli strumenti che servono: è il momento di usarli."],
+ ["La Papessa","☽","intuizione, mistero, sapere interiore, silenzio","segreti, intuito ignorato, chiusura","La risposta è dentro di te: ascolta prima di agire."],
+ ["L'Imperatrice","♀","abbondanza, cura, creatività, accoglienza","dipendenza, blocco creativo, trascuratezza","Ciò che curi cresce: nutri te stesso e i tuoi progetti."],
+ ["L'Imperatore","♈","struttura, stabilità, protezione, ordine","rigidità, controllo eccessivo","Dare ordine e confini solidi alle cose."],
+ ["Il Papa","♉","tradizione, insegnamento, valori condivisi, guida","conformismo, regole che stanno strette","Il sapere che si tramanda e le regole del gruppo."],
+ ["Gli Amanti","♊","amore, unione, scelta, armonia di valori","disarmonia, scelta rimandata, squilibrio","Una scelta che parla di ciò che ami davvero."],
+ ["Il Carro","♋","volontà, direzione, slancio, vittoria","perdita di rotta, dispersione","Tenere insieme forze diverse e avanzare."],
+ ["La Forza","♌","coraggio, pazienza, dolcezza che vince","insicurezza, impulsività","La forza vera è gentile e paziente."],
+ ["L'Eremita","♍","introspezione, ricerca, saggezza, luce interiore","isolamento, chiusura","Fermarsi a cercare la propria luce."],
+ ["La Ruota della Fortuna","♃","cicli, svolta, cambiamento, movimento","resistenza al cambiamento, ripetizioni","La ruota gira: accogli la svolta."],
+ ["La Giustizia","♎","equità, verità, equilibrio, decisione","parzialità, responsabilità evitate","Ogni azione ha conseguenze: scegli con onestà."],
+ ["L'Appeso","♆","pausa, resa, nuova prospettiva","stallo, resistenza","Guardare le cose da un altro punto di vista."],
+ ["La Morte","♏","fine di un ciclo, trasformazione, rinnovamento","paura del cambiamento, attaccamento","Qualcosa si chiude perché altro possa nascere. Non parla di morte fisica."],
+ ["La Temperanza","♐","equilibrio, misura, pazienza, armonia","eccesso, fretta","Mescolare gli opposti con pazienza."],
+ ["Il Diavolo","♑","attaccamenti, abitudini che legano, tentazione","liberazione, presa di coscienza","Riconoscere ciò che ci tiene legati."],
+ ["La Torre","♂","cambiamento improvviso, rivelazione, liberazione","cambiamento rimandato, paura","Ciò che non regge cade e lascia spazio al vero."],
+ ["La Stella","♒","speranza, guarigione, ispirazione, serenità","scoraggiamento, sfiducia","Dopo la tempesta torna la speranza."],
+ ["La Luna","♓","emozioni profonde, sogni, paure, intuito","chiarezza che arriva, paure che si sciolgono","Non tutto è come appare: muoviti con l'intuito."],
+ ["Il Sole","☉","gioia, vitalità, chiarezza, successo","entusiasmo spento, ritardi","Luce piena: fiducia e calore."],
+ ["Il Giudizio","♇","risveglio, rinascita, chiamata, bilancio","autocritica, dubbio","È il momento di rispondere a ciò che ti chiama."],
+ ["Il Mondo","♄","compimento, integrazione, viaggio concluso","incompiutezza, chiusure rimandate","Un ciclo si chiude in pienezza."]
+];
+const ROMAN = ["0","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI"];
+const RANKS = ["Asso","Due","Tre","Quattro","Cinque","Sei","Sette","Otto","Nove","Dieci","Fante","Cavaliere","Regina","Re"];
+const SUITS = [
+ {k:"bastoni",n:"Bastoni",el:"Fuoco",theme:"azione, creatività, passione", m:[
+  "ispirazione, nuovo slancio, potenziale creativo|ritardi, energia dispersa","pianificazione, visione del futuro, decisione|paura dell'ignoto, piani incerti",
+  "espansione, lungimiranza, primi risultati|ostacoli imprevisti, attese deluse","celebrazione, casa, armonia, traguardo|tensioni in famiglia, transizione",
+  "competizione, confronto di idee|evitare il confronto, tensione interna","vittoria, riconoscimento, fiducia|dubbio su di sé, mancato riconoscimento",
+  "difendere la propria posizione, perseveranza|sentirsi sopraffatti","rapidità, notizie, movimento|ritardi, fretta",
+  "resilienza, tenacia, ultima prova|stanchezza, diffidenza","carico eccessivo, responsabilità|delegare, lasciare andare pesi",
+  "entusiasmo, scoperta, messaggi|poca costanza","azione, avventura, impulsività|impazienza, imprudenza",
+  "sicurezza, calore, determinazione|gelosia, insicurezza","leadership, visione, spirito d'iniziativa|autoritarismo, aspettative eccessive"]},
+ {k:"coppe",n:"Coppe",el:"Acqua",theme:"emozioni, relazioni, intuizione", m:[
+  "nuovi sentimenti, amore, intuizione|emozioni trattenute","unione, intesa, alleanza|squilibrio nel legame",
+  "amicizia, festa, comunità|eccessi, pettegolezzi","introspezione, opportunità ignorate|risveglio, nuova motivazione",
+  "perdita, rimpianto, delusione|accettazione, guarigione","nostalgia, ricordi, infanzia|andare avanti",
+  "fantasia, molte scelte, illusioni|chiarezza, decisione","lasciare, cercare un senso più profondo|paura di cambiare",
+  "soddisfazione, desiderio esaudito|insoddisfazione","armonia familiare, felicità condivisa|famiglia in tensione",
+  "sensibilità, messaggio affettivo, creatività|immaturità emotiva","romanticismo, proposta, seguire il cuore|sbalzi d'umore",
+  "compassione, empatia, intuito|trascurare se stessi","equilibrio emotivo, saggezza, generosità|freddezza, chiusura"]},
+ {k:"spade",n:"Spade",el:"Aria",theme:"mente, verità, comunicazione", m:[
+  "chiarezza, verità, intuizione|confusione, idee distorte","stallo, scelta difficile|informazioni nuove, decisione che si sblocca",
+  "dolore, separazione, ferita|guarigione, perdono","riposo, recupero, pausa|irrequietezza, stanchezza",
+  "conflitto, vittoria amara|riconciliazione","transizione, lasciarsi alle spalle, viaggio|questioni irrisolte",
+  "strategia, astuzia|sincerità, confessione","sentirsi bloccati, limiti autoimposti|liberazione, nuova prospettiva",
+  "ansia, preoccupazioni, notti insonni|speranza, chiedere aiuto","fine dolorosa, fondo toccato|ripresa, rigenerazione",
+  "curiosità, vigilanza, idee nuove|parole affrettate","ambizione, azione rapida|precipitazione",
+  "lucidità, indipendenza, franchezza|durezza, amarezza","autorità, verità, giudizio chiaro|freddezza, rigidità"]},
+ {k:"denari",n:"Denari",el:"Terra",theme:"lavoro, corpo, casa, cose concrete", m:[
+  "opportunità concreta, nuovo inizio|occasione mancata","equilibrio, adattabilità, priorità|troppi impegni",
+  "collaborazione, competenza, lavoro di squadra|scarso coordinamento","sicurezza, risparmio, controllo|paura di perdere",
+  "difficoltà, sentirsi esclusi|ripresa, aiuto ricevuto","generosità, dare e ricevere|squilibrio nel dare",
+  "pazienza, investimento a lungo termine|risultati lenti, frustrazione","impegno, apprendimento, maestria|perfezionismo",
+  "indipendenza, autosufficienza|dipendenza, eccessi","stabilità, eredità, famiglia|instabilità",
+  "studio, nuovo progetto|procrastinazione","costanza, affidabilità, metodo|stagnazione",
+  "cura pratica, abbondanza, concretezza|squilibrio casa-lavoro","solidità, prosperità, successo|rigidità"]}
+];
+const DECK = [];
+MAJ.forEach((m,i)=>DECK.push({id:"M"+i,name:m[0],major:true,num:ROMAN[i],glyph:m[1],up:m[2],rev:m[3],sense:m[4],g:ARC_GUARD[i]?G[ARC_GUARD[i]]:null}));
+SUITS.forEach(s=>s.m.forEach((pair,r)=>{
+  const [up,rev]=pair.split("|");
+  DECK.push({id:s.k+r,name:RANKS[r]+" di "+s.n,major:false,suit:s.k,suitName:s.n,rank:r+1,up,rev,sense:"Seme di "+s.n+" ("+s.el+"): "+s.theme+"."});
+}));
+const SPREADS = {
+  uno:{name:"Una carta, risposta diretta",pos:["Il messaggio"],hint:"Una sola carta per un consiglio immediato."},
+  tre:{name:"Tre carte: passato, presente, futuro",pos:["Passato","Presente","Futuro"],hint:"Da dove vieni, dove sei, dove vai."},
+  scelta:{name:"Tre carte: situazione, ostacolo, consiglio",pos:["Situazione","Ostacolo","Consiglio"],hint:"Utile quando ti senti bloccato."},
+  cinque:{name:"Cinque carte: la decisione",pos:["Il punto di partenza","Strada A","Strada B","Ciò che non vedi","Consiglio"],hint:"Per confrontare due possibilità: scrivile nella domanda."},
+  croce:{name:"Croce Celtica, dieci carte",pos:["Il cuore della questione","Ciò che incrocia","Le radici","Il passato recente","Ciò che può emergere","Il futuro prossimo","Te stesso","L'ambiente","Speranze e timori","L'esito"],hint:"La stesa più completa, per domande importanti."}
+};
+
+/* ======================= I CHING ======================= */
+const TRI = {"111":["Qian","Cielo","☰"],"100":["Zhen","Tuono","☳"],"010":["Kan","Acqua","☵"],"001":["Gen","Monte","☶"],"000":["Kun","Terra","☷"],"011":["Xun","Vento","☴"],"101":["Li","Fuoco","☲"],"110":["Dui","Lago","☱"]};
+const TORDER = ["111","100","010","001","000","011","101","110"];
+const KW = [[1,25,6,33,12,44,13,10],[34,51,40,62,16,32,55,54],[5,3,29,39,8,48,63,60],[26,27,4,52,23,18,22,41],[11,24,7,15,2,46,36,19],[9,42,59,53,20,57,37,61],[14,21,64,56,35,50,30,38],[43,17,47,31,45,28,49,58]];
+const HEX = [null,
+ ["Il Creativo","Qián","Forza creativa che persevera: agisci con costanza e senso del giusto."],
+ ["Il Ricettivo","Kūn","Accogliere e seguire con dedizione porta frutto; non forzare la guida."],
+ ["La Difficoltà Iniziale","Zhūn","Il caos degli inizi: cerca aiuto e metti ordine, senza fretta."],
+ ["La Stoltezza Giovanile","Méng","Chi non sa deve chiedere con sincerità; la lezione arriva a chi è pronto."],
+ ["L'Attesa","Xū","Aspetta con fiducia e nutriti; il momento giusto verrà."],
+ ["Il Conflitto","Sòng","Non portare la lite fino in fondo; cerca un mediatore."],
+ ["L'Esercito","Shī","Disciplina e una guida esperta rendono forte il gruppo."],
+ ["La Solidarietà","Bǐ","Unisciti agli altri attorno a un centro saldo, senza indugiare."],
+ ["La Forza Domatrice del Piccolo","Xiǎo Xù","Piccoli passi e gentilezza: le nuvole ci sono, la pioggia non ancora."],
+ ["Il Procedere","Lǚ","Muoviti con garbo anche vicino al pericolo; il buon contegno protegge."],
+ ["La Pace","Tài","Cielo e terra si incontrano: periodo di armonia e crescita."],
+ ["Il Ristagno","Pǐ","Le cose non comunicano; resta fedele a te stesso e aspetta."],
+ ["Comunità con gli Uomini","Tóng Rén","Apertura e obiettivi condivisi permettono grandi imprese."],
+ ["Il Possesso Grande","Dà Yǒu","Grande abbondanza, da gestire con modestia e chiarezza."],
+ ["La Modestia","Qiān","La modestia equilibra e porta a compimento."],
+ ["L'Entusiasmo","Yù","L'entusiasmo muove gli altri; preparalo e sappilo guidare."],
+ ["Il Seguire","Suí","Per essere seguito, impara prima a seguire ciò che è giusto."],
+ ["Il Lavoro sul Corrotto","Gǔ","Ciò che si è guastato si può riparare con impegno e riflessione."],
+ ["L'Avvicinamento","Lín","Un tempo favorevole si avvicina: approfittane, sapendo che non dura."],
+ ["La Contemplazione","Guān","Osserva in profondità e lasciati osservare con sincerità."],
+ ["Il Morso che Spezza","Shì Kè","Un ostacolo va affrontato con decisione e giustizia."],
+ ["La Leggiadria","Bì","La bellezza della forma aiuta nelle piccole cose, non nelle grandi."],
+ ["Lo Sgretolamento","Bō","Le cose cedono: non è tempo di agire ma di resistere in silenzio."],
+ ["Il Ritorno","Fù","Dopo il buio torna la luce; il cambiamento arriva da sé."],
+ ["L'Innocenza","Wú Wàng","Agisci con spontaneità e onestà, senza secondi fini."],
+ ["La Forza Domatrice del Grande","Dà Xù","Raccogli e trattieni le energie; preparati a compiti grandi."],
+ ["Gli Angoli della Bocca","Yí","Fai attenzione a ciò che nutri, in te e negli altri."],
+ ["La Preponderanza del Grande","Dà Guò","Il peso è eccessivo: serve un'azione decisa per non crollare."],
+ ["L'Abissale","Kǎn","Pericolo ripetuto: resta sincero e continua a scorrere come l'acqua."],
+ ["L'Aderente","Lí","La luce dipende da ciò a cui si appoggia: scegli bene i sostegni."],
+ ["L'Influenza","Xián","Attrazione reciproca e ascolto: la ricettività crea legami."],
+ ["La Durata","Héng","Costanza nel cambiamento: resta fedele alla tua direzione."],
+ ["La Ritirata","Dùn","Ritirarsi al momento giusto è forza, non fuga."],
+ ["La Potenza del Grande","Dà Zhuàng","Grande forza: usala solo per ciò che è giusto."],
+ ["Il Progresso","Jìn","Avanzamento rapido e riconoscimento, come il sole che sorge."],
+ ["L'Ottenebramento della Luce","Míng Yí","Tempi difficili: proteggi la tua luce interiore e sii prudente."],
+ ["La Famiglia","Jiā Rén","Ognuno al suo posto: l'ordine della casa dà forza."],
+ ["L'Opposizione","Kuí","Le differenze dividono; nelle piccole cose si può ancora riuscire."],
+ ["L'Impedimento","Jiǎn","Davanti all'ostacolo fermati, guarda dentro e cerca aiuto."],
+ ["La Liberazione","Xiè","La tensione si scioglie: perdona e torna presto alla normalità."],
+ ["La Diminuzione","Sǔn","Togliere il superfluo, con sincerità, porta frutto."],
+ ["L'Accrescimento","Yì","Tempo di crescita: agisci e aiuta gli altri."],
+ ["Lo Straripamento","Guài","Risolutezza: porta il problema alla luce senza violenza."],
+ ["Il Farsi Incontro","Gòu","Un'influenza seducente si avvicina: non darle troppo potere."],
+ ["La Raccolta","Cuì","Le persone si riuniscono attorno a un centro; preparati agli imprevisti."],
+ ["L'Ascendere","Shēng","Crescita graduale come un albero: sforzo costante verso l'alto."],
+ ["L'Angustia","Kùn","Momento faticoso: le parole non bastano, conta la tenuta interiore."],
+ ["Il Pozzo","Jǐng","La fonte comune non si esaurisce; cura ciò che nutre tutti."],
+ ["Il Sovvertimento","Gé","Il cambiamento profondo riesce quando i tempi e le persone sono pronti."],
+ ["Il Crogiuolo","Dǐng","Trasformazione e nutrimento: prende forma un nuovo ordine."],
+ ["L'Eccitante","Zhèn","Lo scossone porta consapevolezza: dopo lo spavento, il sorriso."],
+ ["L'Arresto","Gèn","Fermati e quieta la mente: agisci solo quando è tempo."],
+ ["Lo Sviluppo","Jiàn","Progresso lento e graduale, come un albero sul monte."],
+ ["La Ragazza che Si Sposa","Guī Mèi","Posizione subordinata: agisci con tatto, senza pretese."],
+ ["La Pienezza","Fēng","Culmine di abbondanza: vivilo senza temere che passi."],
+ ["Il Viandante","Lǚ","Da straniero sii prudente e cortese; non fermarti troppo."],
+ ["Il Mite","Xùn","Penetrare dolcemente come il vento: costanza e direzione chiara."],
+ ["Il Sereno","Duì","Gioia condivisa e dialogo; la serenità vera viene da dentro."],
+ ["La Dissoluzione","Huàn","Sciogliere rigidità e divisioni con uno scopo comune."],
+ ["La Limitazione","Jié","I limiti danno forma, ma limiti troppo severi non durano."],
+ ["Verità Interiore","Zhōng Fú","La sincerità del cuore raggiunge anche i più difficili."],
+ ["La Preponderanza del Piccolo","Xiǎo Guò","Tempo per le piccole cose: umiltà e cura dei dettagli."],
+ ["Dopo il Compimento","Jì Jì","Tutto è al suo posto: vigila, perché l'equilibrio è fragile."],
+ ["Prima del Compimento","Wèi Jì","Quasi arrivati: procedi con cautela fino all'ultimo passo."]
+];
+
+/* ======================= UTILITÀ ======================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function randInt(n){const a=new Uint32Array(1),lim=Math.floor(0x100000000/n)*n;do{crypto.getRandomValues(a)}while(a[0]>=lim);return a[0]%n}
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=randInt(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+const reduceMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
+function md(t){
+  const out=[];let list=false;
+  const inline=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/(^|[^*])\*([^*]+)\*/g,"$1<em>$2</em>");
+  for(const raw of t.split("\n")){
+    const l=raw.trim();
+    if(/^[-•*] /.test(l)){if(!list){out.push("<ul>");list=true}out.push("<li>"+inline(l.slice(2))+"</li>");continue}
+    if(list){out.push("</ul>");list=false}
+    if(!l)continue;
+    const h=l.match(/^#{1,4}\s+(.*)/);
+    out.push(h?"<h4>"+inline(h[1])+"</h4>":"<p>"+inline(l)+"</p>");
+  }
+  if(list)out.push("</ul>");
+  return out.join("");
+}
+const ERR={not_granted:"Hai scelto di non usare Claude: restano i significati qui sopra.",sampling_disabled:"L'interpretazione non è disponibile per questo account.",
+  rate_limited:"Troppe richieste ravvicinate. Riprova tra qualche minuto.",session_expired:"La sessione è scaduta: accedi di nuovo e riprova.",
+  refused:"Claude non ha risposto a questa richiesta. Prova a riformularla.",empty_completion:"Nessuna risposta ricevuta. Prova a riformulare.",prompt_too_large:"La richiesta è troppo lunga. Accorciala."};
+const PERMANENT=["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"];
+
+/* ======================= DIARIO ======================= */
+const DKEY="arcani-custodi-diario";
+function loadDiary(){try{return JSON.parse(localStorage.getItem(DKEY)||"[]")}catch(e){return[]}}
+function saveDiary(d){try{localStorage.setItem(DKEY,JSON.stringify(d.slice(0,60)))}catch(e){}}
+function addEntry(e){const d=loadDiary();d.unshift(e);saveDiary(d);return e.t}
+function updateEntry(t,patch){const d=loadDiary();const x=d.find(e=>e.t===t);if(x){Object.assign(x,patch);saveDiary(d)}}
+const KIND={tarot:"Tarocchi",ching:"I Ching",custodi:"Carte dei Custodi"};
+function renderDiary(){
+  const d=loadDiary(),box=$("#diaryList");
+  if(!d.length){box.innerHTML='<p class="empty-state">Il diario è vuoto. Le carte pescate, le stese e gli esagrammi compariranno qui.</p>';return}
+  box.innerHTML=d.map(e=>`<details class="entry"><summary>
+    <span class="d">${esc(new Date(e.t).toLocaleString("it-IT",{dateStyle:"medium",timeStyle:"short"}))} · ${KIND[e.kind]||""}</span>
+    <span class="eq">${esc(e.q||"(senza domanda)")}</span><span class="es">${esc(e.summary)}</span></summary>
+    <div class="reading">${e.text?md(e.text):'<p class="note">Nessun testo salvato per questa lettura.</p>'}</div></details>`).join("");
+}
+let clearArmed=false;
+$("#clearDiary").onclick=()=>{const b=$("#clearDiary");
+  if(!clearArmed){clearArmed=true;b.textContent="Conferma: cancella tutto";setTimeout(()=>{clearArmed=false;b.textContent="Svuota diario"},4000);return}
+  saveDiary([]);clearArmed=false;b.textContent="Svuota diario";renderDiary()};
+
+/* ======================= TAB ======================= */
+const TABS=["custodi","tarot","ching","diary"];
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  TABS.forEach(id=>$("#"+id).hidden=id!==b.dataset.tab);
+  if(b.dataset.tab==="diary")renderDiary();
+});
+
+/* ======================= CLAUDE ======================= */
+// Fuori da claude.ai (es. dnaqi.it) le risposte passano da AI_ENDPOINT: un webhook (n8n) che riceve
+// {system, messages} e chiama Claude con la chiave API lato server, rispondendo {text}. Vuoto = funzione nascosta.
+const AI_ENDPOINT = "";
+const samplePromise=window.claude?.use?window.claude.use("sample").catch(()=>null):Promise.resolve(null);
+let sampleGone=false;
+async function getAsk(){
+  const s=await samplePromise;
+  if(s)return (turns,opt)=>s(turns,{...opt,cache:false});
+  if(!AI_ENDPOINT)return null;
+  return async (turns,{signal,onText})=>{
+    let r;
+    try{r=await fetch(AI_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},signal,
+      body:JSON.stringify({system:turns[0].content,messages:turns.slice(1)})})}
+    catch(e){throw {code:e.name==="AbortError"?"cancelled":"upstream_error"}}
+    if(!r.ok)throw {code:r.status===429?"rate_limited":"upstream_error"};
+    let j={};try{j=await r.json()}catch(e){}
+    const text=String(j.text||"").trim();
+    if(!text)throw {code:"empty_completion"};
+    onText({text,delta:text});
+    return {text,truncated:false};
+  };
+}
+const RULES=`Sei la voce narrativa dell'app "Gli Arcani dei Custodi" dell'associazione I Custodi del DNA APS, che usa racconti e personaggi per accompagnare i bambini con sindromi genetiche rare e le loro famiglie. Il motto è "Ogni sindrome è una storia da raccontare".
+Rispondi sempre in italiano, con tono caldo, inclusivo e accessibile, mai clinico.
+Regole:
+- Tarocchi, I Ching e carte sono strumenti narrativi e di riflessione: non predicono il futuro. Non fare previsioni assolute e non essere fatalista.
+- I Custodi (Super K, Super X, M, Nightgene, Xia Nova, Fragile Mind, Kairos, Ruby-T, Samuel, Lumia, Nistagmo il panda, Professor K, Riff) sono immagini di forza, cura e luce. Non collegare mai il significato di una carta, tanto meno uno negativo, a una sindrome, a una diagnosi o alla salute di qualcuno.
+- Non dare indicazioni mediche, terapeutiche, legali o finanziarie. Se la domanda tocca salute, terapie, scuola o diagnosi, invita con garbo a parlarne con i professionisti di riferimento e ricorda che l'associazione ha uno sportello pedagogico.
+Formato: titoletti preceduti da "## ", paragrafi brevi, eventuali elenchi con "- ". Niente tabelle.`;
+
+const AI_LINKS=[["ChatGPT","https://chatgpt.com/"],["Claude","https://claude.ai/new"],["Gemini","https://gemini.google.com/app"]];
+function oracle(container,firstPrompt,entryT,title,goLabel,localText){
+  const fullPrompt=RULES+"\n\n"+firstPrompt;
+  container.innerHTML=`<div class="oracle"><h3>${esc(title)}</h3>
+    <div class="reading local">${md(localText)}</div>
+    <div class="aibox" data-aibox hidden><h3>Interpretazione con Claude</h3>
+      <div class="reading" data-ai aria-live="polite"></div>
+      <div class="row"><button class="btn" data-go>${esc(goLabel)}</button><button class="btn ghost" data-stop hidden>Ferma</button></div>
+      <p class="note" data-note></p>
+      <div class="follow" data-follow hidden><input type="text" id="fu-${entryT}" placeholder="Fai un'altra domanda…"><button class="btn ghost" data-send>Chiedi</button></div></div>
+    <div class="byo"><span class="lbl">Approfondisci con la tua AI</span>
+      <p class="hint">Copiamo per te domanda, carte e istruzioni. Si apre la chat che usi di solito: incolla il testo e invia. Va bene anche un account gratuito.</p>
+      <div class="row">${AI_LINKS.map(([n,u])=>`<a class="btn ghost" href="${u}" target="_blank" rel="noopener" data-copy>${n}</a>`).join("")}<button class="btn ghost" data-copyonly>Copia solo il testo</button></div>
+      <p class="note" data-copynote aria-live="polite"></p>
+      <details data-det><summary>Vedi il testo da incollare</summary><textarea readonly id="pt-${entryT}" rows="8">${esc(fullPrompt)}</textarea></details></div></div>`;
+  const q=s=>container.querySelector(s);
+  const R=q("[data-ai]"),go=q("[data-go]"),stop=q("[data-stop]"),note=q("[data-note]"),fol=q("[data-follow]"),inp=fol.querySelector("input"),send=q("[data-send]"),box=q("[data-aibox]");
+  const cnote=q("[data-copynote]"),det=q("[data-det]"),ta=det.querySelector("textarea");
+  function copy(){
+    const fallback=()=>{det.open=true;ta.focus();ta.select();cnote.textContent="Copia il testo qui sotto (tieni premuto e scegli Copia), poi incollalo nella chat."};
+    try{navigator.clipboard.writeText(fullPrompt).then(()=>{cnote.textContent="Testo copiato. Incollalo nella chat che si è aperta e invia."},fallback)}catch(e){fallback()}
+  }
+  container.querySelectorAll("[data-copy]").forEach(a=>a.addEventListener("click",copy));
+  q("[data-copyonly]").onclick=copy;
+  updateEntry(entryT,{text:localText});
+  // Interpretazione diretta: solo dove c'è Claude (claude.ai) o un webhook configurato
+  const turns=[{role:"user",content:RULES},{role:"user",content:firstPrompt}];
+  let html="",ctl=null,full=localText;
+  getAsk().then(s=>{box.hidden=!s||sampleGone});
+  async function ask(isFollow,qtext){
+    const sample=await getAsk();
+    if(!sample){box.hidden=true;return}
+    ctl=new AbortController();
+    go.hidden=true;stop.hidden=false;fol.hidden=true;note.textContent="";
+    const base=html+(isFollow?`<p class="q">${esc(qtext)}</p>`:"");
+    R.innerHTML=base+'<p class="thinking">I Custodi stanno pensando…</p>';
+    const sep=isFollow?"\n\n## "+qtext+"\n":"\n\n## Interpretazione con Claude\n";
+    try{
+      const {text,truncated}=await sample(turns,{signal:ctl.signal,onText:({text})=>{R.innerHTML=base+md(text)}});
+      turns.push({role:"assistant",content:text});
+      html=base+md(text);R.innerHTML=html;
+      full+=sep+text;updateEntry(entryT,{text:full});
+      if(truncated)note.textContent="La risposta è stata interrotta per lunghezza.";
+      fol.hidden=false;
+    }catch(e){
+      const kept=e.code!=="refused"&&e.text?e.text:"";
+      R.innerHTML=base+(kept?md(kept):"");
+      if(kept){turns.push({role:"assistant",content:kept});html=R.innerHTML;full+=sep+kept;updateEntry(entryT,{text:full})}
+      else{if(isFollow)turns.pop();R.innerHTML=html}
+      if(e.code!=="cancelled")note.textContent=ERR[e.code]||"Qualcosa si è interrotto. Puoi riprovare.";
+      if(PERMANENT.includes(e.code)){sampleGone=true;box.hidden=true}
+      else if(kept||isFollow)fol.hidden=false;
+      else go.hidden=false;
+    }finally{stop.hidden=true}
+  }
+  go.onclick=()=>ask(false);
+  stop.onclick=()=>ctl?.abort();
+  const doFollow=()=>{const v=inp.value.trim();if(!v)return;inp.value="";turns.push({role:"user",content:v});ask(true,v)};
+  send.onclick=doFollow;inp.addEventListener("keydown",e=>{if(e.key==="Enter")doFollow()});
+}
+
+/* ======================= LETTURE SCRITTE DALL'APP ======================= */
+const POSF={"Il messaggio":"Il messaggio per te ruota attorno a","Passato":"Alle tue spalle c'è un tempo segnato da","Presente":"Il presente parla di","Futuro":"La direzione che si apre parla di",
+ "Situazione":"La situazione di adesso è fatta di","Ostacolo":"Ciò che frena è legato a","Consiglio":"Il consiglio è di lavorare su",
+ "Il punto di partenza":"Il punto da cui parti è fatto di","Strada A":"La prima strada porta con sé","Strada B":"La seconda strada porta con sé","Ciò che non vedi":"Sotto la superficie si muovono",
+ "Il cuore della questione":"Al centro di tutto ci sono","Ciò che incrocia":"A incrociare il cammino arrivano","Le radici":"Le radici della questione affondano in",
+ "Il passato recente":"Il passato recente ha portato","Ciò che può emergere":"Ciò che può emergere, se lo coltivi, è fatto di","Il futuro prossimo":"Nel futuro vicino si affacciano",
+ "Te stesso":"Il modo in cui stai vivendo la cosa parla di","L'ambiente":"Le persone e l'ambiente intorno a te portano","Speranze e timori":"Speranze e timori si intrecciano attorno a","L'esito":"Il punto verso cui tutto tende è fatto di"};
+const SUITTXT={bastoni:"prevale il Fuoco dei Bastoni: energia, iniziativa e voglia di fare guidano il momento.",coppe:"prevale l'Acqua delle Coppe: emozioni e relazioni sono al centro.",
+ spade:"prevale l'Aria delle Spade: pensieri, decisioni e parole contano più del solito.",denari:"prevale la Terra dei Denari: lavoro, casa e aspetti pratici chiedono attenzione."};
+function localTarot(q,sp,drawn){
+  const n=drawn.length,L=[];
+  L.push(q?`Hai chiesto: *${q}*`:"Lettura sul momento presente.");
+  drawn.forEach((d,i)=>{
+    const c=d.card,kw=d.rev?c.rev:c.up;
+    L.push(`## ${n>1?i+1+". "+d.pos+": ":""}${c.name}${d.rev?" (rovesciata)":""}`);
+    L.push(`${POSF[d.pos]||"Qui emergono"} **${kw}**. ${c.sense}${d.rev?" Rovesciata, la carta invita a guardare dove questa energia è trattenuta o rivolta verso l'interno.":""}${c.g?` Nel mazzo dei Custodi la accompagna ${c.g.n}.`:""}`);
+  });
+  if(n>1){
+    L.push("## Il quadro d'insieme");
+    const maj=drawn.filter(d=>d.card.major).length,rev=drawn.filter(d=>d.rev).length,court=drawn.filter(d=>!d.card.major&&d.card.rank>10).length;
+    const cnt={};drawn.forEach(d=>{if(!d.card.major)cnt[d.card.suit]=(cnt[d.card.suit]||0)+1});
+    const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+    const pts=[];
+    if(maj*2>=n)pts.push(`Molti Arcani Maggiori (${maj} su ${n}): il momento tocca temi importanti, più grandi della singola scelta.`);
+    else if(maj===0)pts.push("Nessun Arcano Maggiore: la questione è nelle tue mani e si gioca nelle cose di ogni giorno.");
+    else pts.push(`${maj===1?"Un Arcano Maggiore":maj+" Arcani Maggiori"} su ${n}: un tema di fondo accompagna le scelte quotidiane.`);
+    if(top.length&&top[0][1]>=2&&(top.length===1||top[0][1]>top[1][1]))pts.push("Tra le carte minori "+SUITTXT[top[0][0]]);
+    if(rev*2>n)pts.push("Molte carte rovesciate: alcune energie sono ferme o trattenute. Vale la pena chiedersi cosa stai rimandando.");
+    else if(rev===0)pts.push("Nessuna carta rovesciata: le energie scorrono in modo diretto.");
+    if(court)pts.push(`${court===1?"Una figura di corte":court+" figure di corte"}: possono rappresentare persone vicine a te, o lati del tuo carattere.`);
+    pts.forEach(p=>L.push("- "+p));
+  }
+  const last=drawn[n-1],first=(last.rev?last.card.rev:last.card.up).split(",")[0].trim();
+  L.push("## Da portare con te");
+  L.push(`${n>1?"L'ultima carta, "+last.card.name+",":last.card.name} suggerisce di partire da qui: **${first}**. Rileggi la tua domanda alla luce di queste parole e chiediti quale risuona di più adesso.`);
+  return L.join("\n");
+}
+const TRIIMG={Cielo:"forza e iniziativa",Terra:"accoglienza e sostegno",Tuono:"movimento e risveglio",Acqua:"profondità e prova",Monte:"quiete e fermezza",Vento:"gentilezza che penetra",Fuoco:"chiarezza e calore",Lago:"gioia e scambio"};
+const LINEPOS=["","l'inizio della situazione, i primi passi","il tuo mondo interiore e chi collabora con te","un passaggio delicato tra dentro e fuori","la soglia verso l'esterno e chi ha più responsabilità","il centro della guida, il punto di maggiore influenza","il culmine, quando la situazione sta già per trasformarsi"];
+function localChing(q,lines,h1,h2,changing){
+  const L=[];
+  L.push(q?`Hai chiesto: *${q}*`:"Responso sul momento presente.");
+  L.push(`## ${h1.n}. ${HEX[h1.n][0]}`,HEX[h1.n][2]);
+  L.push("## L'immagine",`Sopra c'è ${h1.up[1]} (${TRIIMG[h1.up[1]]}), sotto ${h1.lo[1]} (${TRIIMG[h1.lo[1]]}). Dall'incontro di queste due forze nasce il carattere del momento.`);
+  L.push("## Le linee mutevoli");
+  if(changing.length)changing.forEach(k=>L.push(`- **Linea ${k}** (${lines[k-1]===9?"yang mutevole":"yin mutevole"}): riguarda ${LINEPOS[k]}. Qui ${lines[k-1]===9?"una forza giunta al massimo sta per ammorbidirsi":"una cedevolezza giunta al massimo sta per farsi decisa"}.`));
+  else L.push("Nessuna linea mutevole: il responso è tutto nell'esagramma e la situazione, per ora, è stabile.");
+  if(h2)L.push(`## Dove va la situazione: ${h2.n}. ${HEX[h2.n][0]}`,HEX[h2.n][2]);
+  L.push("## Da portare con te","Rileggi la tua domanda alla luce di questo responso: quale gesto concreto, anche piccolo, puoi fare oggi?");
+  return L.join("\n");
+}
+function localReflect(r,g,who){
+  const adult=who.startsWith("genitore");
+  const L=[`## Come usare la carta`];
+  if(adult)["Prenditi cinque minuti tranquilli e scrivi la tua risposta, anche solo una riga.","Torna sulla domanda tra qualche giorno: spesso la risposta cambia.","Se ti va, condividila con qualcuno di cui ti fidi."].forEach(t=>L.push("- "+t));
+  else["Leggete la domanda ad alta voce e lasciate tempo: anche il silenzio è una risposta.","Rispondete anche voi adulti, magari per primi, per rompere il ghiaccio.","Vanno bene disegni, gesti o simboli della CAA al posto delle parole.",`Chiudete dicendo una cosa bella l'uno all'altro, come farebbe ${g.n}.`].forEach(t=>L.push("- "+t));
+  return L.join("\n");
+}
+
+/* ======================= DISEGNO CARTE ======================= */
+const backHTML='<div class="back"><span class="lg" aria-hidden="true"></span></div>';
+function faceHTML(c,rev){
+  let emb;
+  if(c.major&&c.g)emb=`<div class="glyph g">${esc(c.g.i)}</div><span class="gname">${esc(c.g.n)}</span>`;
+  else if(c.major)emb=`<div class="glyph">${c.glyph}︎</div>`;
+  else if(c.rank<=10){const n=c.rank;emb=`<div class="pips" style="--s:${n===1?'62%':n<=3?'34%':n<=6?'30%':'24%'}">${Array.from({length:n},()=>`<svg viewBox="0 0 24 24"><use href="#s-${c.suit}"/></svg>`).join("")}</div>`}
+  else emb=`<div class="court"><svg viewBox="0 0 24 24"><use href="#s-${c.suit}"/></svg><b>${{11:"F",12:"C",13:"R",14:"Re"}[c.rank]}</b></div>`;
+  const top=c.major?c.num:(c.rank<=10?ROMAN[c.rank]:c.suitName);
+  return `<div class="face${rev?" rev":""}"><span class="num">${top}</span><div class="emb">${emb}</div><span class="name">${esc(c.name)}</span></div>`;
+}
+function flipAll(root){root.querySelectorAll(".card:not(.up)").forEach((el,i)=>setTimeout(()=>el.classList.add("up"),reduceMotion()?0:250+i*180))}
+
+/* ======================= CARTE DEI CUSTODI ======================= */
+function drawReflect(r,flip){
+  const g=G[r[0]], who=$("#who").value, name=$("#kidName").value.trim();
+  const adult=who.startsWith("genitore"), both=who.startsWith("famiglia");
+  const out=$("#refOut");
+  out.innerHTML=`<div class="ref">
+    <div class="slot"><div class="card rcard${flip?"":" up"}"><div class="inner">${backHTML}<div class="front"><div class="face">
+      <div class="glyph g">${esc(g.i)}</div><span class="gname">${esc(g.n)}</span><span class="rtitle">${esc(r[1])}</span></div></div></div></div></div>
+    <div class="prompts">
+      ${adult?"":`<div class="pr"><span>Per ${esc(name||"i più piccoli")}</span><p>${esc(r[2])}</p></div>`}
+      ${adult||both?`<div class="pr"><span>Per gli adulti</span><p>${esc(r[3])}</p></div>`:""}
+    </div></div><div id="refOracle"></div>`;
+  if(flip)flipAll(out);
+  return {g,who,name};
+}
+$("#refBtn").onclick=()=>{
+  const r=REFLECT[randInt(REFLECT.length)];
+  const {g,who,name}=drawReflect(r,true);
+  const t=addEntry({t:Date.now(),kind:"custodi",q:r[1],summary:g.n+" · "+(who.startsWith("genitore")?r[3]:r[2]),text:""});
+  const prompt=`Carta dei Custodi pescata: "${r[1]}", guidata da ${g.n}.
+Domanda per i bambini: ${r[2]}
+Domanda per gli adulti: ${r[3]}
+Chi ascolta: ${who}${name?`, di nome ${name}`:""}.
+
+Scrivi una mini-storia (150-250 parole) in cui ${g.n} vive una piccola avventura legata al tema della carta, adatta a chi ascolta per lessico e lunghezza${name?`, e in cui ${name} incontra il Custode`:""}. Non citare sindromi né diagnosi. Poi aggiungi "## Facciamolo insieme" con una semplice attività da fare a casa in 5-10 minuti, e "## Da chiedersi" con la domanda della carta riformulata con parole tue.`;
+  oracle($("#refOracle"),prompt,t,"Per parlarne insieme","Racconta una storia con "+g.n,localReflect(r,g,who));
+};
+drawReflect(REFLECT[0],false); // carta di esempio visibile all'apertura
+
+/* ======================= TAROCCHI ======================= */
+const spSel=$("#spread");
+spSel.innerHTML=Object.entries(SPREADS).map(([k,v])=>`<option value="${k}">${esc(v.name)}</option>`).join("");
+spSel.value="tre";
+const setHint=()=>$("#spreadHint").textContent=SPREADS[spSel.value].hint;
+spSel.onchange=setHint;setHint();
+function tableHTML(drawn,up){
+  return `<div class="table">${drawn.map((d,i)=>`<div class="slot"><span class="pos">${i+1}. ${esc(d.pos)}</span>
+    <div class="card${up?" up":""}" aria-label="${esc(d.card.name)}${d.rev?" rovesciata":""}"><div class="inner">${backHTML}<div class="front">${faceHTML(d.card,d.rev)}</div></div></div></div>`).join("")}</div>`;
+}
+$("#drawBtn").onclick=()=>{
+  const q=$("#tq").value.trim(),sp=SPREADS[spSel.value],useRev=$("#revOn").checked;
+  const deck=shuffle(DECK),cut=randInt(78),cd=deck.slice(cut).concat(deck.slice(0,cut));
+  const drawn=sp.pos.map((p,i)=>({pos:p,card:cd[i],rev:useRev&&randInt(2)===1}));
+  const out=$("#tarotOut");
+  out.innerHTML=tableHTML(drawn,false)+`<div class="meanings">${drawn.map((d,i)=>`<div class="mean"><span class="t">${i+1}. ${esc(d.card.name)}${d.rev?'<span class="tag">rovesciata</span>':""}${d.card.g?`<span class="tag g">${esc(d.card.g.n)}</span>`:""} <small>· ${esc(d.pos)}</small></span>
+    <span class="k">${esc(d.rev?d.card.rev:d.card.up)}</span><p>${esc(d.card.sense)}</p></div>`).join("")}</div><div id="tarotOracle"></div>`;
+  flipAll(out);
+  const t=addEntry({t:Date.now(),kind:"tarot",q,summary:drawn.map(d=>d.card.name+(d.rev?" (R)":"")).join(" · "),text:""});
+  const prompt=`Stesa di Tarocchi Rider–Waite: "${sp.name}".
+Domanda: ${q?`"${q}"`:"(nessuna domanda specifica: riflessione sul momento presente)"}
+
+Carte estratte (posizione → carta):
+${drawn.map((d,i)=>`${i+1}. ${d.pos}: ${d.card.name}${d.rev?" (rovesciata)":" (dritta)"}; parole chiave: ${d.rev?d.card.rev:d.card.up}${d.card.g?`; nel mazzo dei Custodi questa carta è accompagnata da ${d.card.g.n}`:""}`).join("\n")}
+
+Interpreta la stesa come spunto di riflessione sulla domanda. Per ogni carta spiega in 2-3 frasi cosa suggerisce in quella posizione, richiamando l'iconografia Rider–Waite quando aiuta. Se una carta ha un Custode, puoi usarlo come immagine positiva di accompagnamento, senza collegarlo a sindromi. Poi una sintesi che leghi le carte tra loro e un consiglio pratico. Circa ${sp.pos.length>5?"550-700":"300-450"} parole.`;
+  oracle($("#tarotOracle"),prompt,t,"La lettura","Interpreta con Claude",localTarot(q,sp,drawn));
+  setTimeout(()=>out.scrollIntoView({behavior:reduceMotion()?"auto":"smooth",block:"start"}),50);
+};
+// esempio visibile all'apertura
+$("#tarotOut").innerHTML=`<p class="hint" style="text-align:center;margin-top:24px">Esempio di stesa · scrivi la tua domanda e premi «Mescola e stendi»</p>`+
+  tableHTML([["M8","Passato"],["coppe2","Presente"],["M17","Futuro"]].map(([id,pos])=>({pos,card:DECK.find(c=>c.id===id),rev:false})),true);
+
+/* ======================= I CHING ======================= */
+let lines=[];
+function lineHTML(v){
+  if(v==null)return '<div class="ln empty"><span></span></div>';
+  const yang=v===7||v===9,chg=v===6||v===9;
+  return `<div class="ln${chg?" chg":""}">${yang?"<span></span>":"<span></span><span></span>"}${chg?`<i class="mk" aria-hidden="true">${v===9?"○":"✕"}</i>`:""}</div>`;
+}
+const staticLines=bits=>bits.map(b=>`<div class="ln">${b?"<span></span>":"<span></span><span></span>"}</div>`).join("");
+function hexOf(bits){const lo=bits.slice(0,3).join(""),up=bits.slice(3,6).join("");return{n:KW[TORDER.indexOf(up)][TORDER.indexOf(lo)],lo:TRI[lo],up:TRI[up]}}
+function renderChing(){
+  const out=$("#chingOut"),slots=Array.from({length:6},(_,i)=>lines[i]);
+  if(lines.length<6){out.innerHTML=`<div class="hexbox"><div class="hex">${slots.map(lineHTML).join("")}</div><span class="tri">${lines.length}/6 linee</span></div>`;$("#chingMeaning").innerHTML="";$("#chingOracle").innerHTML="";return}
+  const b1=lines.map(v=>v===7||v===9?1:0),b2=lines.map(v=>v===6||v===7?1:0);
+  const changing=lines.map((v,i)=>v===6||v===9?i+1:0).filter(Boolean);
+  const h1=hexOf(b1),h2=changing.length?hexOf(b2):null;
+  const box=(h,inner)=>`<div class="hexbox"><span class="hexnum">${h.n}</span><div class="hex">${inner}</div><span class="hexname">${esc(HEX[h.n][0])}</span><span class="tri">${HEX[h.n][1]} · ${h.up[2]} ${h.up[1]} sopra ${h.lo[2]} ${h.lo[1]}</span></div>`;
+  out.innerHTML=box(h1,slots.map(lineHTML).join(""))+(h2?`<span class="arrow" aria-hidden="true">→</span>`+box(h2,staticLines(b2)):"");
+  $("#chingMeaning").innerHTML=`<div class="meanings"><div class="mean"><span class="t">${h1.n}. ${esc(HEX[h1.n][0])} <small>· esagramma presente</small></span><span class="k">${esc(HEX[h1.n][2])}</span>
+    <p>${changing.length?"Linee mutevoli: "+changing.map(n=>n+"ª").join(", ")+" (contate dal basso).":"Nessuna linea mutevole: la situazione è stabile."}</p></div>
+    ${h2?`<div class="mean"><span class="t">${h2.n}. ${esc(HEX[h2.n][0])} <small>· dove la situazione tende</small></span><span class="k">${esc(HEX[h2.n][2])}</span></div>`:""}</div>`;
+  const q=$("#cq").value.trim();
+  const t=addEntry({t:Date.now(),kind:"ching",q,summary:`${h1.n} ${HEX[h1.n][0]}`+(h2?` → ${h2.n} ${HEX[h2.n][0]}`:""),text:""});
+  const prompt=`Consultazione I Ching con il metodo delle tre monete.
+Domanda: ${q?`"${q}"`:"(nessuna domanda specifica: riflessione sul momento presente)"}
+Valori delle linee dal basso: ${lines.join(", ")}.
+Esagramma presente: ${h1.n}, ${HEX[h1.n][0]} (${HEX[h1.n][1]}), ${h1.up[1]} sopra ${h1.lo[1]}.
+Linee mutevoli: ${changing.length?changing.join(", "):"nessuna"}.
+${h2?`Esagramma di trasformazione: ${h2.n}, ${HEX[h2.n][0]} (${HEX[h2.n][1]}), ${h2.up[1]} sopra ${h2.lo[1]}.`:""}
+
+Interpreta seguendo la tradizione Wilhelm, con parole tue: il senso della Sentenza e dell'Immagine dell'esagramma presente, ${changing.length?"il significato di ciascuna linea mutevole, poi l'esagramma di trasformazione come direzione verso cui la situazione evolve,":"il significato dell'assenza di linee mutevoli,"} e infine cosa suggerisce rispetto alla domanda, in modo concreto. Circa 400-550 parole.`;
+  oracle($("#chingOracle"),prompt,t,"Il responso","Interpreta con Claude",localChing(q,lines,h1,h2,changing));
+}
+function toss(){
+  if(lines.length>=6)return;
+  const c=[0,1,2].map(()=>randInt(2)?3:2),v=c[0]+c[1]+c[2];
+  lines.push(v);
+  $("#coins").innerHTML=c.map(x=>`<span class="coin${x===2?" t":""}" title="${x===3?"testa":"croce"}">${x===3?"T":"C"}</span>`).join("")+
+    `<span class="coinlog"><b>Linea ${lines.length}</b>${{6:"6 · yin mutevole",7:"7 · yang",8:"8 · yin",9:"9 · yang mutevole"}[v]}</span>`;
+  renderChing();
+  $("#tossBtn").disabled=$("#tossAll").disabled=lines.length>=6;
+}
+$("#tossBtn").onclick=toss;
+$("#tossAll").onclick=()=>{while(lines.length<6)toss()};
+$("#tossReset").onclick=()=>{lines=[];$("#coins").innerHTML="";$("#tossBtn").disabled=$("#tossAll").disabled=false;renderChing()};
+renderChing();
+</script>
+
+</body>
+</html>
