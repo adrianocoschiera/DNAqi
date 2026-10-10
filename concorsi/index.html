@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concorsi e opportunità · I Custodi del DNA</title>
+<meta name="description" content="Concorsi, premi e bandi italiani su malattie rare, disabilità, fumetto, musica, video e tecnologia, raccolti da I Custodi del DNA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --fg:#17211f; --muted:#5c6b67; --line:#d9e1de;
+  --accent:#0d6b63; --accent-soft:#dcefeb;
+  --ok:#1d7a3e; --ok-soft:#e1f2e6; --warn:#a35a00; --warn-soft:#fbecd6; --bad:#b0332b; --bad-soft:#f8e1de;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#101615; --surface:#172120; --fg:#e4ecea; --muted:#9aaca7; --line:#2a3836;
+  --accent:#5cc4b8; --accent-soft:#163a36;
+  --ok:#6fd393; --ok-soft:#183324; --warn:#f0b35c; --warn-soft:#3a2a12; --bad:#f08a80; --bad-soft:#3d1d1a; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);padding-inline:16px;padding-block:32px 56px}
+.wrap{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+h1{font:700 clamp(26px,5vw,38px)/1.1 var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:8px 0 0;max-width:64ch}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font:500 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toggle{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:12px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px}
+.item.closed{opacity:.72}
+.due{font:500 13px/1.3 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.due b{display:block;font:700 22px/1.1 var(--display);color:var(--fg)}
+.due.soon b{color:var(--bad)}
+.item h2{font:700 18px/1.25 var(--display);margin:0}
+.item h2 a{color:inherit;text-decoration-color:var(--line);text-underline-offset:3px}
+.ente{font-size:13px;color:var(--muted);margin-top:2px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.pill{font-size:12px;border-radius:999px;padding:2px 9px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.pill.open{background:var(--ok-soft);color:var(--ok)}
+.pill.next{background:var(--warn-soft);color:var(--warn)}
+.pill.shut{background:var(--bad-soft);color:var(--bad)}
+.pill.runts{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+.item p{margin:4px 0;max-width:68ch}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-right:6px}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:28px;color:var(--muted);text-align:center}
+footer{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+footer a{color:var(--accent)}
+@media (max-width:560px){.item{grid-template-columns:1fr;gap:8px}.due b{display:inline;margin-right:8px}.toggle{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Concorsi e opportunità</h1>
+    <p class="sub">Premi, festival e bandi italiani su malattie rare, disabilità, fumetto, musica, video e tecnologia. Li raccoglie ogni settimana l'associazione I Custodi del DNA: verificate sempre i dettagli sul bando ufficiale.</p>
+  </header>
+  <nav class="filters" id="filters" aria-label="Categorie"></nav>
+  <main class="list" id="list"><div class="empty">Sto caricando i concorsi…</div></main>
+  <footer>
+    <span id="agg"></span>
+    <span>Il badge <span class="pill runts">serve RUNTS</span> indica i bandi riservati agli enti iscritti al Registro del Terzo Settore.</span>
+    <span>A cura di <a href="https://dnaqi.it/">I Custodi del DNA</a>.</span>
+  </footer>
+</div>
+<script>
+const CATS={tutti:"Tutti",musica:"Canzone",fumetto:"Fumetto",video:"Video e corti",tecnologia:"Tecnologia e robotica",disabilita:"Disabilità e malattie rare",bandi:"Bandi e fondi"};
+const BANDO={aperto:["open","Aperto"],prossima:["next","Prossima edizione"],chiuso:["shut","Chiuso"]};
+let rows=[],cat="tutti",showClosed=false;
+const today=new Date();today.setHours(0,0,0,0);
+const days=d=>d?Math.round((new Date(d+"T00:00:00")-today)/864e5):null;
+const fmt=d=>new Date(d+"T00:00:00").toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric"});
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function renderFilters(){
+  const f=document.getElementById("filters");f.replaceChildren();
+  for(const [k,v] of Object.entries(CATS)){const b=el("button","chip",v);b.type="button";b.setAttribute("aria-pressed",String(k===cat));b.onclick=()=>{cat=k;renderFilters();render()};f.append(b)}
+  const t=el("label","toggle"),c=document.createElement("input");c.type="checkbox";c.id="show-closed";c.checked=showClosed;c.onchange=()=>{showClosed=c.checked;render()};t.append(c,"Mostra chiusi");f.append(t);
+}
+function render(){
+  const list=document.getElementById("list");list.replaceChildren();
+  const closed=r=>r.stato_bando==="chiuso"||(r.stato_bando==="aperto"&&(days(r.scadenza)??0)<0);
+  let v=rows.filter(r=>cat==="tutti"||r.categoria===cat);
+  if(!showClosed)v=v.filter(r=>!closed(r));
+  const rank=r=>closed(r)?2:r.stato_bando==="aperto"?0:1;
+  v.sort((a,b)=>rank(a)-rank(b)||(a.scadenza||"9999").localeCompare(b.scadenza||"9999"));
+  if(!v.length){list.append(el("div","empty","Nessun concorso in questa categoria al momento. Prova «Mostra chiusi» o torna la prossima settimana."));return}
+  for(const r of v){
+    const c=closed(r),card=el("article","item"+(c?" closed":""));
+    const d=days(r.scadenza),due=el("div","due"+(!c&&d!=null&&d<=14?" soon":""));
+    if(r.scadenza)due.append(el("b",null,d>=0?(d===0?"oggi":d+" gg"):"scaduto"),"scad. "+fmt(r.scadenza));
+    else due.append(el("b",null,"—"),r.stato_bando==="prossima"?"prossima edizione":"data da confermare");
+    const b=el("div");b.style.minWidth="0";const h=el("h2");
+    if(r.link){const a=el("a",null,r.titolo);a.href=r.link;a.target="_blank";a.rel="noopener";h.append(a)}else h.textContent=r.titolo;
+    b.append(h);if(r.ente)b.append(el("div","ente",r.ente));
+    const meta=el("div","meta"),[bc,bl]=c?BANDO.chiuso:(BANDO[r.stato_bando]||BANDO.aperto);
+    meta.append(el("span","pill "+bc,bl),el("span","pill",CATS[r.categoria]||r.categoria));if(r.runts)meta.append(el("span","pill runts","serve RUNTS"));b.append(meta);
+    const line=(l,t)=>{if(!t)return;const p=el("p");p.append(el("span","lbl",l),t);b.append(p)};
+    if(!r.scadenza)line("Quando",r.quando);line("Cos'è",r.descrizione);line("Requisiti",r.requisiti);line("Premio",r.premio);
+    card.append(due,b);list.append(card);
+  }
+}
+renderFilters();
+fetch("concorsi.json",{cache:"no-cache"}).then(r=>r.json()).then(j=>{
+  rows=j.concorsi||[];if(j.aggiornato)document.getElementById("agg").textContent="Ultimo aggiornamento: "+fmt(j.aggiornato)+".";render();
+}).catch(()=>{document.getElementById("list").replaceChildren(el("div","empty","Non riesco a caricare l'elenco. Ricarica la pagina tra poco."))});
+</script>
+</body>
+</html>
