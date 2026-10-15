@@ -1,0 +1,8 @@
+{
+  "istruzioni": "Collegamenti usati nell'area per i grandi del Negozio dei Custodi. Lasciare vuoto (\"\") se non disponibile. Solo indirizzi https:// o mailto:. cambio = quante Rarocoin corrispondono, come riferimento, a 1 euro di donazione libera.",
+  "donaCustodi": "https://www.icustodideldna.it",
+  "donaBrigata": "",
+  "shopCustodi": "https://www.icustodideldna.it",
+  "shopBrigata": "",
+  "cambio": 100
+}
