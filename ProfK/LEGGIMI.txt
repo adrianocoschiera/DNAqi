@@ -1,0 +1,28 @@
+PROF K E LE BOLLE DI DNA (Bubble Bobble dei Custodi del DNA) - VERSIONE HD
+
+AVVIO: doppio clic su Prof_K.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline.
+
+MODALITA'
+1 GIOCATORE ... giochi con il Prof K; l'ape Riff ti segue come assistente volante
+                e ogni tanto soffia una bolla di polline sui Grigini
+2 GIOCATORI ... Prof K e Riff giocano insieme sulla stessa tastiera
+TRANQUILLO .... 5 vite, Grigini lenti, bolle che durano di piu', niente fantasma,
+                e Riff fa scoppiare le bolle rimaste troppo a lungo
+CLASSICO ...... 3 vite, come in sala giochi
+
+COMANDI
+1 giocatore: frecce o WASD muovi - Z / SPAZIO / SU salta - X / F / J bolla
+2 giocatori: PROF K  A D muovi, W salta, F bolla
+             RIFF    frecce, SU salta, L bolla (tenendo premuto salto Riff plana)
+P pausa - M audio - joypad e schermo touch supportati
+
+COME SI GIOCA
+Soffia una bolla contro un Grigino per intrappolarlo, poi tocca la bolla per farla
+scoppiare: il Grigino diventa un premio (osso, miele, ciambella, torta...).
+Bolle vicine scoppiano a catena: 1000, 2000, 4000, 8000 punti!
+Puoi saltare SULLE bolle tenendo premuto il tasto salto.
+Raccogli le lettere G-E-N-O-M-A nelle bolle rosa: vita in piu'.
+Le bolle-fulmine viola lanciano un fulmine che spazza via i Grigini.
+Se ci metti troppo arriva "SBRIGATI!" e poi il fantasma Nebbione.
+13 livelli: l'ultimo e' la sfida contro il GRIGIOTRON.
