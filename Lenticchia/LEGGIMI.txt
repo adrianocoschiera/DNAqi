@@ -1,0 +1,24 @@
+LENTICCHIA E LE BOLLE DEL DNA (Puzzle Bobble dei Custodi del DNA) - VERSIONE HD
+
+AVVIO: doppio clic su Lenticchia.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline, anche su tablet.
+
+COMANDI
+Mouse o touch .... punta dove vuoi tirare e clicca/tocca
+                   tocca la bolla tenuta da Riff per scambiarla
+Tastiera/joypad .. SINISTRA/DESTRA mira, SU/SPAZIO/Z/X tira, GIU o C scambia
+P pausa - M audio
+
+REGOLE
+3 o piu' bolle uguali vicine scoppiano.
+Le bolle che restano appese senza appoggio cadono: piu' ne cadono, piu' punti!
+Le bolle grigie (i Grigini) non scoppiano: falle cadere.
+Ogni tot tiri scende la Pressa Grigia: non far arrivare le bolle alla linea in basso.
+
+MODO TRANQUILLO: traiettoria completa con i rimbalzi, pressa lenta, nessuna fretta, 5 vite.
+MODO CLASSICO: mira corta, pressa veloce, "SBRIGATI!" dopo 6 secondi, 3 vite.
+SIMBOLI: dentro le bolle ci sono le lettere del DNA (A T C G) e delle forme
+(stella, cuore, goccia), cosi' si gioca anche senza distinguere i colori.
+
+30 livelli in 6 mondi: Il Laboratorio, Il Giardino di Riff, Il Mare,
+Il Bosco dei Custodi, La Notte delle Stelle, La Citta' Grigia.

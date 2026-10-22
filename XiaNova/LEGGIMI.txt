@@ -1,0 +1,13 @@
+XIA NOVA - LE STELLE DEL CORAGGIO | EDIZIONE ARCADE - VERSIONE HD
+
+Avvio: doppio clic su Xia_Nova.exe. L'avviatore apre il gioco locale nel browser predefinito. Conservare tutti i file insieme.
+
+COMANDI
+A/D o frecce: cammina e gira il personaggio
+SPAZIO o W: salta
+J o F: spara stelle
+K: super potere delle stelle quando la barra raggiunge il 100%
+P: pausa - R: ricomincia - INVIO: avvia/conferma
+
+3 mondi, stelle da raccogliere, nemici da sconfiggere, checkpoint e portali.
+Questo e' un gioco 2D HTML5 offline con avviatore Windows .exe, non un eseguibile nativo di Godot o Unreal.

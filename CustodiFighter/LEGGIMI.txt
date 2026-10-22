@@ -1,0 +1,27 @@
+CUSTODI FIGHTER - IL TORNEO DELL'AMICIZIA (picchiaduro stile Street Fighter dei Custodi del DNA) - VERSIONE HD
+
+AVVIO: doppio clic su Custodi_Fighter.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline.
+
+MODALITA'
+ARCADE ........ scegli un Custode e affronta 7 sfidanti + il boss IL GRIGIO
+SFIDA 2 GIOC. . due giocatori sulla stessa tastiera (o due joypad)
+ALLENAMENTO ... compagno fermo, energia e barra SUPER che si ricaricano
+DIFFICOLTA' ... FACILE (parata automatica, colpi presi meno forti), NORMALE, DIFFICILE
+
+COMANDI
+Giocatore 1: W A S D muovi/salta/abbassati - F pugno - G calcio - H speciale
+Giocatore 2: FRECCE - J pugno - K calcio - L speciale (anche tastierino 1 2 3)
+In 1 giocatore funzionano entrambi gli schemi.
+P / ESC pausa - M audio - joypad e schermo touch supportati
+
+MOSSE
+SPECIALE da solo ............. colpo a distanza
+AVANTI + SPECIALE ............ mossa speciale 2 (scatto, salto o giravolta)
+GIU' + SPECIALE (barra piena) . SUPER DNA
+Indietro = parata (giu'+indietro per i colpi bassi)
+Per i veterani: giu', giu'-avanti, avanti + pugno = colpo a distanza.
+
+Nessuna violenza: i colpi fanno "POF!", chi perde si siede a riposare
+e ogni incontro finisce con una stretta di mano.
+I nomi segnati "(nome provvisorio)" si cambiano facilmente: diteci quelli giusti!

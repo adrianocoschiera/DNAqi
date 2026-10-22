@@ -1,0 +1,25 @@
+CUSTODE - L'AVVENTURA DEI CUSTODI DEL DNA (platform in stile Super Mario Bros, versione HD)
+
+AVVIO: doppio clic su Custode.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline, anche su tablet.
+
+COMANDI
+Frecce o A/D ......... cammina
+Z, SPAZIO, SU o W .... salta (tieni premuto per saltare piu' in alto)
+X o SHIFT ............ corri; con il Modulo Arcobaleno spara raggi-colore
+GIU' ................. entra nei tubi segreti (e abbassati quando sei grande)
+P pausa - M audio - joypad e schermo touch (croce + CORRI + SALTA)
+
+OGGETTI
+Blocco DNA .......... colpiscilo da sotto: escono basi A T C G o sorprese
+Batteria ............ aggiornamento OS: CUSTODE diventa grande (regge un colpo)
+Modulo Arcobaleno ... raggi-colore che ricolorano i Grigini
+Cuore d'oro ......... invincibile per qualche secondo
+Faccina rosa ........ una vita in piu'   -   100 basi = una vita in piu'
+
+MODO TRANQUILLO: niente tempo, rete di sicurezza sui buchi, 5 vite,
+                 tenendo premuto SALTA in caduta CUSTODE plana con i jet.
+MODO CLASSICO:  tempo, buchi veri, 3 vite, come in sala giochi.
+
+6 livelli: Il Prato dei Custodi, Il Laboratorio Sotterraneo, Il Ponte delle Connessioni,
+La Citta' Arcobaleno, La Notte delle Stelle, La Torre Grigia (con il Grigiotron).
