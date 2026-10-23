@@ -1,0 +1,21 @@
+RIFF - L'APE E IL GIARDINO DEI COLORI (Pac-Man dei Custodi del DNA) - VERSIONE HD
+
+AVVIO: doppio clic su Riff.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline.
+
+COMANDI
+Frecce o WASD ....... muovi Riff
+Su tablet ........... scorri il dito sullo schermo o usa la croce
+INVIO conferma - P pausa - M audio
+Nel titolo, con Sinistra/Destra scegli:
+  RONZIO LENTO - 5 vite, nuvole piu' lente, fiori che durano di piu'
+  ARCADE       - velocita' da sala giochi
+
+PUNTI
+Polline 10 - Fiore arcobaleno 50 - Nuvole colorate 200/400/800/1600
+Premi: miele 100, girasole 300, elica DNA 500, chitarra 700,
+stella 1000, corona 2000. Vita extra a 10.000 punti.
+
+Ogni nuvola ha il suo carattere:
+BRONTOLO ti insegue dritto, FRETTA prova ad anticiparti,
+CONFUSIONE fa giri strani, PIGRO a volte si stanca e torna nel suo angolo.
