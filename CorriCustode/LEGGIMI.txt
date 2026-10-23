@@ -1,0 +1,26 @@
+OLTRE L'ORIZZONTE - gioco di guida arcade in stile Out Run - VERSIONE HD
+
+AVVIO: doppio clic su Oltre_lOrizzonte.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline.
+
+COMANDI
+Sinistra/Destra (o A/D) ... sterzo
+Su (o W, SPAZIO, Z) ....... accelera
+Giu (o S) ................. frena
+INVIO conferma - P pausa - M audio
+Nel titolo, con Sinistra/Destra scegli la modalita':
+  GITA           - piu' tempo, poco traffico
+  GARA           - tempo stretto, come in sala giochi
+  VIAGGIO LIBERO - UN SOLO TASTO (Spazio/Su) e niente tempo: l'auto sterza
+                   da sola, evita il traffico e raccoglie le lettere;
+                   ai bivi basta premere Sinistra o Destra. Prima di partire scegli
+una delle 3 stazioni radio.
+
+COME SI GIOCA
+Arriva al traguardo prima che il TEMPO finisca. Ogni CHECKPOINT regala
+secondi extra. Ai BIVI resta sulla meta' sinistra o destra della strada
+per scegliere la tappa successiva: ci sono 8 percorsi diversi.
+Uscire di strada rallenta; urtare alberi e cartelli fa sbandare la cabrio.
+Raccogli le lettere del DNA (A, T, C, G): ogni sequenza completa vale
++5 secondi. Ai bivi ogni destinazione ha anche un simbolo (stile CAA).
+Gamepad e comandi touch supportati.
