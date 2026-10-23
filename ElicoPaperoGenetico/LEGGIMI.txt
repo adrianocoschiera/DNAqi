@@ -1,0 +1,29 @@
+ELICO - IL PAPERO GENETICO (platform in stile Rayman dei Custodi del DNA, versione HD)
+
+AVVIO: doppio clic su Elico.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline, anche su tablet.
+
+COMANDI
+Frecce o A/D ............. cammina
+Z, SPAZIO, SU o W ........ salta
+SALTA in aria (tieni) .... il ciuffo-elica fa planare Elico
+X, J o SHIFT ............. lancia il pugno volante
+tieni premuto X .......... pugno caricato: va piu' lontano e colpisce doppio
+SALTA mentre sei appeso .. ti lanci via dall'anello
+P pausa - M audio - joypad e schermo touch (croce + PUGNO + SALTA)
+
+NEL GIOCO
+Anelli viola ....... colpiscili col pugno: Elico si aggrappa e dondola
+Fiori rosa ......... saltaci sopra per rimbalzare in alto
+Gabbie grigie ...... 3 pugni e liberi i piccoli Geni (A, T, C, G)
+Gabbia grande ...... alla fine del mondo: dentro c'e' un Custode da liberare
+Grigini ............ un pugno e tornano colorati (niente violenza!)
+Rovi grigi ......... non toccarli!
+Cuori .............. ridanno energia   -   100 basi DNA = una vita in piu'
+
+MODO TRANQUILLO: 5 cuori, rete di sicurezza sui burroni, pugno lungo,
+                 basta tenere premuto SALTA per planare.
+MODO CLASSICO:  3 cuori, burroni veri, pugno da caricare.
+
+6 mondi: La Giungla dei Geni, Il Lago delle Melodie, Le Montagne di Cristallo,
+La Grotta delle Lucciole, La Citta' dei Cromosomi, Il Castello del Grigio (con il Grigiotron).
