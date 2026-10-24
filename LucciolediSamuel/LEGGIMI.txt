@@ -1,0 +1,46 @@
+LE LUCCIOLE DI SAMUEL - come si gioca
+========================================
+COME SI GIOCA
+- La lucciola segue il tuo sguardo, con calma: guarda dove vuoi che vada.
+- Fermala vicino a un cristallo grigio per mezzo secondo: si accende.
+- Le lucciole piccole che tocchi ti seguono e fanno più luce.
+- Dal livello 3 ci sono le Ombre (nuvolette nere con gli occhi): se le
+  tocchi, la lucciola si stordisce un attimo e perde un paio di lucciole
+  amiche. Non si perde mai la partita.
+- Accesi tutti i cristalli, guarda la bolla dell'amico per liberarlo.
+- Stelle: 3 senza toccare Ombre, 2 se le tocchi 1-2 volte, 1 se di più.
+- Nel menu: "Lucciola: Lenta / Normale / Veloce" regola la velocità.
+  Lenta è consigliata per i più piccoli o se lo sguardo "trema" molto.
+- I livelli si sbloccano uno dopo l'altro e il gioco ricorda dove eri.
+
+COME AVVIARLO
+- Doppio clic su "Lucciole_di_Samuel.exe", oppure apri "gioco.html" con Chrome o Edge
+  (consigliati). Funziona anche senza internet: il riconoscimento del viso
+  è già dentro il file.
+- Quando il browser lo chiede, CONSENTI l'uso della webcam.
+  Le immagini della webcam restano sul computer: non vengono inviate a nessuno.
+
+PRIMA DI GIOCARE (calibrazione, circa 30 secondi)
+1. Siediti a 40-70 cm dallo schermo, con la webcam sopra o sotto il monitor.
+2. Luce davanti al viso, non alle spalle. Togli gli occhiali se riflettono.
+3. Segui con gli OCCHI il punto giallo (9 punti), tenendo la testa ferma.
+4. Poi ci sono 5 punti di verifica: il gioco dice quanto è precisa la mira.
+   Se esce "Scarsa", scegli "Ricalibra".
+
+COMANDI
+- I pulsanti si premono GUARDANDOLI: si riempiono e scattano.
+- "Sguardo: 1,1 s" nel menu cambia quanto a lungo bisogna guardare
+  (0,6 / 1,1 / 1,6 / 2,2 secondi): più lungo = meno scatti per sbaglio.
+- Se esci dall'inquadratura, il gioco va in pausa da solo.
+- Tasti facoltativi: INVIO = conferma, P = pausa, M = audio sì/no.
+  Col mouse/dito: il simbolo II in alto a destra mette in pausa.
+
+SU TABLET
+- Usa il link online con Chrome (Android) o Safari (iPad).
+- Tablet su un supporto, in orizzontale; non spostarlo dopo la calibrazione.
+
+SENZA WEBCAM
+- "Gioca col dito / mouse": al posto dello sguardo si usa il dito o il mouse.
+
+NOTA: con una webcam normale la mira degli occhi è approssimativa (non è un
+eye-tracker professionale): per questo i bersagli sono grandi e "magnetici".
