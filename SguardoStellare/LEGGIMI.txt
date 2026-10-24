@@ -1,0 +1,36 @@
+SGUARDO STELLARE - come si gioca
+================================
+
+COME AVVIARLO
+- Doppio clic su "Sguardo_Stellare.exe", oppure apri "gioco.html" con
+  Chrome o Edge (consigliati). Funziona anche senza internet: il
+  riconoscimento del viso è già dentro il file.
+- Quando il browser lo chiede, CONSENTI l'uso della webcam.
+  Le immagini della webcam restano sul computer: non vengono inviate a nessuno.
+
+PRIMA DI GIOCARE (calibrazione, circa 30 secondi)
+1. Siediti a 40-70 cm dallo schermo, con la webcam sopra o sotto il monitor.
+2. Metti una luce davanti al viso, non alle spalle. Togli gli occhiali se riflettono.
+3. Segui con gli OCCHI il punto giallo (9 punti), tenendo la testa ferma.
+4. Poi ci sono 5 punti di verifica e il gioco ti dice quanto è precisa la mira.
+   Se esce "Scarsa", scegli "Ricalibra".
+
+COMANDI
+- Si gioca solo con gli occhi: guarda un Grigino e verrà colpito.
+- I pulsanti si premono guardandoli per circa un secondo (si riempiono).
+- Se esci dall'inquadratura, il gioco va in pausa da solo.
+- Tasti facoltativi: INVIO = conferma, P = pausa, M = audio sì/no.
+- Difficoltà "Facile": mira più tollerante e Grigini più lenti
+  (consigliata per iniziare o per bambini).
+
+SU TABLET
+- Usa il link online e aprilo con Chrome (Android) o Safari (iPad).
+- Appoggia il tablet su un supporto, in orizzontale, e non muoverlo dopo la calibrazione.
+
+SENZA WEBCAM
+- Scegli "Gioca col dito / mouse": i Grigini esplodono quando ci passi
+  sopra col mouse o li tocchi col dito.
+
+NOTA: con una webcam normale la mira degli occhi è approssimativa (non è un
+eye-tracker professionale). Per questo c'è il mirino "magnetico", che aggancia
+il Grigino più vicino al punto in cui guardi.

@@ -1,0 +1,14 @@
+SGUARDO STELLARE - un gioco de I Custodi del DNA
+
+I Grigini, asteroidi grigi e brontoloni, stanno piovendo sul Pianeta DNA.
+Il tuo unico strumento sono i tuoi occhi: basta GUARDARE un Grigino perché
+il cannone del pianeta lo colpisca con un raggio laser.
+I Grigini grandi si spezzano in due più piccoli; colpiscili uno dopo l'altro
+per alzare il moltiplicatore (fino a x8).
+
+Bonus:
+- Gene d'oro: guardalo per ricaricare uno scudo.
+- Fiore arcobaleno: guardalo per far esplodere tutti i Grigini sullo schermo.
+
+Ogni 28 secondi arriva un'ondata nuova, più veloce. Se i Grigini colpiscono
+il pianeta troppe volte, la partita finisce. Difendilo più a lungo che puoi!
