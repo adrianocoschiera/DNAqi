@@ -1,0 +1,15 @@
+IL COMUNICATORE DEI CUSTODI - uno strumento de I Custodi del DNA
+
+Una tabella di Comunicazione Aumentativa Alternativa (CAA) che si usa con
+gli occhi. Si guarda una casella per un attimo: la casella si riempie e la
+voce del computer o del tablet dice la parola. Le parole scelte si mettono
+in fila in alto, e con "Parla" si sente tutta la frase.
+
+Funziona con una webcam qualsiasi o con la fotocamera del tablet, dopo una
+calibrazione di 30 secondi. È gratuito e non manda dati a nessuno: tutto
+resta sul dispositivo.
+
+IMPORTANTE: è uno strumento di gioco e allenamento, non un dispositivo
+medico. La mira con una webcam normale è approssimativa, per questo le
+caselle sono poche e grandi (2, 4 o 6). Per le comunicazioni importanti
+usare sempre anche altri canali.

@@ -1,0 +1,58 @@
+IL COMUNICATORE DEI CUSTODI - come si gioca
+========================================
+COME SI USA
+- "Caselle: 6 / 4 / 2" nel menu:
+  6 o 4 = tabelle a categorie (Sì e No, Bisogni, Emozioni, Persone,
+  Cosa facciamo, Frasi); si entra in una categoria guardandola e si torna
+  indietro con "Indietro". "Altro" mostra le altre parole della categoria.
+  2 = solo SÌ e NO, grandi: ideale per iniziare.
+- In alto: "Parla" dice tutta la frase, "Cancella" toglie l'ultima parola.
+- RIPOSO (la luna in alto a sinistra, guardala 2 secondi): blocca le
+  caselle, così si può guardare lo schermo senza scegliere niente per
+  sbaglio. Riguardando la luna si torna operativi. In riposo compare anche
+  "Torna al menu".
+- Dopo una scelta bisogna spostare lo sguardo e tornare sulla casella per
+  sceglierla di nuovo (evita le ripetizioni involontarie).
+- "Voce: Normale / Lenta" cambia la velocità della voce. La voce è quella
+  italiana installata sul dispositivo.
+- "Cerchio: visibile / nascosto": il cerchio che mostra dove si guarda può
+  aiutare o distrarre: provate entrambi.
+
+PERSONALIZZARE LE TABELLE (per adulti, con mouse o dito)
+- Nel menu tocca "Modifica tabelle": puoi cambiare nomi e simboli (incolla
+  qualsiasi emoji), aggiungere o togliere parole, rinominare le categorie.
+  Per esempio in "Persone" metti i nomi veri: la nonna, la maestra, il cane.
+- Le modifiche restano salvate su quel computer/tablet e in quel browser.
+- "Ripristina tabelle iniziali" torna alle parole di partenza.
+
+COME AVVIARLO
+- Doppio clic su "Comunicatore_Custodi.exe", oppure apri "gioco.html" (il programma) con Chrome o Edge
+  (consigliati). Funziona anche senza internet: il riconoscimento del viso
+  è già dentro il file.
+- Quando il browser lo chiede, CONSENTI l'uso della webcam.
+  Le immagini della webcam restano sul computer: non vengono inviate a nessuno.
+
+PRIMA DI GIOCARE (calibrazione, circa 30 secondi)
+1. Siediti a 40-70 cm dallo schermo, con la webcam sopra o sotto il monitor.
+2. Luce davanti al viso, non alle spalle. Togli gli occhiali se riflettono.
+3. Segui con gli OCCHI il punto giallo (9 punti), tenendo la testa ferma.
+4. Poi ci sono 5 punti di verifica: il gioco dice quanto è precisa la mira.
+   Se esce "Scarsa", scegli "Ricalibra".
+
+COMANDI
+- I pulsanti si premono GUARDANDOLI: si riempiono e scattano.
+- "Sguardo: 1,1 s" nel menu cambia quanto a lungo bisogna guardare
+  (0,6 / 1,1 / 1,6 / 2,2 secondi): più lungo = meno scatti per sbaglio.
+- Se esci dall'inquadratura, il gioco va in pausa da solo.
+- Tasti facoltativi: INVIO = conferma, P = pausa, M = audio sì/no.
+  Col mouse/dito: il simbolo II in alto a destra mette in pausa.
+
+SU TABLET
+- Usa il link online con Chrome (Android) o Safari (iPad).
+- Tablet su un supporto, in orizzontale; non spostarlo dopo la calibrazione.
+
+SENZA WEBCAM
+- "Gioca col dito / mouse": al posto dello sguardo si usa il dito o il mouse.
+
+NOTA: con una webcam normale la mira degli occhi è approssimativa (non è un
+eye-tracker professionale): per questo i bersagli sono grandi e "magnetici".
