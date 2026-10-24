@@ -1,0 +1,44 @@
+LA FINESTRA MAGICA - come si gioca
+========================================
+COME SI GIOCA
+- Funziona con il movimento della TESTA, non degli occhi: niente calibrazione.
+- L'effetto 3D si vede bene con UN occhio solo aperto o da un po' di distanza:
+  è un'illusione pensata per chi sta davanti alla webcam (gli altri vedono
+  la stanza muoversi, ma senza profondità).
+- Nascondino: muovi la testa per sbirciare dietro tavolo, casse, piante...
+  Quando vedi un Grigino per un attimo, è trovato. Dopo 20 secondi senza
+  trovarne, delle stelline indicano dove cercare.
+- Esplora: nessun obiettivo, solo da guardare. Per uscire, volta la testa
+  dallo schermo (pausa) e scegli Menu.
+- "Effetto: Leggero / Normale / Forte" regola quanto si muove la stanza.
+
+COME AVVIARLO
+- Doppio clic su "Finestra_Magica.exe", oppure apri "gioco.html" con Chrome o Edge
+  (consigliati). Funziona anche senza internet: il riconoscimento del viso
+  è già dentro il file.
+- Quando il browser lo chiede, CONSENTI l'uso della webcam.
+  Le immagini della webcam restano sul computer: non vengono inviate a nessuno.
+
+PRIMA DI GIOCARE (nessuna calibrazione!)
+1. Siediti a 40-70 cm dallo schermo, al centro, con la webcam sopra il monitor.
+2. Luce davanti al viso. Quando il gioco dice "Perfetto", quella diventa la
+   posizione di partenza. "Ricentra" nel menu la reimposta.
+
+COMANDI
+- I pulsanti si premono spostando la TESTA: il cerchio bianco segue la testa;
+  tienilo su un pulsante finché si riempie.
+- "Sguardo: 1,1 s" nel menu cambia quanto a lungo bisogna guardare
+  (0,6 / 1,1 / 1,6 / 2,2 secondi): più lungo = meno scatti per sbaglio.
+- Se esci dall'inquadratura, il gioco va in pausa da solo.
+- Tasti facoltativi: INVIO = conferma, P = pausa, M = audio sì/no.
+  Col mouse/dito: il simbolo II in alto a destra mette in pausa.
+
+SU TABLET
+- Usa il link online con Chrome (Android) o Safari (iPad).
+- Tablet su un supporto, in orizzontale; non spostarlo dopo la calibrazione.
+
+SENZA WEBCAM
+- "Gioca col dito / mouse": al posto dello sguardo si usa il dito o il mouse.
+
+NOTA: con una webcam normale la mira degli occhi è approssimativa (non è un
+eye-tracker professionale): per questo i bersagli sono grandi e "magnetici".
