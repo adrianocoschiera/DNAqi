@@ -1,0 +1,47 @@
+IL GIARDINO DEI GENI - come si gioca
+========================================
+LE ATTIVITÀ (dalla più facile alla più impegnativa)
+1. Pennello magico: dove guardi sbocciano fiori. Se fissi un punto a lungo,
+   esplode un fiore grande. Allena: causa-effetto, esplorare lo schermo.
+2. Semi giganti: 2 semi grandi, 3 volte. Allena: fissare un bersaglio.
+3. Semi medi: 4 semi, 2 volte.
+4. Semi piccoli: 9 semi in griglia 3x3, come una tabella CAA.
+5. Trova il colore: una voce dice "Guarda il fiore ROSSO". Se si guarda un
+   altro fiore, la voce dice il suo colore (nessun errore, nessuna penalità).
+   Allena: scegliere su richiesta.
+- "Tutto di fila" le propone una dopo l'altra.
+- La voce usa la sintesi vocale italiana del computer/tablet, se presente.
+- Per bambini con poca resistenza, imposta "Sguardo" a 0,6 s; per chi
+  guarda in giro molto, 1,6 o 2,2 s.
+
+COME AVVIARLO
+- Doppio clic su "Giardino_dei_Geni.exe", oppure apri "gioco.html" con Chrome o Edge
+  (consigliati). Funziona anche senza internet: il riconoscimento del viso
+  è già dentro il file.
+- Quando il browser lo chiede, CONSENTI l'uso della webcam.
+  Le immagini della webcam restano sul computer: non vengono inviate a nessuno.
+
+PRIMA DI GIOCARE (calibrazione, circa 30 secondi)
+1. Siediti a 40-70 cm dallo schermo, con la webcam sopra o sotto il monitor.
+2. Luce davanti al viso, non alle spalle. Togli gli occhiali se riflettono.
+3. Segui con gli OCCHI il punto giallo (9 punti), tenendo la testa ferma.
+4. Poi ci sono 5 punti di verifica: il gioco dice quanto è precisa la mira.
+   Se esce "Scarsa", scegli "Ricalibra".
+
+COMANDI
+- I pulsanti si premono GUARDANDOLI: si riempiono e scattano.
+- "Sguardo: 1,1 s" nel menu cambia quanto a lungo bisogna guardare
+  (0,6 / 1,1 / 1,6 / 2,2 secondi): più lungo = meno scatti per sbaglio.
+- Se esci dall'inquadratura, il gioco va in pausa da solo.
+- Tasti facoltativi: INVIO = conferma, P = pausa, M = audio sì/no.
+  Col mouse/dito: il simbolo II in alto a destra mette in pausa.
+
+SU TABLET
+- Usa il link online con Chrome (Android) o Safari (iPad).
+- Tablet su un supporto, in orizzontale; non spostarlo dopo la calibrazione.
+
+SENZA WEBCAM
+- "Gioca col dito / mouse": al posto dello sguardo si usa il dito o il mouse.
+
+NOTA: con una webcam normale la mira degli occhi è approssimativa (non è un
+eye-tracker professionale): per questo i bersagli sono grandi e "magnetici".
