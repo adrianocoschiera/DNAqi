@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#3a2d7a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Custodi GO</title>
+<link rel="stylesheet" href="lib/leaflet.css">
+<style>
+@font-face{font-family:"Lilita One";src:url(fonts/lilita-one-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Nunito";src:url(fonts/nunito-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Nunito";src:url(fonts/nunito-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Nunito";src:url(fonts/nunito-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+</style>
+<style>
+:root{--ink:#1f2a44;--paper:#fff;--sky:#3a2d7a;--helix:#ff5d8f;--gold:#ffc43d;--muted:#6b7590;
+  --display:"Lilita One","Arial Rounded MT Bold",system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#a8dc8f;color:var(--ink);font-family:var(--body);-webkit-tap-highlight-color:transparent}
+#map{position:absolute;inset:0;z-index:0}
+.leaflet-container{background:#a8dc8f;font-family:var(--body)}
+.leaflet-tile-pane{filter:saturate(1.15) hue-rotate(-8deg) brightness(1.04)}
+.cust{width:56px;height:64px;animation:float 2.6s ease-in-out infinite}
+.cust img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 6px 4px rgba(0,0,0,.25))}
+.cust.near img{filter:drop-shadow(0 0 10px #ffc43d) drop-shadow(0 6px 4px rgba(0,0,0,.25))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.lab{width:40px;height:56px;display:flex;flex-direction:column;align-items:center}
+.lab .hex{width:34px;height:34px;background:var(--helix);clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);animation:spin 6s linear infinite}
+.lab.used .hex{background:#c9c2f2;animation:none}
+.lab .pole{width:5px;height:20px;background:var(--sky);border-radius:2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.me{width:26px;height:26px;border-radius:50%;background:var(--gold);border:4px solid #fff;box-shadow:0 0 0 3px var(--sky),0 4px 8px rgba(0,0,0,.3)}
+.hud{position:absolute;z-index:10;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:8px;
+  padding:calc(10px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 0 max(14px,env(safe-area-inset-left));pointer-events:none}
+.chip{pointer-events:auto;background:var(--paper);border-radius:999px;padding:6px 12px 6px 6px;display:flex;align-items:center;gap:8px;box-shadow:0 3px 0 rgba(31,42,68,.18);font-weight:800;font-size:14px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--sky);color:var(--gold);display:grid;place-items:center;font-family:var(--display)}
+.xpbar{width:70px;height:6px;background:#e7e9f2;border-radius:3px;overflow:hidden}.xpbar i{display:block;height:100%;background:var(--helix)}
+.bottom{position:absolute;z-index:10;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  padding:0 max(14px,env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));pointer-events:none}
+.btn{pointer-events:auto;border:0;background:var(--sky);color:#fff;font-family:var(--display);font-size:16px;letter-spacing:.03em;border-radius:20px;padding:12px 16px;box-shadow:0 4px 0 #1d1546;cursor:pointer}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #1d1546}
+.btn.light{background:#fff;color:var(--sky);box-shadow:0 4px 0 #c9c2f2}
+.toast{position:absolute;z-index:30;left:50%;top:calc(64px + env(safe-area-inset-top));transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:12px;font-weight:700;font-size:14px;max-width:calc(100% - 32px);text-align:center;pointer-events:none;transition:opacity .3s;opacity:0}
+.status{position:absolute;z-index:10;left:50%;transform:translateX(-50%);bottom:calc(80px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);padding:6px 12px;border-radius:10px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;max-width:calc(100% - 28px);overflow:hidden;text-overflow:ellipsis}
+.sheet{position:absolute;inset:0;z-index:20;background:var(--sky);color:#fff;display:flex;flex-direction:column}
+.sheet[hidden]{display:none}
+.sheet header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 6px max(14px,env(safe-area-inset-left))}
+.sheet h2{font-family:var(--display);font-weight:400;font-size:24px;margin:0;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.x{border:0;background:rgba(0,0,0,.3);color:#fff;width:42px;height:42px;border-radius:50%;font-size:20px;cursor:pointer}
+#cam,#huntCam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+#huntCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:none}
+#hunt{background:#222}
+#arCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:none}
+.encfoot{position:relative;z-index:2;margin-top:auto;padding:10px 16px calc(16px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
+.encmsg{font-weight:800;font-size:16px;text-align:center;background:rgba(0,0,0,.35);padding:6px 12px;border-radius:12px}
+.encbtns{display:flex;gap:10px;pointer-events:auto}
+.throw{background:var(--helix);box-shadow:0 4px 0 #b73463}
+.dex{flex:1;overflow:auto;padding:8px max(14px,env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.slot{background:rgba(255,255,255,.08);border:0;color:#fff;border-radius:16px;padding:10px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--body);cursor:pointer}
+.slot img{width:64px;height:72px;object-fit:contain}.slot b{font-size:13px}.slot small{font-size:11px;color:#c9c2f2}
+.card{background:#fff;color:var(--ink);border-radius:22px;margin:4px 0 16px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.card img{width:90px;height:120px;object-fit:contain;flex:none}.card div{min-width:0}
+.card h3{font-family:var(--display);font-weight:400;font-size:22px;margin:0}
+.tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:2px 0 6px}
+.card p{margin:0;font-size:14px;line-height:1.45}
+.stars{color:var(--gold);font-size:13px;letter-spacing:2px}
+.intro{position:absolute;inset:0;z-index:40;background:var(--sky);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center}
+.intro[hidden]{display:none}
+.intro h1{font-family:var(--display);font-weight:400;font-size:44px;margin:0;color:var(--gold)}
+.intro p{max-width:34ch;margin:0;line-height:1.5;color:#e4e0ff}
+.leaflet-control-attribution{font-size:9px!important}
+.banner{position:absolute;z-index:15;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));top:calc(60px + env(safe-area-inset-top));
+  background:#fff;border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 0 rgba(31,42,68,.18);font-weight:700;font-size:14px}
+.banner[hidden]{display:none}.banner span{flex:1;min-width:0}.banner .btn{font-size:14px;padding:8px 12px;flex:none}
+.parent{background:rgba(255,255,255,.1);border-radius:16px;padding:12px 14px;max-width:36ch;text-align:left;font-size:13px;line-height:1.45;color:#e4e0ff}
+.parent b{color:#fff}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="hud">
+  <div class="chip"><span class="av" id="lvl">1</span><div><div style="font-size:12px;color:var(--muted)">Livello Custode</div><div class="xpbar"><i id="xp"></i></div></div></div>
+  <div class="chip" style="padding:6px 12px"><span style="color:var(--helix)">🧬</span><span id="hel">10</span></div>
+</div>
+<div class="status" id="status">Cerco la tua posizione…</div>
+<div class="toast" id="toast"></div>
+<div class="banner" id="banner" hidden><span id="bannerTxt"></span><button class="btn light" id="bannerBtn">Prova da casa</button></div>
+<div class="bottom">
+  <button class="btn light" id="centerBtn">Dove sono</button>
+  <button class="btn light" id="gpsBtn" hidden>Usa il GPS</button>
+  <button class="btn throw" id="huntBtn">Caccia AR</button>
+  <button class="btn" id="dexBtn">Album <span id="dexCount" style="opacity:.75;font-size:14px">0/12</span></button>
+</div>
+
+<section class="sheet" id="hunt" hidden>
+  <video id="huntCam" playsinline muted autoplay></video>
+  <canvas id="huntCanvas"></canvas>
+  <header><h2>Caccia AR</h2><span class="encmsg" id="huntInfo" style="font-size:13px">Cerco la posizione…</span></header>
+  <div class="encfoot">
+    <div class="encmsg" id="huntMsg">Gira il telefono intorno a te per trovare i Custodi</div>
+    <div class="encbtns"><button class="btn light" id="toMapBtn">Mappa</button><button class="btn" id="huntDexBtn">Album</button></div>
+  </div>
+</section>
+
+<section class="sheet" id="enc" hidden>
+  <video id="cam" playsinline muted autoplay></video>
+  <canvas id="arCanvas"></canvas>
+  <header><h2 id="encName">Custode</h2><button class="x" id="encClose" aria-label="Torna alla mappa">✕</button></header>
+  <div class="encfoot">
+    <div class="encmsg" id="encMsg">Trascina l'elica verso l'alto per lanciarla!</div>
+    <div class="encbtns"><button class="btn light" id="arBtn">AR: sì</button><button class="btn throw" id="throwBtn">Lancio facile</button></div>
+  </div>
+</section>
+
+<section class="sheet" id="dex" hidden>
+  <header><h2>Album dei Custodi</h2><button class="x" id="dexClose" aria-label="Chiudi album">✕</button></header>
+  <div class="dex"><p id="dexSub" style="color:#c9c2f2;font-size:14px;margin:0 0 12px"></p><div id="detail"></div><div class="grid" id="grid"></div></div>
+</section>
+
+<div class="intro" id="intro">
+  <h1>Custodi GO</h1>
+  <p>Esci a fare una passeggiata: i Custodi del DNA fluttuano per la città. Avvicinati, inquadrali con la fotocamera e lancia l'elica DNA per diventare loro amico.</p>
+  <button class="btn" id="startBtn" style="background:var(--helix);box-shadow:0 4px 0 #b73463;font-size:20px;padding:14px 28px">Inizia a esplorare</button>
+  <button class="btn light" id="demoBtn">Prova da casa (senza GPS)</button>
+  <a class="btn light" id="apkLink" href="CustodiGO.apk" download style="text-decoration:none;font-size:14px">Scarica l'app Android</a>
+  <div class="parent"><b>Per i genitori.</b> Il gioco chiede la <b>posizione</b> per mostrare i Custodi intorno a voi e la <b>fotocamera</b> per vederli in realtà aumentata. Le immagini non vengono salvate né inviate. Serve internet per caricare la mappa; i progressi restano su questo dispositivo. Giocate insieme e guardate sempre dove camminate.</div>
+</div>
+
+<script src="lib/leaflet.js"></script>
+<script>
+(()=>{
+/* ================= DATI ================= */
+const SPECIES=[
+ {id:'k',name:'Super K',tag:'Sindrome di Klinefelter',img:'img/c-klinefelter.png',col:'#2f7de1',rar:1,fact:'Riguarda i maschi che hanno un cromosoma X in più (47,XXY). Il potere di Super K è l\'adattamento: sente gli altri, legge tra le righe e trasforma il peso del giudizio in energia.'},
+ {id:'n',name:'Nistagmo',tag:'Nistagmo e ipovisione',img:'img/c-nistagmo.png',col:'#222',rar:1,fact:'Il nistagmo fa muovere gli occhi da soli, avanti e indietro. Nistagmo il panda non vede come gli altri, ma sente oltre: percepisce movimenti, vibrazioni e presenze.'},
+ {id:'s',name:'Samuel',tag:'Acromatopsia',img:'img/c-acromatopsia.png',col:'#8b93a8',rar:1,fact:'Con l\'acromatopsia si vede il mondo quasi senza colori e la luce forte abbaglia. Samuel coglie le sfumature quiete e vede l\'essenza di ciò che gli altri perdono nel colore.'},
+ {id:'fm',name:'Fragile Mind',tag:'Sindrome dell\'X fragile',img:'img/c-xfragile.png',col:'#2f8f6a',rar:1,fact:'Riguarda il gene FMR1 sul cromosoma X. Fragile Mind percepisce ciò che gli altri provano: con un sorriso scioglie le distanze e sa calmare i conflitti.'},
+ {id:'r',name:'Ruby-T',tag:'Sindrome di Rubinstein-Taybi',img:'img/c-rubinsteintaybi.png',col:'#d6332f',rar:2,fact:'È legata ai geni CREBBP o EP300. Ruby-T trasforma le emozioni in luce: la sua chiave accende la memoria emotiva e porta chiarezza dove tutto è confuso.'},
+ {id:'ng',name:'Nightgene',tag:'Sindrome di Smith-Magenis',img:'img/c-smithmagenis.png',col:'#26205e',rar:2,fact:'Nasce da un cambiamento sul cromosoma 17 e scombina l\'orologio del sonno. Nightgene entra nei sogni, ferma le tempeste e riporta quiete nei pensieri notturni.'},
+ {id:'kr',name:'Kairos',tag:'SOX4',img:'img/c-sox4.png',col:'#f5a623',rar:2,fact:'Il gene SOX4 aiuta il cervello a crescere e organizzarsi. Kairos rimette in fila i pensieri dispersi come note di uno spartito e trasforma il caos in una melodia silenziosa.'},
+ {id:'l',name:'Lumia',tag:'GNAO1',img:'img/c-gnao1.png',col:'#3f6fb0',rar:2,fact:'Il gene GNAO1 aiuta i neuroni a passarsi i messaggi, anche quelli del movimento. Lumia sente il ritmo nascosto del mondo: dove il movimento trema, la sua mente trova una direzione.'},
+ {id:'xn',name:'Xia Nova',tag:'Sindrome di Xia-Gibbs',img:'img/c-xiagibbs.png',col:'#7a3fd1',rar:2,fact:'È legata al gene AHDC1 ed è stata descritta solo nel 2014. Xia Nova illumina i pensieri frammentati come una cometa silenziosa e disegna sentieri di luce.'},
+ {id:'pk',name:'Prof K',tag:'Il professore dei Custodi',col:'#b7854a',acc:'#f4e2c4',g:'',rar:3,dog:1,fact:'Il Prof K è il cane scienziato che guida i Custodi. Dice sempre: "Ogni DNA racconta una storia, e ogni storia merita di essere ascoltata."'},
+ {id:'rf',name:'Riff',tag:'Assistente del Prof K',col:'#ffc43d',acc:'#1f2a44',g:'',rar:3,bee:1,fact:'Riff è l\'ape assistente del Prof K. Vola da un laboratorio all\'altro e porta le eliche DNA a chi ne ha bisogno.'}
+];
+const IMG={},DARK={};
+const imgReady=Promise.all(SPECIES.filter(s=>s.img).map(s=>new Promise(res=>{const im=new Image();im.onload=()=>{IMG[s.id]=im;
+  const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d');g.drawImage(im,0,0);
+  g.globalCompositeOperation='source-in';g.fillStyle='#3d3570';g.fillRect(0,0,c.width,c.height);DARK[s.id]=c;res()};im.onerror=res;im.src=s.img})));
+const RAR={1:{w:6,base:.55,label:'Comune',stars:'★'},2:{w:3,base:.4,label:'Raro',stars:'★★'},3:{w:.6,base:.28,label:'Leggendario',stars:'★★★'}};
+const CATCH_M=70, LAB_M=60;          // metri: distanza per incontrare / usare un laboratorio
+const CELL=0.0012, SLOT_MIN=10;      // ~130 m per cella, i Custodi cambiano ogni 10 minuti
+const LAB_CELL=0.003;
+const $=id=>document.getElementById(id);
+
+let save={caught:{},got:{},helix:10,xp:0,labs:{}};
+try{const s=JSON.parse(localStorage.getItem('custodiGO')||'null');if(s)save=Object.assign(save,s)}catch(e){}
+const store=()=>{try{localStorage.setItem('custodiGO',JSON.stringify(save))}catch(e){}};
+
+/* ================= DISEGNO ================= */
+function drawCustode(ctx,sp,x,y,r,t=0,sil=false){
+  if(sp.img){const im=sil?DARK[sp.id]:IMG[sp.id];
+    if(im){const ih=im.height||im.naturalHeight,iw=im.width||im.naturalWidth,h=r*2.5,w=h*iw/ih;
+      ctx.drawImage(im,x-w/2,y+r*1.15-h,w,h);
+      if(sil){ctx.fillStyle='#c9c2f2';ctx.font=`${r*.8}px "Lilita One",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',x,y)}}
+    return}
+  ctx.save();ctx.translate(x,y);
+  const body=sil?'#3d3570':sp.col, acc=sil?'#3d3570':sp.acc, ink=sil?'#2a2358':'#1f2a44';
+  if(sp.bee){ctx.fillStyle=sil?body:'rgba(255,255,255,.85)';const fl=Math.sin(t*30)*.3;
+    ctx.beginPath();ctx.ellipse(-r*.45,-r*.6,r*.4,r*.22,-.6+fl,0,7);ctx.fill();ctx.beginPath();ctx.ellipse(r*.45,-r*.6,r*.4,r*.22,.6-fl,0,7);ctx.fill();}
+  if(sp.dog){ctx.fillStyle=sil?body:'#7a5530';ctx.beginPath();ctx.ellipse(-r*.78,-r*.25,r*.25,r*.48,.35,0,7);ctx.fill();ctx.beginPath();ctx.ellipse(r*.78,-r*.25,r*.25,r*.48,-.35,0,7);ctx.fill();}
+  if(sp.panda){ctx.fillStyle=ink;ctx.beginPath();ctx.arc(-r*.62,-r*.62,r*.26,0,7);ctx.arc(r*.62,-r*.62,r*.26,0,7);ctx.fill();}
+  ctx.fillStyle=body;ctx.strokeStyle=ink;ctx.lineWidth=Math.max(2,r*.07);ctx.beginPath();ctx.arc(0,0,r*.85,0,7);ctx.fill();ctx.stroke();
+  if(sil){ctx.fillStyle='#c9c2f2';ctx.font=`${r*.9}px "Lilita One",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',0,r*.05);ctx.restore();return}
+  if(sp.bee){ctx.save();ctx.beginPath();ctx.arc(0,0,r*.82,0,7);ctx.clip();ctx.fillStyle=ink;for(let i=-1;i<=1;i++)ctx.fillRect(-r,r*.25+i*r*.38,r*2,r*.16);ctx.restore();}
+  if(sp.dog){ctx.fillStyle=acc;ctx.beginPath();ctx.ellipse(0,r*.28,r*.45,r*.32,0,0,7);ctx.fill();ctx.fillStyle=ink;ctx.beginPath();ctx.ellipse(0,r*.12,r*.13,r*.09,0,0,7);ctx.fill();
+    ctx.strokeStyle=ink;ctx.lineWidth=r*.05;ctx.beginPath();ctx.arc(-r*.3,-r*.18,r*.17,0,7);ctx.moveTo(r*.47,-r*.18);ctx.arc(r*.3,-r*.18,r*.17,0,7);ctx.moveTo(-r*.13,-r*.18);ctx.lineTo(r*.13,-r*.18);ctx.stroke();}
+  if(sp.panda){ctx.fillStyle=ink;ctx.beginPath();ctx.ellipse(-r*.3,-r*.12,r*.2,r*.25,.5,0,7);ctx.ellipse(r*.3,-r*.12,r*.2,r*.25,-.5,0,7);ctx.fill();}
+  if(!sp.dog&&!sp.bee&&!sp.panda){ctx.fillStyle=ink;ctx.beginPath();ctx.ellipse(0,-r*.18,r*.62,r*.2,0,0,7);ctx.fill();
+    ctx.fillStyle=acc;ctx.font=`${r*(sp.g.length>1?.42:.55)}px "Lilita One",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sp.g,0,r*.4);}
+  const blink=(Math.sin(t*1.7+sp.id.length)>.97)?.15:1, ex=r*.3, ey=-r*.18, er=r*.11, look=sp.panda?Math.sin(t*6)*r*.04:0;
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(-ex,ey,er*1.2,er*1.2*blink,0,0,7);ctx.ellipse(ex,ey,er*1.2,er*1.2*blink,0,0,7);ctx.fill();
+  ctx.fillStyle=sp.id==='s'?'#555':'#1f2a44';ctx.beginPath();ctx.arc(-ex+look,ey,er*.6*blink,0,7);ctx.arc(ex+look,ey,er*.6*blink,0,7);ctx.fill();
+  ctx.strokeStyle=ink;ctx.lineWidth=r*.06;ctx.lineCap='round';ctx.beginPath();ctx.arc(0,sp.dog?r*.25:r*.05,r*.18,.3,Math.PI-.3);ctx.stroke();
+  if(sp.bee){ctx.lineWidth=r*.05;ctx.beginPath();ctx.moveTo(-r*.2,-r*.8);ctx.quadraticCurveTo(-r*.3,-r*1.15,-r*.45,-r*1.15);ctx.moveTo(r*.2,-r*.8);ctx.quadraticCurveTo(r*.3,-r*1.15,r*.45,-r*1.15);ctx.stroke();}
+  ctx.restore();
+}
+function drawHelix(ctx,x,y,s,rot){
+  ctx.save();ctx.translate(x,y);ctx.rotate(rot);
+  ctx.fillStyle='#fff';ctx.strokeStyle='#1f2a44';ctx.lineWidth=s*.12;ctx.beginPath();ctx.arc(0,0,s,0,7);ctx.fill();ctx.stroke();
+  ctx.lineWidth=s*.22;ctx.lineCap='round';
+  ctx.strokeStyle='#ff5d8f';ctx.beginPath();ctx.moveTo(-s*.4,-s*.7);ctx.bezierCurveTo(s*.6,-s*.3,-s*.6,s*.3,s*.4,s*.7);ctx.stroke();
+  ctx.strokeStyle='#3a2d7a';ctx.beginPath();ctx.moveTo(s*.4,-s*.7);ctx.bezierCurveTo(-s*.6,-s*.3,s*.6,s*.3,-s*.4,s*.7);ctx.stroke();
+  ctx.restore();
+}
+const ICON={},SIL={};
+function icon(sp,sil){const k=sp.id,c=sil?SIL:ICON;if(c[k])return c[k];
+  if(sp.img){if(!sil)return sp.img;if(!DARK[k])return sp.img;return c[k]=DARK[k].toDataURL()}
+  const cv=document.createElement('canvas');cv.width=cv.height=160;const g=cv.getContext('2d');drawCustode(g,sp,80,82,62,0,sil);return c[k]=cv.toDataURL();}
+
+/* ================= MONDO DETERMINISTICO ================= */
+// Tutti i telefoni vedono gli stessi Custodi negli stessi posti, come in Pokémon GO.
+function hash(...n){let h=2166136261;for(const v of n){h^=v|0;h=Math.imul(h,16777619);h^=h>>>13;h=Math.imul(h,1274126177)}return ((h^(h>>>16))>>>0)/4294967296}
+function pickSpecies(r){const tot=SPECIES.reduce((a,s)=>a+RAR[s.rar].w,0);let x=r*tot;for(const s of SPECIES){x-=RAR[s.rar].w;if(x<=0)return s}return SPECIES[0]}
+function spawnsAround(lat,lng){
+  const slot=Math.floor(Date.now()/(SLOT_MIN*60e3)),out=[];
+  const ci0=Math.floor(lat/CELL),cj0=Math.floor(lng/CELL);
+  for(let di=-3;di<=3;di++)for(let dj=-3;dj<=3;dj++){
+    const ci=ci0+di,cj=cj0+dj,h=hash(ci,cj,slot);
+    const n=h<.55?0:h<.92?1:2;
+    for(let k=0;k<n;k++){
+      const id=`${ci}_${cj}_${slot}_${k}`;if(save.got[id])continue;
+      out.push({id,sp:pickSpecies(hash(ci,cj,slot,k,7)),lat:(ci+.1+.8*hash(ci,cj,slot,k,1))*CELL,lng:(cj+.1+.8*hash(ci,cj,slot,k,2))*CELL,slot});
+    }}
+  return out;
+}
+function labsAround(lat,lng){
+  const out=[],ci0=Math.floor(lat/LAB_CELL),cj0=Math.floor(lng/LAB_CELL);
+  for(let di=-2;di<=2;di++)for(let dj=-2;dj<=2;dj++){const ci=ci0+di,cj=cj0+dj,h=hash(ci,cj,99);
+    if(h<.55)out.push({id:`L${ci}_${cj}`,lat:(ci+.2+.6*hash(ci,cj,3))*LAB_CELL,lng:(cj+.2+.6*hash(ci,cj,4))*LAB_CELL});}
+  return out;
+}
+function meters(a,b,c,d){const R=6371e3,p=Math.PI/180,x=(d-b)*p*Math.cos((a+c)/2*p),y=(c-a)*p;return Math.hypot(x,y)*R}
+
+/* ================= MAPPA ================= */
+// Le tessere della mappa già viste restano in memoria: senza internet si vedono le zone già visitate.
+const TILE_CACHE='custodi-tiles-v1', TILE_MAX=4000;
+async function loadTile(url){
+  if(!('caches' in window))return url;
+  try{const c=await caches.open(TILE_CACHE),hit=await c.match(url);
+    if(hit)return URL.createObjectURL(await hit.blob());
+    if(!navigator.onLine)return url;
+    const r=await fetch(url,{mode:'cors'});
+    if(r.ok){c.put(url,r.clone()).catch(()=>{});return URL.createObjectURL(await r.blob())}}catch(e){}
+  return url;
+}
+async function trimTiles(){try{const c=await caches.open(TILE_CACHE),k=await c.keys();if(k.length>TILE_MAX)for(const r of k.slice(0,k.length-TILE_MAX+500))await c.delete(r)}catch(e){}}
+setTimeout(trimTiles,8000);
+const CachedTiles=L.TileLayer.extend({createTile(coords,done){
+  const img=document.createElement('img');img.alt='';img.setAttribute('role','presentation');
+  L.DomEvent.on(img,'load',L.Util.bind(this._tileOnLoad,this,done,img));
+  L.DomEvent.on(img,'error',L.Util.bind(this._tileOnError,this,done,img));
+  img.addEventListener('load',()=>{if(img.src.startsWith('blob:'))setTimeout(()=>URL.revokeObjectURL(img.src),1000)});
+  loadTile(this.getTileUrl(coords)).then(src=>img.src=src);
+  return img}});
+function banner(txt,btn,fn){if(!txt){$('banner').hidden=true;return}$('bannerTxt').textContent=txt;$('bannerBtn').textContent=btn;$('bannerBtn').onclick=fn;$('banner').hidden=false}
+function netStatus(){if(!navigator.onLine)toast('Sei senza internet: la mappa mostra solo le zone già visitate. I Custodi ci sono comunque!')}
+addEventListener('offline',netStatus);addEventListener('online',()=>toast('Connessione tornata'));
+let map,me,acc,pos=null,demo=false,follow=true;
+const markers=new Map(),labMarkers=new Map();
+function initMap(lat,lng){
+  map=L.map('map',{zoomControl:false,attributionControl:true}).setView([lat,lng],18);
+  new CachedTiles('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,maxNativeZoom:19,
+    attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  me=L.marker([lat,lng],{icon:L.divIcon({className:'',html:'<div class="me"></div>',iconSize:[26,26]}),interactive:false,zIndexOffset:1000}).addTo(map);
+  acc=L.circle([lat,lng],{radius:CATCH_M,color:'#3a2d7a',weight:2,opacity:.4,fillOpacity:.06,interactive:false}).addTo(map);
+  map.on('dragstart',()=>follow=false);
+  map.on('click',e=>{if(demo)walkTo(e.latlng.lat,e.latlng.lng)});
+}
+function setPos(lat,lng,accuracy){
+  pos={lat,lng,acc:accuracy||10};
+  if(!map)initMap(lat,lng);
+  me.setLatLng([lat,lng]);acc.setLatLng([lat,lng]);
+  if(follow)map.panTo([lat,lng],{animate:true});
+  refresh();
+  $('status').textContent=demo?'Modalità prova: tocca la mappa per camminare':(accuracy>60?'Segnale GPS debole ('+Math.round(accuracy)+' m)…':'Cammina e cerca i Custodi!');
+}
+function refresh(){
+  if(!pos)return;
+  const sp=spawnsAround(pos.lat,pos.lng),keep=new Set();
+  for(const s of sp){keep.add(s.id);let m=markers.get(s.id);
+    if(!m){m=L.marker([s.lat,s.lng],{icon:L.divIcon({className:'',html:`<div class="cust"><img alt="${s.sp.name}" src="${icon(s.sp,!save.caught[s.sp.id])}"></div>`,iconSize:[56,56],iconAnchor:[28,40]})}).addTo(map);
+      m.on('click',()=>tapSpawn(s));m.data=s;markers.set(s.id,m);}
+    const near=meters(pos.lat,pos.lng,s.lat,s.lng)<CATCH_M;
+    const el=m.getElement()&&m.getElement().firstChild;if(el)el.classList.toggle('near',near);}
+  for(const [id,m] of markers)if(!keep.has(id)){map.removeLayer(m);markers.delete(id)}
+  const lb=labsAround(pos.lat,pos.lng),lk=new Set(),now=Date.now();
+  for(const l of lb){lk.add(l.id);let m=labMarkers.get(l.id);
+    if(!m){m=L.marker([l.lat,l.lng],{icon:L.divIcon({className:'',html:'<div class="lab"><div class="hex"></div><div class="pole"></div></div>',iconSize:[40,56],iconAnchor:[20,56]})}).addTo(map);
+      m.on('click',()=>tapLab(l));labMarkers.set(l.id,m);}
+    const el=m.getElement()&&m.getElement().firstChild;if(el)el.classList.toggle('used',save.labs[l.id]>now);}
+  for(const [id,m] of labMarkers)if(!lk.has(id)){map.removeLayer(m);labMarkers.delete(id)}
+}
+setInterval(refresh,15000);
+function tapSpawn(s){
+  const d=meters(pos.lat,pos.lng,s.lat,s.lng);
+  if(d>CATCH_M){toast(`Questo Custode è a ${Math.round(d)} m: avvicinati!`);return}
+  openEnc(s);
+}
+function tapLab(l){
+  const d=meters(pos.lat,pos.lng,l.lat,l.lng);
+  if(d>LAB_M){toast(`Laboratorio a ${Math.round(d)} m: avvicinati!`);return}
+  if(save.labs[l.id]>Date.now()){toast('Laboratorio in ricarica, ripassa tra poco');return}
+  const g=3+Math.floor(Math.random()*3);save.helix+=g;save.labs[l.id]=Date.now()+5*60e3;addXP(5);store();hud();refresh();
+  toast(`Laboratorio dei Custodi: +${g} eliche DNA`);
+}
+$('centerBtn').onclick=()=>{follow=true;if(pos)map.setView([pos.lat,pos.lng],18)};
+
+/* GPS */
+// Nell'app Android usa il GPS nativo (plugin Capacitor), altrimenti quello del browser.
+const CAP=window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform()?window.Capacitor.Plugins:null;
+let watchId=null,badSince=null,gpsOk=false;
+function onFix(c){
+  if(demo)return;gpsOk=true;setPos(c.latitude,c.longitude,c.accuracy);
+  if(c.accuracy>150){badSince=badSince||Date.now();
+    if(Date.now()-badSince>25000)banner('Posizione poco precisa: forse questo tablet non ha il GPS. Puoi giocare lo stesso con la Prova da casa.','Prova da casa',()=>{banner();startDemo()})}
+  else{badSince=null;banner()}
+}
+function onGpsError(msg){
+  if(demo)return;
+  banner(msg,'Prova da casa',()=>{banner();startDemo()});
+  if(!pos)startDemo(true);
+}
+async function startGPS(){
+  demo=false;
+  if(CAP&&CAP.Geolocation){
+    try{let p=await CAP.Geolocation.checkPermissions();
+      if(p.location!=='granted'&&p.coarseLocation!=='granted')p=await CAP.Geolocation.requestPermissions();
+      if(p.location!=='granted'&&p.coarseLocation!=='granted'){onGpsError('Posizione non consentita. Puoi attivarla in Impostazioni → App → Custodi GO → Autorizzazioni.');return}
+      watchId=await CAP.Geolocation.watchPosition({enableHighAccuracy:true,maximumAge:3000,timeout:20000},(p,err)=>{
+        if(err){if(!gpsOk)onGpsError('Non riesco a trovare la posizione. Controlla che la geolocalizzazione sia attiva.');return}
+        if(p)onFix(p.coords)});
+    }catch(e){onGpsError('La geolocalizzazione è spenta o non disponibile su questo dispositivo.')}
+    return;
+  }
+  if(!navigator.geolocation){onGpsError('Questo dispositivo non fornisce la posizione.');return}
+  navigator.geolocation.watchPosition(p=>onFix(p.coords),
+    err=>onGpsError(err.code===1?'Posizione non consentita: attivala nelle impostazioni del browser.':'Non riesco a trovare la posizione.'),
+    {enableHighAccuracy:true,maximumAge:3000,timeout:20000});
+  setTimeout(()=>{if(!gpsOk&&!demo)onGpsError('Sto ancora cercando il GPS… Se il dispositivo non ce l\'ha, usa la Prova da casa.')},20000);
+}
+function stopGPS(){if(watchId!=null&&CAP&&CAP.Geolocation)CAP.Geolocation.clearWatch({id:watchId}).catch(()=>{});watchId=null}
+/* modalità prova */
+let walkTimer=null;
+function startDemo(quiet){demo=true;stopGPS();setPos(pos?pos.lat:41.8902,pos?pos.lng:12.4922,5);
+  if(!quiet)toast('Prova da casa: tocca la mappa per camminare');
+  $('gpsBtn').hidden=false}
+function walkTo(lat,lng){clearInterval(walkTimer);follow=true;
+  walkTimer=setInterval(()=>{const d=meters(pos.lat,pos.lng,lat,lng);if(d<3){clearInterval(walkTimer);return}
+    const k=Math.min(1,4/d);setPos(pos.lat+(lat-pos.lat)*k,pos.lng+(lng-pos.lng)*k,5)},120);}
+
+/* ================= HUD ================= */
+const lvlOf=xp=>1+Math.floor(Math.sqrt(xp/20));
+function hud(){const l=lvlOf(save.xp),a=20*(l-1)**2,b=20*l**2;$('lvl').textContent=l;$('xp').style.width=((save.xp-a)/(b-a)*100)+'%';
+  $('hel').textContent=save.helix;$('dexCount').textContent=Object.keys(save.caught).length+'/'+SPECIES.length}
+function addXP(n){const l=lvlOf(save.xp);save.xp+=n;if(lvlOf(save.xp)>l)setTimeout(()=>toast('Sei salito al livello '+lvlOf(save.xp)+'!'),1200)}
+let tt;function toast(m){const e=$('toast');e.textContent=m;e.style.opacity=1;clearTimeout(tt);tt=setTimeout(()=>e.style.opacity=0,2600)}
+
+/* ================= INCONTRO IN AR ================= */
+const ar=$('arCanvas'),ax=ar.getContext('2d'),vid=$('cam');
+let enc=null,stream=null,arOn=true,dpr=1,W=0,H=0;
+let heading=null,head0=null,tilt=null,tilt0=null;
+function sizeAR(){dpr=Math.min(2,devicePixelRatio||1);W=ar.clientWidth;H=ar.clientHeight;ar.width=W*dpr;ar.height=H*dpr}
+addEventListener('resize',()=>{if(enc)sizeAR()});
+let absSeen=false,orientAsked=false;
+const landscape=()=>{const a=(screen.orientation&&screen.orientation.angle)||window.orientation||0;return a===90||a===-90||a===270};
+
+function onOrient(e){
+  let h=null;
+  if(e.webkitCompassHeading!=null)h=e.webkitCompassHeading;           // iPhone
+  else if(e.type==='deviceorientationabsolute'||e.absolute){absSeen=true;if(e.alpha!=null)h=(360-e.alpha)%360}  // Android
+  else if(!absSeen&&e.alpha!=null)h=(360-e.alpha)%360;
+  const ang=(screen.orientation&&screen.orientation.angle)||window.orientation||0;
+  if(h!=null&&e.webkitCompassHeading==null)h=(h+ang+360)%360;   // compensa il tablet ruotato
+  if(h!=null){
+    if(heading==null)heading=h;else{const d=((h-heading+540)%360)-180;heading=(heading+d*.25+360)%360}
+    if(head0==null)head0=heading}
+  if(e.beta!=null){tilt=tilt==null?e.beta:tilt+(e.beta-tilt)*.25;if(tilt0==null)tilt0=tilt}
+}
+async function askOrientation(){
+  if(orientAsked)return;orientAsked=true;
+  try{if(typeof DeviceOrientationEvent!=='undefined'&&DeviceOrientationEvent.requestPermission){const r=await DeviceOrientationEvent.requestPermission();if(r!=='granted')return}
+    addEventListener('deviceorientationabsolute',onOrient);addEventListener('deviceorientation',onOrient)}catch(e){}
+}
+let camTried=false;
+async function getStream(){
+  if(stream)return stream;
+  if(!window.isSecureContext||!navigator.mediaDevices){if(!camTried)toast('La fotocamera funziona solo da un indirizzo https');camTried=true;return null}
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false})}
+  catch(e){stream=null;if(!camTried)toast(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform()?'Fotocamera non consentita: attivala in Impostazioni → App → Custodi GO':'Fotocamera negata: attivala nelle impostazioni del browser');camTried=true}
+  return stream;
+}
+function attach(v){if(stream){v.srcObject=stream;v.hidden=false;v.play().catch(()=>{})}else{v.srcObject=null;v.hidden=true}}
+async function startCam(){if(!arOn)return;await getStream();attach(vid)}
+function stopCam(){vid.srcObject=null;vid.hidden=true;
+  if($('hunt').hidden&&stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
+$('arBtn').onclick=()=>{arOn=!arOn;$('arBtn').textContent='AR: '+(arOn?'sì':'no');arOn?startCam():stopCam()};
+
+function openEnc(s){
+  enc={s,sp:s.sp,state:'idle',t0:performance.now(),proj:null,drag:null};
+  head0=heading;tilt0=tilt;
+  $('encName').textContent=save.caught[s.sp.id]?s.sp.name:'Un Custode selvatico!';
+  $('encMsg').textContent='Trascina l\'elica verso l\'alto per lanciarla!';
+  $('enc').hidden=false;sizeAR();
+  askOrientation();startCam();
+}
+function closeEnc(){ $('enc').hidden=true;enc=null;stopCam();store();hud();refresh();if(!$('hunt').hidden)attach($('huntCam')) }
+$('encClose').onclick=closeEnc;
+
+function creaturePos(now){
+  const t=now/1000;let x=W/2+Math.sin(t*.7)*W*.18,y=H*.4+Math.sin(t*1.4)*H*.04;
+  if(heading!=null&&head0!=null){let d=((heading-head0+540)%360)-180;x-=d*W/50}
+  if(tilt!=null&&tilt0!=null&&!landscape()){y+=(tilt-tilt0)*H/60}
+  return{x,y,r:Math.min(W,H)*.17};
+}
+const ringSize=now=>.3+.7*(.5+.5*Math.cos(now/520));
+const HX=()=>W/2, HY=()=>H-150;
+
+ar.addEventListener('pointerdown',e=>{if(!enc||enc.state!=='idle')return;const r=ar.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  if(Math.hypot(x-HX(),y-HY())<60){enc.drag={x0:x,y0:y,x,y,t0:performance.now(),hist:[{x,y,t:performance.now()}]};ar.setPointerCapture(e.pointerId)}});
+ar.addEventListener('pointermove',e=>{if(!enc||!enc.drag)return;const r=ar.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,t=performance.now();
+  enc.drag.x=x;enc.drag.y=y;enc.drag.hist.push({x,y,t});if(enc.drag.hist.length>6)enc.drag.hist.shift()});
+ar.addEventListener('pointerup',()=>{if(!enc||!enc.drag)return;const d=enc.drag;enc.drag=null;const h=d.hist,a=h[0],b=h[h.length-1],dt=Math.max(16,b.t-a.t);
+  const vx=(b.x-a.x)/dt,vy=(b.y-a.y)/dt;
+  if(vy>-.35){$('encMsg').textContent='Più veloce verso l\'alto!';return}
+  throwHelix(d.x,d.y,vx/(-vy));});
+$('throwBtn').onclick=()=>{if(!enc)return;if(enc.state==='done'){closeEnc();return}
+  if(enc.state!=='idle')return;const c=creaturePos(performance.now()+600);throwHelix(HX(),HY(),(c.x-HX())/(HY()-c.y)*(.85+Math.random()*.3))};
+
+function throwHelix(x,y,slope){
+  if(save.helix<=0){$('encMsg').textContent='Eliche finite! Passa da un laboratorio rosa sulla mappa.';return}
+  save.helix--;hud();
+  enc.ring=ringSize(performance.now());enc.state='throw';enc.t0=performance.now();enc.proj={x0:x,y0:y,slope};
+}
+function frame(now){
+  requestAnimationFrame(frame);if(!enc)return;
+  ax.setTransform(dpr,0,0,dpr,0,0);ax.clearRect(0,0,W,H);
+  if(vid.hidden){const g=ax.createLinearGradient(0,0,0,H);g.addColorStop(0,'#3a2d7a');g.addColorStop(.62,'#6a5bc0');g.addColorStop(.62,'#8fd17a');g.addColorStop(1,'#5fae50');ax.fillStyle=g;ax.fillRect(0,0,W,H)}
+  const t=now/1000,c=creaturePos(now),el=now-enc.t0,sp=enc.sp;
+  // ombra a terra
+  ax.fillStyle='rgba(0,0,0,.22)';ax.beginPath();ax.ellipse(c.x,c.y+c.r*1.6,c.r*.6,c.r*.14,0,0,7);ax.fill();
+  if(enc.state!=='shake')drawCustode(ax,sp,c.x,c.y,c.r,t);
+  if(enc.state==='idle'){
+    const rs=ringSize(now);ax.lineWidth=5;ax.strokeStyle='rgba(255,255,255,.75)';ax.beginPath();ax.arc(c.x,c.y,c.r*1.15,0,7);ax.stroke();
+    ax.strokeStyle=rs<.45?'#7dffb0':'#ffc43d';ax.beginPath();ax.arc(c.x,c.y,c.r*1.15*rs,0,7);ax.stroke();
+    const hx=enc.drag?enc.drag.x:HX(),hy=enc.drag?enc.drag.y:HY();drawHelix(ax,hx,hy,30,enc.drag?0:Math.sin(t*2)*.2);
+  }
+  if(enc.state==='throw'){
+    const P=enc.proj,k=Math.min(1,el/600),dy=(P.y0-c.y),x=P.x0+P.slope*dy*k,y=P.y0-dy*k-Math.sin(k*Math.PI)*H*.15;
+    drawHelix(ax,x,y,30-14*k,k*12);
+    if(k>=1){
+      const hit=Math.abs(x-c.x)<c.r*1.1;
+      const bonus=enc.ring<.45?.4:enc.ring<.65?.2:0;
+      const p=Math.min(.95,RAR[sp.rar].base+bonus+lvlOf(save.xp)*.01);
+      if(hit&&Math.random()<p){enc.state='shake';enc.t0=now;enc.cx=c.x;enc.cy=c.y;enc.cr=c.r;$('encMsg').textContent=enc.ring<.45?'Lancio perfetto!':'Preso… quasi!'}
+      else{enc.state='miss';enc.t0=now;$('encMsg').textContent=hit?sp.name+' ha fatto una capriola! Riprova.':'Mancato di poco! Prendi la mira e riprova.'}
+    }
+  }
+  if(enc.state==='shake'){
+    const k=el/1500,wob=Math.sin(el/90)*.35*(k<1?1:0);drawHelix(ax,enc.cx,enc.cy+enc.cr*.6,enc.cr*.55,wob);
+    for(let i=0;i<3;i++){ax.fillStyle=el>i*500+250?'#ffc43d':'rgba(255,255,255,.35)';ax.beginPath();ax.arc(enc.cx-30+i*30,enc.cy+enc.cr*1.5,7,0,7);ax.fill()}
+    if(k>=1)caught();
+  }
+  if(enc.state==='miss'&&el>800){enc.state='idle';$('encMsg').textContent='Trascina l\'elica verso l\'alto per lanciarla!'}
+  if(enc.state==='done'){for(let i=0;i<24;i++){const a=i/24*7+t,d=c.r*1.3+((el/8)%60);ax.fillStyle=i%2?'#ffc43d':'#ff5d8f';ax.beginPath();ax.arc(c.x+Math.cos(a)*d,c.y+Math.sin(a)*d,4,0,7);ax.fill()}}
+}
+requestAnimationFrame(frame);
+function caught(){
+  const sp=enc.sp,first=!save.caught[sp.id];
+  save.caught[sp.id]=(save.caught[sp.id]||0)+1;save.got[enc.s.id]=enc.s.slot;
+  const slotNow=Math.floor(Date.now()/(SLOT_MIN*60e3));for(const k in save.got)if(save.got[k]<slotNow-1)delete save.got[k];
+  addXP(first?30:10*sp.rar);enc.state='done';enc.t0=performance.now();
+  $('encName').textContent=sp.name;
+  $('encMsg').textContent=first?sp.name+' è diventato tuo amico! Nuova pagina nell\'album.':'Di nuovo insieme a '+sp.name+'!';
+  $('throwBtn').textContent='Torna alla mappa';
+  const b=$('throwBtn');const done=()=>{b.textContent='Lancio facile';b.removeEventListener('click',done);if(first)openDex(sp.id)};b.addEventListener('click',done);
+  if(navigator.vibrate)navigator.vibrate([60,40,120]);
+  store();hud();
+}
+
+/* ================= CACCIA AR (vista fotocamera) ================= */
+// Ogni Custode vicino viene messo nella sua direzione reale (bussola + GPS):
+// giri il telefono verso di lui e lo vedi fluttuare nella strada vera.
+const hc=$('huntCanvas'),hx=hc.getContext('2d'),hv=$('huntCam');
+const FOV=62, SEE_M=150;
+let hW=0,hH=0,manualHead=0,hits=[],dragH=null;
+function bearing(a,b,c,d){const p=Math.PI/180,y=Math.sin((d-b)*p)*Math.cos(c*p),x=Math.cos(a*p)*Math.sin(c*p)-Math.sin(a*p)*Math.cos(c*p)*Math.cos((d-b)*p);return(Math.atan2(y,x)/p+360)%360}
+function sizeHunt(){dpr=Math.min(2,devicePixelRatio||1);hW=hc.clientWidth;hH=hc.clientHeight;hc.width=hW*dpr;hc.height=hH*dpr}
+addEventListener('resize',()=>{if(!$('hunt').hidden)sizeHunt()});
+async function openHunt(){
+  $('hunt').hidden=false;sizeHunt();askOrientation();
+  await getStream();attach(hv);
+}
+function closeHunt(){$('hunt').hidden=true;hv.srcObject=null;
+  if(stream&&$('enc').hidden){stream.getTracks().forEach(t=>t.stop());stream=null}
+  if(map)map.invalidateSize();}
+$('toMapBtn').onclick=closeHunt;
+$('huntDexBtn').onclick=()=>openDex();
+hc.addEventListener('pointerdown',e=>{dragH={x:e.clientX,y:e.clientY,moved:0};hc.setPointerCapture(e.pointerId)});
+hc.addEventListener('pointermove',e=>{if(!dragH)return;const dx=e.clientX-dragH.x;dragH.moved+=Math.abs(dx);dragH.x=e.clientX;
+  if(heading==null)manualHead=(manualHead-dx*FOV/hW+360)%360});   // senza bussola: trascina per guardarti intorno
+hc.addEventListener('pointerup',e=>{const d=dragH;dragH=null;if(!d||d.moved>10)return;
+  const r=hc.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  for(let i=hits.length-1;i>=0;i--){const h=hits[i];if(Math.hypot(x-h.x,y-h.y)<h.r*1.1){
+    if(h.d<=CATCH_M){openEnc(h.s)}else toast(`${save.caught[h.s.sp.id]?h.s.sp.name:'Il Custode'} è a ${Math.round(h.d)} m: cammina verso di lui!`);return}}});
+function huntFrame(now){
+  requestAnimationFrame(huntFrame);
+  if($('hunt').hidden||!$('enc').hidden)return;
+  const t=now/1000;hx.setTransform(dpr,0,0,dpr,0,0);hx.clearRect(0,0,hW,hH);
+  const head=heading!=null?heading:manualHead;
+  const pitch=tilt!=null&&!landscape()?tilt-90:0;                       // telefono dritto = 0
+  const horizon=hH*.55+pitch*hH/55;
+  if(hv.hidden){const g=hx.createLinearGradient(0,0,0,hH);g.addColorStop(0,'#3a2d7a');g.addColorStop(Math.max(0,Math.min(1,horizon/hH)),'#7a6bd0');
+    g.addColorStop(Math.max(0,Math.min(1,horizon/hH)),'#8fd17a');g.addColorStop(1,'#5fae50');hx.fillStyle=g;hx.fillRect(0,0,hW,hH)}
+  hits=[];
+  if(!pos){$('huntInfo').textContent='Cerco la posizione…';return}
+  const list=spawnsAround(pos.lat,pos.lng).map(s=>({s,d:meters(pos.lat,pos.lng,s.lat,s.lng),b:bearing(pos.lat,pos.lng,s.lat,s.lng)}))
+    .filter(o=>o.d<SEE_M).sort((a,b)=>b.d-a.d);
+  let inView=0,closest=null;
+  for(const o of list){
+    const rel=((o.b-head+540)%360)-180;
+    if(!closest||o.d<closest.d)closest=o;
+    const near=o.d<=CATCH_M;
+    const r=Math.max(18,Math.min(hW*.2,hW*.11*(35/Math.max(o.d,12))));
+    if(Math.abs(rel)<FOV/2+12){
+      inView++;
+      const ph=hash(o.s.id.length,o.s.lat*1e5|0)*6;
+      const x=hW/2+rel/(FOV/2)*hW/2+Math.sin(t*.6+ph)*hW*.03;
+      const y=horizon-hH*.12*(30/Math.max(o.d,15))+Math.sin(t*1.4+ph)*12;
+      hx.fillStyle='rgba(0,0,0,.2)';hx.beginPath();hx.ellipse(x,horizon+hH*.25*(25/Math.max(o.d,12)),r*.6,r*.14,0,0,7);hx.fill();
+      if(near){hx.fillStyle='rgba(255,196,61,.35)';hx.beginPath();hx.arc(x,y,r*1.25+Math.sin(t*5)*3,0,7);hx.fill()}
+      drawCustode(hx,o.s.sp,x,y,r,t+ph);
+      const lbl=near?'Tocca!':Math.round(o.d)+' m';hx.font='800 13px Nunito,sans-serif';const tw=hx.measureText(lbl).width+16;
+      hx.fillStyle=near?'#ffc43d':'rgba(31,42,68,.8)';hx.beginPath();hx.roundRect?hx.roundRect(x-tw/2,y+r+8,tw,22,11):hx.rect(x-tw/2,y+r+8,tw,22);hx.fill();
+      hx.fillStyle=near?'#1f2a44':'#fff';hx.textAlign='center';hx.textBaseline='middle';hx.fillText(lbl,x,y+r+19);
+      hits.push({x,y,r,s:o.s,d:o.d});
+    }
+  }
+  // freccia verso il Custode più vicino se non è inquadrato
+  if(closest){const rel=((closest.b-head+540)%360)-180;
+    if(Math.abs(rel)>=FOV/2){const right=rel>0,x=right?hW-36:36,y=hH*.45;
+      hx.save();hx.translate(x,y);hx.scale(right?1:-1,1);hx.fillStyle='#ffc43d';hx.strokeStyle='#1f2a44';hx.lineWidth=3;
+      hx.beginPath();hx.moveTo(18,0);hx.lineTo(-12,-18);hx.lineTo(-12,18);hx.closePath();hx.fill();hx.stroke();hx.restore();
+      hx.font='800 12px Nunito,sans-serif';hx.fillStyle='#fff';hx.textAlign='center';hx.fillText(Math.round(closest.d)+' m',x,y+32)}}
+  // radar
+  const R=48,rx=max16()+R,ry=hH-170;
+  hx.fillStyle='rgba(31,42,68,.55)';hx.beginPath();hx.arc(rx,ry,R,0,7);hx.fill();
+  hx.strokeStyle='rgba(255,255,255,.35)';hx.lineWidth=1;hx.beginPath();hx.arc(rx,ry,R*CATCH_M/SEE_M,0,7);hx.stroke();
+  hx.fillStyle='rgba(255,255,255,.18)';hx.beginPath();hx.moveTo(rx,ry);hx.arc(rx,ry,R,-Math.PI/2-FOV/2*Math.PI/180,-Math.PI/2+FOV/2*Math.PI/180);hx.closePath();hx.fill();
+  for(const o of list){const a=(o.b-head-90)*Math.PI/180,k=o.d/SEE_M*R;hx.fillStyle=o.d<=CATCH_M?'#ffc43d':'#ff5d8f';hx.beginPath();hx.arc(rx+Math.cos(a)*k,ry+Math.sin(a)*k,4,0,7);hx.fill()}
+  hx.fillStyle='#fff';hx.beginPath();hx.arc(rx,ry,3,0,7);hx.fill();
+  $('huntInfo').textContent=list.length?`${list.length} Custodi qui intorno`:'Nessun Custode vicino';
+  $('huntMsg').textContent=!list.length?'Cammina un po\': ne compaiono di nuovi ogni 10 minuti'
+    :inView?(hits.some(h=>h.d<=CATCH_M)?'Tocca il Custode per incontrarlo!':'Avvicinati al Custode che vedi'):(heading==null?'Trascina lo schermo per guardarti intorno':'Gira il telefono seguendo la freccia');
+}
+function max16(){return 16}
+requestAnimationFrame(huntFrame);
+
+/* ================= ALBUM ================= */
+function openDex(sel){
+  $('dex').hidden=false;const n=Object.keys(save.caught).length;
+  $('dexSub').textContent=n?`Hai fatto amicizia con ${n} Custodi su ${SPECIES.length}. Tocca un Custode per leggere la sua storia.`:'Ancora nessun amico. Esci e cerca i Custodi sulla mappa!';
+  const grid=$('grid');grid.innerHTML='';
+  for(const sp of SPECIES){const got=save.caught[sp.id],b=document.createElement('button');b.className='slot';
+    const im=new Image();im.src=icon(sp,!got);im.alt='';const nm=document.createElement('b');nm.textContent=got?sp.name:'???';
+    const sm=document.createElement('small');sm.textContent=got?RAR[sp.rar].stars+' ×'+got:RAR[sp.rar].label;
+    b.append(im,nm,sm);b.onclick=()=>detail(sp);grid.append(b)}
+  const p=SPECIES.find(s=>s.id===sel)||SPECIES.find(s=>save.caught[s.id]);if(p)detail(p);else $('detail').innerHTML='';
+}
+function detail(sp){const got=save.caught[sp.id],d=$('detail');d.innerHTML='';const c=document.createElement('div');c.className='card';
+  const im=new Image();im.src=icon(sp,!got);im.alt='';const box=document.createElement('div');
+  const h=document.createElement('h3');h.textContent=got?sp.name:'Custode misterioso';
+  const tg=document.createElement('div');tg.className='tag';tg.textContent=got?sp.tag:RAR[sp.rar].label;
+  const st=document.createElement('div');st.className='stars';st.textContent=RAR[sp.rar].stars;
+  const p=document.createElement('p');p.textContent=got?sp.fact:'Non l\'hai ancora incontrato. Continua a esplorare!';
+  box.append(h,tg,st,p);c.append(im,box);d.append(c)}
+$('dexBtn').onclick=()=>openDex();$('dexClose').onclick=()=>$('dex').hidden=true;
+
+/* ================= AVVIO ================= */
+if(CAP){const l=$('apkLink');if(l)l.remove()}
+if(CAP&&CAP.App)CAP.App.addListener('backButton',()=>{
+  if(!$('dex').hidden){$('dex').hidden=true;return}
+  if(!$('enc').hidden){closeEnc();return}
+  if(!$('hunt').hidden){closeHunt();return}
+  CAP.App.minimizeApp();
+});
+if(CAP&&CAP.App)CAP.App.addListener('pause',()=>store());
+$('startBtn').onclick=()=>{$('intro').hidden=true;askOrientation();startGPS();openHunt();netStatus()};
+$('demoBtn').onclick=()=>{$('intro').hidden=true;askOrientation();startDemo()};
+$('huntBtn').onclick=()=>openHunt();
+$('gpsBtn').onclick=()=>{$('gpsBtn').hidden=true;banner();gpsOk=false;startGPS();toast('Cerco la tua posizione…')};
+setInterval(store,5000);hud();
+Promise.all([document.fonts?document.fonts.ready:0,imgReady]).then(()=>{for(const k in ICON)delete ICON[k];for(const k in SIL)delete SIL[k];
+  if(map){for(const [,m] of markers)map.removeLayer(m)}markers.clear();refresh()});
+})();
+</script>
+</body>
+</html>
