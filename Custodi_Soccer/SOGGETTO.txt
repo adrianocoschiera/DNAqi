@@ -1,0 +1,24 @@
+CUSTODI SOCCER - La Coppa del DNA
+un gioco de I Custodi del DNA
+
+Il calcio veloce e visto dall'alto dei videogiochi anni '90, con la grafica a
+pixel di allora (giocatori piccolissimi con l'ombra di lato, campo a strisce,
+menu a blocchi, replay dei gol), con le squadre de I Custodi del DNA.
+Nelle Opzioni c'e' anche una versione in alta definizione.
+
+Ogni squadra ha come capitano un eroe dei Custodi e porta il nome di una
+sindrome genetica: Super K (Klinefelter), Super X (Turner), Marfan M,
+Nightgene (Smith-Magenis), Xia Nova (Xia-Gibbs), Fragile Mind (X Fragile),
+Ruby T (Rubinstein-Taybi), Nistagmo il panda, Samuel (acromatopsia, per questo
+gioca in grigio) e Lumia (GNAO1).
+
+Tutte le squadre sono forti uguali: nessuna sindrome rende "piu' deboli" o
+"piu' forti". Vince chi gioca meglio.
+
+L'arbitro e' il Prof K, la telecronaca e' dell'ape Riff.
+All'intervallo e nella Coppa, il gioco racconta in due righe ogni sindrome
+("Lo sapevi?"), con parole semplici e informazioni corrette.
+
+MODALITA'
+- Amichevole: 1 giocatore contro il computer, oppure 2 giocatori sulla stessa tastiera.
+- Coppa dei Custodi: 8 squadre, quarti, semifinali e finale. In caso di pareggio, rigori.

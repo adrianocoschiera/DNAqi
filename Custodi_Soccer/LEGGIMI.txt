@@ -1,0 +1,34 @@
+CUSTODI SOCCER - LEGGIMI
+========================
+
+COME SI AVVIA
+- Su Windows: doppio clic su Custodi_Soccer.exe (apre il gioco nel browser).
+- Su qualsiasi computer o tablet: apri gioco.html con Chrome, Edge, Firefox o Safari.
+- Funziona senza internet.
+
+COMANDI
+- Muoversi: frecce oppure W A S D. Sul tablet: joystick a sinistra.
+- TIRA (Spazio, oppure il tasto tondo sul tablet):
+  - tocco breve = passaggio al compagno piu' libero nella direzione in cui guardi;
+  - tieni premuto e lascia = tiro (piu' tieni, piu' e' forte);
+  - subito dopo il tiro: direzione di lato = effetto, indietro = palla alta,
+    avanti = palla bassa;
+  - senza palla = scivolata; con la palla alta vicino = colpo di testa.
+- Esc o P (o il tasto II sul tablet) = pausa.
+- Dopo ogni gol parte il REPLAY: premi TIRA per saltarlo.
+- Joypad: levetta + A. Start = pausa.
+
+DUE GIOCATORI
+- Opzioni > Giocatori: 2.
+- Giocatore 1: W A S D + Spazio. Giocatore 2: frecce + Invio.
+- Con due joypad collegati, ognuno usa il suo.
+
+OPZIONI
+- Grafica: Pixel anni '90 (come i giochi di una volta) oppure HD.
+- Durata di un tempo: 2, 3 o 5 minuti.
+- Difficolta': Facile, Normale, Difficile.
+
+NOTE
+- Tutti i personaggi e la grafica sono originali de I Custodi del DNA.
+- Le informazioni "Lo sapevi?" sulle sindromi sono divulgative: per ogni dubbio
+  medico chiedete sempre al vostro medico o genetista.
