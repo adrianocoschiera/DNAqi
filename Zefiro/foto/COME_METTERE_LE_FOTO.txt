@@ -1,0 +1,25 @@
+METTI QUI LE TUE FOTO
+======================
+Copia in questa cartella le foto, chiamandole ESATTAMENTE cosi':
+
+IL RACCONTO INIZIALE
+  Le 5 polaroid (1985, 1987, 1989, 1996, 1996) sono gia' dentro il gioco:
+  non serve metterle qui.
+
+I RICORDI CHE TORNANO (alla fine di ogni livello e nell'album)
+  Le 5 foto dei capitoli sono gia' dentro il gioco. Se vuoi cambiarne una,
+  metti qui un file con lo stesso nome: vince il file della cartella.
+  cortile.jpg    La casa nuova - Estate 1986
+  giardino.jpg   I primi passi di Aria - Estate 1989
+  mare.jpg       La prima estate insieme - Luglio 1997
+  bosco.jpg      La lucina di Aria - Inverno 1996
+  neve.jpg       La stella di Aria - Natale 1999
+
+IL FINALE
+  finale.jpg     la foto di tutti insieme
+
+- Vanno bene anche .jpeg, .png o .webp.
+- Meglio foto quadrate e SENZA cornice ne' scritte: la cornice della polaroid e la
+  didascalia scritta a mano le aggiunge il gioco.
+- Se una foto manca, al suo posto resta il disegno.
+- Le foto restano solo sul vostro computer: non vengono inviate da nessuna parte.

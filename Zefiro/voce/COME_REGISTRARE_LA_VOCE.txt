@@ -1,0 +1,33 @@
+LA VOCE NARRANTE DEL RACCONTO INIZIALE
+=======================================
+Il racconto iniziale scorre da solo, come un piccolo film. Se registri la tua voce
+(o quella di chi vuoi), il gioco la usa: ogni foto aspetta la fine della frase.
+
+Metti qui i file chiamandoli ESATTAMENTE cosi' (vanno bene .mp3, .m4a, .ogg, .wav):
+
+  intro1.mp3
+     "Prima di tutto, c'erano loro due. Una primavera, tanti anni fa."
+
+  intro2.mp3
+     "Poi arrivò la notizia più bella: stava per nascere una bambina."
+
+  intro3.mp3
+     "Si chiamava Aria. Un nome leggero come il vento. Aveva i capelli chiari come la neve e rideva per ogni cosa."
+
+  intro4.mp3
+     "Alla fine di quell'autunno, Aria se ne andò. Era piccolissima, e il suo corpo aveva una fragilità scritta nel DNA. La casa rimase in silenzio per tanto, tanto tempo."
+
+  intro5.mp3
+     "Anni dopo, dal cancello di casa entrò un bambino con i capelli neri e gli occhi pieni di domande. Si chiamava Zefiro. E da quel giorno fu il loro figlio."
+
+  intro6.mp3
+     "Zefiro è un bambino speciale. A volte il mondo gli sembra troppo grande, troppo rumoroso, troppo veloce. E a volte si chiede: «Io, da dove vengo?»"
+
+  intro7.mp3
+     "Una sera, dal fondo dell'album, spuntò un filo colorato. Era il filo del DNA di Zefiro. «Ciao, fratellino» sussurrò una vocina luminosa. «Seguiamolo insieme. Scopriamo da dove vieni.»"
+
+Consigli:
+- Leggi piano, con le pause. Un secondo di silenzio prima e dopo va benissimo.
+- Si puo' registrare anche col telefono, in una stanza silenziosa.
+- Se un file manca, quella foto resta il tempo giusto per leggere il testo.
+- Mentre parla la voce, la musica si abbassa da sola.

@@ -1,0 +1,42 @@
+ZEFIRO E IL FILO DEL DNA - istruzioni
+======================================
+
+AVVIO
+- Doppio clic su "Zefiro_e_il_filo_del_DNA.exe", oppure apri "gioco.html" con
+  Chrome o Edge. Funziona senza internet.
+- Grafica in stile fotografico: sfocatura da obiettivo, luce morbida,
+  piante, rocce e terreni presi da scansioni di oggetti veri.
+  Serve un computer con una scheda video decente. Se va a scatti, in pausa
+  premi "Grafica": alta -> media -> bassa (bassa toglie gli effetti).
+- Al primo avvio ci vogliono alcuni secondi per caricare piante e texture.
+
+COMANDI
+- Frecce (o A/D): cammina.   Spazio (o Z): salta.
+- E, X o Shift = FILO:
+  * vicino a un anello che brilla: lanci il filo e resti appeso;
+  * vicino a un paletto: ci leghi il filo. Legato a DUE paletti diventa un
+    trampolino (salta sopra tenendo premuto Salto).
+- Appeso al filo: Su/Giu' per arrampicarti o scendere, Destra/Sinistra per
+  dondolare, Salto per lasciarti andare. FILO di nuovo vicino a un altro anello:
+  passi al successivo.
+- Mele e casse: camminaci contro per spingerle e usale come gradino.
+- Il filo e' lungo solo fino a un certo punto. Ai rocchetti si ricarica (e sono
+  anche i punti di ripartenza). Se finisce, torna indietro sul tuo cammino.
+- In ogni ricordo ci sono 3 fotografie nascoste da trovare.
+- Joypad: A salta, X filo, Start pausa.  Tablet: pulsanti sullo schermo.
+- Esc o P: pausa.
+
+Le polaroid del racconto iniziale sono quelle fornite da Adriano. Le foto dei
+ricordi nei livelli sono disegnate dal gioco e si possono sostituire (cartella foto).
+
+CREDITI GRAFICI
+- Modelli 3D e texture fotografiche: Poly Haven (polyhaven.com), licenza CC0.
+- Le musiche si possono sostituire con le vostre.
+- Illustrazione della schermata iniziale: fornita da Adriano / I Custodi del DNA.
+- I progressi delle versioni precedenti ripartono da zero (c'e' un livello nuovo all'inizio).
+
+LE TUE MUSICHE E LE TUE FOTO
+- Accanto a gioco.html ci sono le cartelle "musiche", "foto" e "voce": dentro c'e'
+  un foglio che spiega come chiamare i file. Funziona con il gioco scaricato
+  (non nella versione aperta dal link online). Tieni sempre gioco.html, l'exe
+  e le due cartelle insieme nella stessa cartella.

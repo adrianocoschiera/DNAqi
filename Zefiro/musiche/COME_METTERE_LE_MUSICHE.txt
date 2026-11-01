@@ -1,0 +1,17 @@
+METTI QUI LE TUE MUSICHE
+=========================
+Copia in questa cartella i tuoi brani, chiamandoli ESATTAMENTE cosi':
+
+  titolo.mp3     schermata iniziale, racconto e album
+  cortile.mp3    livello 1 - Il Cortile
+  giardino.mp3   livello 2 - Il Giardino
+  mare.mp3       livello 3 - Il Mare
+  bosco.mp3      livello 4 - Il Bosco
+  neve.mp3       livello 5 - La Neve
+  finale.mp3     il finale sotto le stelle
+
+- Vanno bene anche .m4a, .ogg o .wav (es. mare.wav).
+- I brani ripartono da capo quando finiscono (loop): meglio se l'inizio e la
+  fine si "attaccano" bene.
+- Se un file manca, in quel punto suona la chitarra del gioco.
+- Basta riaprire il gioco: non serve cambiare nient'altro.
