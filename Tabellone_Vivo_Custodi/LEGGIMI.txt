@@ -1,0 +1,29 @@
+I CUSTODI DEL DNA - IL TABELLONE VIVO
+Gioco da tavolo cooperativo (1-4 giocatori, dai 6 anni) + app per cellulare in realta' aumentata.
+
+COSA C'E' NELLO ZIP
+- gioco.html ............... l'app (cellulare, tablet o PC)
+- Tabellone_Vivo.exe ....... apre l'app sul PC
+- kit_da_stampare/
+    tabellone_A3.pdf ....... il tabellone (stampa in A3 al 100%)
+    tabellone_2xA4.pdf ..... lo stesso tabellone su 2 fogli A4 da unire
+    pedine_A4.pdf .......... 6 pedine a cubetto da ritagliare e incollare (2 fogli)
+    regolamento.pdf ........ le regole
+
+PREPARAZIONE
+1. Stampa tabellone e pedine SEMPRE al 100% (niente "adatta alla pagina").
+2. Ritaglia e incolla i cubetti: il quadrato bianco e nero va sopra, piatto e pulito.
+3. Apri l'app sul cellulare -> "Gioca con il tabellone", scegli i Custodi e inquadra il tabellone:
+   devono vedersi i 4 quadrati bianchi e neri agli angoli.
+
+LA FOTOCAMERA - IMPORTANTE
+Il browser del telefono accende la fotocamera solo se la pagina arriva da un sito sicuro (https).
+Il modo piu' semplice: carica gioco.html sul sito dell'associazione (o su GitHub Pages / Netlify)
+e apri quell'indirizzo dal telefono. Se la fotocamera non e' disponibile, l'app passa da sola al
+TABELLONE VIRTUALE: si gioca uguale, sullo schermo.
+
+SENZA STAMPARE NULLA
+"Gioca sullo schermo": tabellone 3D virtuale, il cellulare (o il PC) muove le pedine da solo.
+Tasto con la telecamera in alto a destra: passa da realta' aumentata a tabellone virtuale.
+
+Rilevamento dei marcatori: libreria js-aruco (licenza MIT, (c) Juan Mellado). Grafica 3D: three.js (MIT).
