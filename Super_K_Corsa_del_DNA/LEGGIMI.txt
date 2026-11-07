@@ -1,0 +1,25 @@
+SUPER K - LA CORSA DEL DNA (platform veloce in stile console portatile anni '90)
+
+AVVIO: doppio clic su Super_K.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline, anche su tablet e telefono.
+
+COMANDI
+Frecce o A/D ............ corri (piu' tieni premuto, piu' Super K accelera)
+Z, X, C o SPAZIO ........ salta (in aria Super K si chiude a palla e distrugge i Grigini)
+GIU' mentre corri ....... rotola a palla
+SU / GIU' da fermo ...... guarda in alto / in basso
+INVIO ................... start / pausa      M: audio si/no
+G ....................... grafica HD (schermo largo 16:9) / PIXEL (come la console portatile)
+                          nella schermata del titolo c'e' anche il tasto HD/PIXEL in alto a sinistra
+Joypad e comandi touch supportati.
+
+COME SI GIOCA
+- Raccogli gli anelli d'oro: se vieni colpito li perdi (riprendili al volo!).
+  Senza anelli un colpo ti fa perdere una vita. 100 anelli = 1 vita.
+- Colpisci i robot Grigini saltandoci sopra o rotolando: liberano le basette del DNA.
+- Monitor: 10 anelli, scudo, scarpe veloci, vita extra. Rompili con la palla.
+- Molle gialle e rosse, lampioni checkpoint, cartello di fine atto.
+- 3 zone x 2 atti: Collina del DNA, Ponte delle Connessioni, Laboratorio Grigio.
+  Alla fine del 2o atto di ogni zona arriva il Grigiotron: colpiscilo 6 volte.
+- In ogni zona c'e' una GEMMA DEL DNA nascosta in alto (cerca una molla rossa).
+  Con tutte e 3 le gemme vedi il finale completo.
