@@ -1,0 +1,29 @@
+CUSTODI DEL DNA - ACCHIAPPA-PREGIUDIZI (gioco in stile Commodore 64)
+
+AVVIO: doppio clic su Acchiappa_Pregiudizi.exe (apre il gioco nel browser)
+oppure apri gioco.html con Chrome/Edge/Firefox. Funziona offline, anche su tablet.
+
+COMANDI
+Frecce o WASD ........ muovi / guida / posiziona
+SPAZIO, INVIO o Z .... FUOCO
+B o X ................ ESCA (quando scatta l'allarme Gigante)
+M .................... musica si/no  -  joypad e schermo touch supportati
+
+COME SI GIOCA
+1. Canzone iniziale con la pallina che salta sulle parole. FUOCO per giocare.
+2. Scrivi il nome. Se hai un NUMERO DI CONTO di una partita precedente
+   inseriscilo: riparti con i soldi guadagnati. Altrimenti la banca ti presta 10.000 euro.
+3. Compra il veicolo (velocita' e posti) e l'attrezzatura:
+   Rilevatore PK, Visore, Sensore Gigante, Esca, Trappole, Aspiratore,
+   Contenitore portatile.
+4. In citta' i palazzi rossi lampeggianti hanno un Pregiudizio: vai alla porta e premi FUOCO
+   (oppure tocca il palazzo). Se lungo la strada passi sopra un Pregiudizio vagante,
+   lo ritrovi mentre guidi: tienilo sopra l'auto e tieni FUOCO con l'Aspiratore.
+5. Cattura: metti la trappola, posiziona Super K, poi Super X, e accendi i raggi.
+   Muovi la coppia per portare il Pregiudizio sopra la trappola e premi FUOCO.
+   Non far toccare i Custodi dal Pregiudizio e non incrociare mai i raggi!
+6. Trappole piene? Torna al LAB: Prof K le svuota e fa il pieno.
+7. ALLARME GIGANTE: premi B con un'esca, o il Gigante delle Etichette schiaccia un palazzo.
+8. A PK 9999 si apre la Torre dello Stigma. Se hai guadagnato piu' del prestito,
+   vai alla Torre e fai passare almeno 2 Custodi sotto il Gigante che salta.
+   Alla fine ricevi il numero di conto per la prossima partita.

@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Custodi Acchiappa-Pregiudizi</title>
+<style>
+:root{--border:#000}
+html,body{margin:0;height:100%;background:var(--border);overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--border);transition:background .05s}
+#c{image-rendering:pixelated;image-rendering:crisp-edges;display:block;background:#000}
+#dlg{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:5}
+#dlg.on{display:flex}
+#box{background:#352879;color:#6C5EB5;border:6px solid #6C5EB5;padding:18px 20px;font:700 18px/1.4 "Courier New",monospace;max-width:86vw;text-transform:uppercase}
+#box input{display:block;margin:10px 0;width:100%;box-sizing:border-box;background:#352879;color:#fff;border:0;border-bottom:3px solid #6C5EB5;font:inherit;outline:none;text-transform:uppercase;caret-color:#fff}
+#box .row{display:flex;gap:10px;flex-wrap:wrap}
+#box button{background:#6C5EB5;color:#352879;border:0;font:inherit;padding:6px 14px;cursor:pointer}
+#tc{position:fixed;inset:auto 0 0 0;height:0;display:none;z-index:4;pointer-events:none}
+body.touch #tc{display:block}
+.tb{position:fixed;width:58px;height:58px;border-radius:12px;background:rgba(108,94,181,.35);border:2px solid rgba(149,149,149,.6);color:#fff;font:700 14px "Courier New",monospace;display:flex;align-items:center;justify-content:center;pointer-events:auto;touch-action:none}
+.tb.dn{background:rgba(184,199,111,.6)}
+#tL{left:12px;bottom:70px}#tR{left:136px;bottom:70px}#tU{left:74px;bottom:132px}#tD{left:74px;bottom:10px}
+#tF{right:14px;bottom:60px;width:78px;height:78px;border-radius:50%}#tB{right:104px;bottom:24px;border-radius:50%}#tM{right:14px;top:14px;bottom:auto;width:44px;height:44px;font-size:12px}
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="c" width="320" height="200"></canvas></div>
+<div id="dlg"><div id="box"><div id="dq"></div><input id="di" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false"><div class="row" id="dbtn"><button id="dok">OK</button></div></div></div>
+<div id="tc">
+  <div class="tb" id="tL" data-k="L">&#9664;</div><div class="tb" id="tR" data-k="R">&#9654;</div>
+  <div class="tb" id="tU" data-k="U">&#9650;</div><div class="tb" id="tD" data-k="D">&#9660;</div>
+  <div class="tb" id="tF" data-k="F">FUOCO</div><div class="tb" id="tB" data-k="B">ESCA</div><div class="tb" id="tM" data-k="M">&#9835;</div>
+</div>
+<script>
+'use strict';
+// =====================================================================================
+//  CUSTODI DEL DNA - ACCHIAPPA-PREGIUDIZI
+//  Omaggio ai giochi di gestione/azione per Commodore 64 degli anni '80.
+//  Personaggi, nomi, musica e grafica originali dell'universo de I Custodi del DNA.
+// =====================================================================================
+const W = 320, H = 200;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+g.imageSmoothingEnabled = false;
+// C64 palette
+const PAL = ['#000000', '#FFFFFF', '#68372B', '#70A4B2', '#6F3D86', '#588D43', '#352879', '#B8C76F', '#6F4F25', '#433900', '#9A6759', '#444444', '#6C6C6C', '#9AD284', '#6C5EB5', '#959595'];
+const K = { k: 0, w: 1, r: 2, c: 3, p: 4, g: 5, b: 6, y: 7, o: 8, n: 9, R: 10, d: 11, m: 12, G: 13, B: 14, l: 15 };
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const rnd = (a, b) => a + Math.random() * (b - a);
+const pick = a => a[(Math.random() * a.length) | 0];
+function rect(x, y, w, h, c) { g.fillStyle = PAL[c]; g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); }
+function circ(cx, cy, r, c) { g.fillStyle = PAL[c]; r = Math.round(r); for (let dy = -r; dy <= r; dy++) { const dx = Math.floor(Math.sqrt(r * r - dy * dy)); g.fillRect(Math.round(cx - dx), Math.round(cy + dy), dx * 2 + 1, 1); } }
+function line(x0, y0, x1, y1, c) { g.fillStyle = PAL[c]; x0 = Math.round(x0); y0 = Math.round(y0); x1 = Math.round(x1); y1 = Math.round(y1); const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1; let e = dx + dy, n = 0; while (n++ < 2000) { g.fillRect(x0, y0, 1, 1); if (x0 === x1 && y0 === y1) break; const e2 = 2 * e; if (e2 >= dy) { e += dy; x0 += sx; } if (e2 <= dx) { e += dx; y0 += sy; } } }
+function setBorder(c) { document.documentElement.style.setProperty('--border', PAL[c]); }
+
+// ---------------------------------------------------------------- font (5x7, drawn bold like the C64)
+const FD = {
+  A: '.###. #...# #...# ##### #...# #...# #...#', B: '####. #...# #...# ####. #...# #...# ####.', C: '.###. #...# #.... #.... #.... #...# .###.', D: '####. #...# #...# #...# #...# #...# ####.',
+  E: '##### #.... #.... ####. #.... #.... #####', F: '##### #.... #.... ####. #.... #.... #....', G: '.###. #...# #.... #.### #...# #...# .####', H: '#...# #...# #...# ##### #...# #...# #...#',
+  I: '.###. ..#.. ..#.. ..#.. ..#.. ..#.. .###.', J: '..### ...#. ...#. ...#. ...#. #..#. .##..', K: '#...# #..#. #.#.. ##... #.#.. #..#. #...#', L: '#.... #.... #.... #.... #.... #.... #####',
+  M: '#...# ##.## #.#.# #.#.# #...# #...# #...#', N: '#...# #...# ##..# #.#.# #..## #...# #...#', O: '.###. #...# #...# #...# #...# #...# .###.', P: '####. #...# #...# ####. #.... #.... #....',
+  Q: '.###. #...# #...# #...# #.#.# #..#. .##.#', R: '####. #...# #...# ####. #.#.. #..#. #...#', S: '.#### #.... #.... .###. ....# ....# ####.', T: '##### ..#.. ..#.. ..#.. ..#.. ..#.. ..#..',
+  U: '#...# #...# #...# #...# #...# #...# .###.', V: '#...# #...# #...# #...# #...# .#.#. ..#..', W: '#...# #...# #...# #.#.# #.#.# #.#.# .#.#.', X: '#...# #...# .#.#. ..#.. .#.#. #...# #...#',
+  Y: '#...# #...# .#.#. ..#.. ..#.. ..#.. ..#..', Z: '##### ....# ...#. ..#.. .#... #.... #####',
+  0: '.###. #...# #..## #.#.# ##..# #...# .###.', 1: '..#.. .##.. ..#.. ..#.. ..#.. ..#.. .###.', 2: '.###. #...# ....# ...#. ..#.. .#... #####', 3: '##### ...#. ..#.. ...#. ....# #...# .###.',
+  4: '...#. ..##. .#.#. #..#. ##### ...#. ...#.', 5: '##### #.... ####. ....# ....# #...# .###.', 6: '..##. .#... #.... ####. #...# #...# .###.', 7: '##### ....# ...#. ..#.. .#... .#... .#...',
+  8: '.###. #...# #...# .###. #...# #...# .###.', 9: '.###. #...# #...# .#### ....# ...#. .##..',
+  '.': '..... ..... ..... ..... ..... .##.. .##..', ',': '..... ..... ..... ..... .##.. ..#.. .#...', ':': '..... .##.. .##.. ..... .##.. .##.. .....', ';': '..... .##.. .##.. ..... .##.. ..#.. .#...',
+  '!': '..#.. ..#.. ..#.. ..#.. ..#.. ..... ..#..', '?': '.###. #...# ....# ...#. ..#.. ..... ..#..', "'": '..#.. ..#.. .#... ..... ..... ..... .....', '"': '.#.#. .#.#. ..... ..... ..... ..... .....',
+  '-': '..... ..... ..... ##### ..... ..... .....', '+': '..... ..#.. ..#.. ##### ..#.. ..#.. .....', '/': '....# ...#. ...#. ..#.. .#... .#... #....', '(': '...#. ..#.. .#... .#... .#... ..#.. ...#.',
+  ')': '.#... ..#.. ...#. ...#. ...#. ..#.. .#...', '%': '##..# ##.#. ...#. ..#.. .#... .#.## #..##', '€': '..### .#... ####. .#... ####. .#... ..###', '*': '..... #.#.# .###. ##### .###. #.#.# .....',
+  '=': '..... ..... ##### ..... ##### ..... .....', '>': '.#... ..#.. ...#. ....# ...#. ..#.. .#...', '<': '...#. ..#.. .#... #.... .#... ..#.. ...#.', '#': '.#.#. .#.#. ##### .#.#. ##### .#.#. .#.#.',
+  '_': '..... ..... ..... ..... ..... ..... #####', '[': '.###. .#... .#... .#... .#... .#... .###.', ']': '.###. ...#. ...#. ...#. ...#. ...#. .###.', '@': '.###. #...# #.### #.#.# #.### #.... .###.',
+  '♪': '..##. ..#.# ..#.. ..#.. ###.. ###.. .....', '♥': '..... .#.#. ##### ##### .###. ..#.. .....',
+};
+const GC = {};
+function glyph(ch, c) { const k = ch + '|' + c; if (GC[k]) return GC[k]; const o = document.createElement('canvas'); o.width = 8; o.height = 8; const q = o.getContext('2d'); q.fillStyle = PAL[c]; const d = FD[ch]; if (d) d.split(' ').forEach((r, y) => { for (let x = 0; x < 5; x++) if (r[x] === '#') q.fillRect(x, y, 2, 1); }); return (GC[k] = o); }
+function norm(s) { return String(s).toUpperCase().replace(/[ÀÁ]/g, "A'").replace(/[ÈÉ]/g, "E'").replace(/[ÌÍ]/g, "I'").replace(/[ÒÓ]/g, "O'").replace(/[ÙÚ]/g, "U'"); }
+const tw = (s, sc = 1) => norm(s).length * 7 * sc;
+function text(s, x, y, c = 1, sc = 1, sh = -1) { s = norm(s); if (sh >= 0) text0(s, x + sc, y + sc, sh, sc); text0(s, x, y, c, sc); }
+function text0(s, x, y, c, sc) { for (let i = 0; i < s.length; i++) { const ch = s[i]; if (ch !== ' ') g.drawImage(glyph(ch, c), Math.round(x + i * 7 * sc), Math.round(y), 8 * sc, 8 * sc); } }
+function ctext(s, y, c = 1, sc = 1, sh = -1) { text(s, Math.round((W - tw(s, sc)) / 2), y, c, sc, sh); }
+function rtext(s, x, y, c = 1) { text(s, x - tw(s), y, c); }
+// wraps a sentence into lines of max n characters
+function wrap(s, n) { const out = []; let cur = ''; norm(s).split(' ').forEach(w => { if ((cur + ' ' + w).trim().length > n) { out.push(cur.trim()); cur = w; } else cur += ' ' + w; }); if (cur.trim()) out.push(cur.trim()); return out; }
+
+// ---------------------------------------------------------------- sprites
+function canvas(w, h) { const o = document.createElement('canvas'); o.width = w; o.height = h; return o; }
+function mkSpr(rows, remap = {}) { const w = Math.max(...rows.map(r => r.length)), h = rows.length; const o = canvas(w, h), q = o.getContext('2d'); rows.forEach((r, y) => { for (let x = 0; x < r.length; x++) { const ch = r[x]; if (ch === '.') continue; const ci = remap[ch] !== undefined ? remap[ch] : K[ch]; if (ci === undefined) continue; q.fillStyle = PAL[ci]; q.fillRect(x, y, 1, 1); } }); return o; }
+function flip(o) { const f = canvas(o.width, o.height), q = f.getContext('2d'); q.translate(o.width, 0); q.scale(-1, 1); q.drawImage(o, 0, 0); return f; }
+function spr(o, x, y, sc = 1) { g.drawImage(o, Math.round(x), Math.round(y), o.width * sc, o.height * sc); }
+// the Custodi (front 3/4 view, facing right, with the DNA-ray backpack)
+const B_TOP = [
+  '...hhhh...',
+  '..hhhhhh..',
+  '..hRRRRh..',
+  '..RkRRkR..',
+  '..RRRRRR..',
+  '...RRRR...',
+  '.llSSSSS..',
+  'llmSSSSSR.',
+  'llmSwwSSR.',
+  'llmSwwSS..',
+  'llmSSSSS..',
+  '.llSSSSS..',
+  '..SSkkSS..'];
+const B_LEGS = [
+  ['..SS..SS..', '..SS..SS..', '..SS..SS..', '..SS..SS..', '.kkk..kkk.'],
+  ['..SSS.SS..', '.SS...SS..', '.SS....SS.', 'SS.....SS.', 'kk.....kkk'],
+  ['...SSSS...', '...SSS....', '...SS.S...', '..SS..SS..', '.kkk.kkk..']];
+const TEAM = [
+  { n: 'SUPER K', S: K.B, h: K.n, R: K.R }, // azzurro
+  { n: 'SUPER X', S: K.p, h: K.y, R: K.R }, // viola
+  { n: 'M', S: K.G, h: K.o, R: K.R },       // verde, il piu' alto
+];
+const BSPR = TEAM.map(t => B_LEGS.map(l => { const s = mkSpr(B_TOP.concat(l), { S: t.S, h: t.h }); return [s, flip(s)]; }));
+const SLIMED = B_LEGS.map(l => { const s = mkSpr(B_TOP.concat(l), { S: K.G, h: K.G, R: K.G, w: K.g, m: K.g, l: K.G }); return [s, flip(s)]; });
+function drawBuster(i, x, yFeet, frame, faceLeft, slimed, sc = 1) { const set = slimed ? SLIMED : BSPR[i]; const s = set[frame][faceLeft ? 1 : 0]; const tall = i === 2 ? 1.18 : 1; g.drawImage(s, Math.round(x - 5 * sc), Math.round(yFeet - 18 * sc * tall), 10 * sc, Math.round(18 * sc * tall)); }
+// the Pregiudizio (a grey ghost with a label stuck on its forehead)
+const GH = [
+  ['.....llllll.....', '...llllllllll...', '..llllllllllll..', '.lllwwllllwwlll.', '.lllwkllllkwlll.', 'llllllllllllllll', 'lllllkkkkkklllll', 'llllkrrrrrrkllll', 'lllllkkkkkklllll', '.llllllllllllll.', '.llmllllllllmll.', '..llmlllllllmll.', '..ll.lll.lll.ll.', '..l...l...l...l.'],
+  ['.....llllll.....', '...llllllllll...', 'l.llllllllllll.l', 'llllwwllllwwllll', '.lllkwllllwklll.', '.llllllllllllll.', '.llllkkkkkklllll', 'lllllkrrrrklllll', 'llllllkkkklllll.', 'llllllllllllll..', '.lmllllllllllml.', '.llmlllllllmll..', '.ll.lll.lll.ll..', '.l...l...l...l..']];
+const GSPR = GH.map(r => mkSpr(r)), GSPR_F = GSPR.map(flip);
+function drawGhost(x, y, t, sc = 1, faint = false) {
+  if (faint && ((t * 9) | 0) % 3 === 0) return;
+  const f = ((t * 4) | 0) % 2, s = (Math.sin(t * 1.3) > 0 ? GSPR : GSPR_F)[f];
+  g.drawImage(s, Math.round(x - 8 * sc), Math.round(y - 7 * sc), 16 * sc, 14 * sc);
+  // the label (etichetta) stuck on its head
+  rect(x - 3 * sc, y - 7 * sc, 7 * sc, 3 * sc, K.y); rect(x - 2 * sc, y - 6 * sc, 5 * sc, Math.max(1, sc * 0.6), K.n);
+}
+function drawRoamer(x, y, t) { // tiny map/road version
+  const f = ((t * 5) | 0) % 2; rect(x - 3, y - 3, 7, 5, K.l); rect(x - 2, y - 4, 5, 1, K.l); rect(x - 2, y - 2, 1, 1, K.k); rect(x + 1, y - 2, 1, 1, K.k); rect(x - 3 + f, y + 2, 1, 1, K.l); rect(x + 1 + f, y + 2, 1, 1, K.l); rect(x - 1, y - 5, 3, 1, K.y);
+}
+// cars seen from above
+function drawCar(cx, cy, c, len, flash) {
+  const w = 12; const x = Math.round(cx - w / 2), y = Math.round(cy - len / 2);
+  rect(x - 1, y + 2, 2, 4, K.k); rect(x + w - 1, y + 2, 2, 4, K.k); rect(x - 1, y + len - 6, 2, 4, K.k); rect(x + w - 1, y + len - 6, 2, 4, K.k);
+  rect(x, y, w, len, c); rect(x + 2, y + 3, w - 4, 3, K.c); rect(x + 2, y + len - 5, w - 4, 2, K.c); rect(x + 1, y + 7, w - 2, len - 13, flash ? K.w : K.m);
+  rect(x + 1, y, 2, 1, K.y); rect(x + w - 3, y, 2, 1, K.y);
+}
+// the Giant of Labels (Gigante delle Etichette): a huge figure covered in stickers
+function drawGiant(cx, by, s, t, mood = 0) {
+  const R = (x, y, w, h, c) => rect(cx + x * s, by - y * s, Math.max(1, w * s), Math.max(1, h * s), c);
+  const sw = Math.sin(t * 6) * 3;
+  R(-15, 18, 11, 18, K.l); R(4, 18, 11, 18, K.l); R(-17, 3, 14, 3, K.m); R(3, 3, 14, 3, K.m);
+  R(-22, 58, 44, 42, K.w); R(-22, 58, 2, 40, K.l); R(20, 58, 2, 40, K.l); R(-18, 18, 36, 2, K.l);
+  R(-31, 54 + sw, 9, 24, K.w); R(22, 54 - sw, 9, 24, K.w); R(-31, 32 + sw, 9, 3, K.l); R(22, 32 - sw, 9, 3, K.l);
+  const st = [[-18, 52, K.y], [-4, 55, K.R], [8, 50, K.c], [-14, 40, K.G], [2, 42, K.y], [10, 34, K.B], [-18, 28, K.R], [-2, 30, K.o], [-28, 48 + sw, K.c], [24, 46 - sw, K.G]];
+  st.forEach(([x, y, c]) => { R(x, y, 10, 7, c); R(x + 1, y - 2, 7, 1, K.k); R(x + 1, y - 4, 5, 1, K.k); });
+  const hy = 74; for (let dy = -13; dy <= 13; dy++) { const dx = Math.floor(Math.sqrt(169 - dy * dy)); R(-dx, hy - dy, dx * 2 + 1, 1.2, K.w); }
+  R(-7, hy + 4, 3, 3, K.k); R(4, hy + 4, 3, 3, K.k);
+  if (mood) { R(-6, hy - 4, 12, 2, K.k); } else { R(-8, hy - 3, 16, 2, K.k); R(-8, hy - 1, 2, 2, K.k); R(6, hy - 1, 2, 2, K.k); }
+  R(-9, hy + 12, 18, 6, K.y); R(-7, hy + 10, 14, 1, K.n); R(-7, hy + 8, 10, 1, K.n);
+}
+const PREJ = ["NON CE LA FARA' MAI", "E' SOLO UN CAPRICCIO", "NON PUO' GIOCARE CON NOI", "E' COLPA DEI GENITORI", "TANTO NON CAPISCE", "E' TROPPO DIVERSO", "NON E' COME GLI ALTRI", "MEGLIO NON INVITARLO", "E' STRANO", "NON SERVE PROVARCI"];
+
+// ---------------------------------------------------------------- audio (SID-like)
+let AC = null, MG = null, NB = null, MUTE = false;
+function initAudio() { if (AC) { if (AC.state === 'suspended') AC.resume(); return; } try { AC = new (window.AudioContext || window.webkitAudioContext)(); MG = AC.createGain(); MG.gain.value = 0.22; MG.connect(AC.destination); NB = AC.createBuffer(1, AC.sampleRate, AC.sampleRate); const d = NB.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } catch (e) { AC = null; } }
+function tone(f, t0, dur, type = 'square', vol = 0.15, slide = 0, out) { if (!AC) return; const o = AC.createOscillator(), v = AC.createGain(); o.type = type; o.frequency.setValueAtTime(f, t0); if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(20, f * slide), t0 + dur); v.gain.setValueAtTime(0.0001, t0); v.gain.linearRampToValueAtTime(vol, t0 + 0.006); v.gain.setValueAtTime(vol, t0 + dur * 0.6); v.gain.exponentialRampToValueAtTime(0.0001, t0 + dur); o.connect(v); v.connect(out || MG); o.start(t0); o.stop(t0 + dur + 0.02); }
+function noise(t0, dur, vol = 0.15, hp = 800, out) { if (!AC) return; const s = AC.createBufferSource(); s.buffer = NB; const f = AC.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = hp; const v = AC.createGain(); v.gain.setValueAtTime(vol, t0); v.gain.exponentialRampToValueAtTime(0.0001, t0 + dur); s.connect(f); f.connect(v); v.connect(out || MG); s.start(t0, Math.random() * 0.5); s.stop(t0 + dur + 0.02); }
+const N2F = n => { const m = /^([A-G])(#?)(-?\d)$/.exec(n); const i = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]] + (m[2] ? 1 : 0); return 440 * Math.pow(2, ((+m[3] + 1) * 12 + i - 69) / 12); };
+const SFX = {
+  t() { return AC ? AC.currentTime : 0; },
+  blip() { tone(880, this.t(), 0.05, 'square', 0.08); },
+  buy() { const t = this.t(); tone(660, t, 0.06, 'square', 0.1); tone(990, t + 0.06, 0.09, 'square', 0.1); },
+  no() { tone(140, this.t(), 0.2, 'square', 0.12, 0.7); },
+  cash() { const t = this.t();[1318, 1568, 2093].forEach((f, i) => tone(f, t + i * 0.07, 0.12, 'triangle', 0.14)); },
+  zap() { const t = this.t(); tone(1200, t, 0.08, 'sawtooth', 0.05, 0.4); noise(t, 0.06, 0.05, 2000); },
+  trap() { const t = this.t(); tone(200, t, 0.5, 'sawtooth', 0.14, 6); noise(t, 0.4, 0.1, 3000); },
+  capture() { const t = this.t();[523, 659, 784, 1046, 1318].forEach((f, i) => tone(f, t + 0.3 + i * 0.07, 0.1, 'square', 0.1)); },
+  slime() { const t = this.t(); tone(180, t, 0.6, 'square', 0.15, 0.3); tone(120, t + 0.1, 0.6, 'triangle', 0.15, 0.4); },
+  boom() { const t = this.t(); noise(t, 0.8, 0.35, 60); tone(90, t, 0.6, 'sine', 0.3, 0.3); },
+  thump() { const t = this.t(); tone(80, t, 0.3, 'sine', 0.4, 0.4); noise(t, 0.2, 0.2, 80); },
+  alarm() { const t = this.t(); for (let i = 0; i < 6; i++) tone(i % 2 ? 660 : 880, t + i * 0.22, 0.2, 'square', 0.1); },
+  vac() { const t = this.t(); noise(t, 0.12, 0.06, 1200); tone(300 + Math.random() * 200, t, 0.1, 'sawtooth', 0.03, 2); },
+  crash() { const t = this.t(); noise(t, 0.3, 0.25, 300); tone(120, t, 0.2, 'square', 0.12, 0.5); },
+  door() { const t = this.t();[392, 523, 659, 784].forEach((f, i) => tone(f, t + i * 0.09, 0.15, 'triangle', 0.15)); },
+  win() { const t = this.t();[523, 659, 784, 1046, 784, 1046, 1318].forEach((f, i) => tone(f, t + i * 0.13, 0.2, 'square', 0.12)); },
+};
+// ------------- the theme song (original melody and lyrics) with karaoke
+const BPM = 126, STEP = 60 / BPM / 4;
+const LYR = [
+  { s: ["UN'", 'OM', 'BRA ', 'GRI', 'GIA ', 'SUL', 'LA ', 'CIT', "TA'"], n: ['E4', 'E4', 'G4', 'E4', 'D4', 'B3', 'D4', 'E4', 'E4'], l: [2, 2, 2, 2, 4, 2, 2, 2, 14] },
+  { s: ["UN'", 'E', 'TI', 'CHET', 'TA ', 'CHE ', 'NON ', 'VA'], n: ['G4', 'G4', 'A4', 'G4', 'E4', 'D4', 'E4', 'B3'], l: [2, 2, 2, 2, 4, 2, 2, 16] },
+  { s: ['PREN', 'DI IL ', 'RAG', 'GIO, ', 'PREN', 'DI IL ', 'FI', 'LO ', 'DEL ', 'DNA'], n: ['E4', 'E4', 'G4', 'A4', 'A4', 'A4', 'B4', 'A4', 'G4', 'A4'], l: [2, 2, 2, 4, 2, 2, 2, 2, 4, 10] },
+  { s: ['AR', 'RI', 'VA', 'NO ', 'I ', 'CU', 'STO', 'DI ', 'DEL ', 'D-', 'N-', 'A!'], n: ['G4', 'A4', 'B4', 'B4', 'B4', 'D5', 'B4', 'A4', 'G4', 'E4', 'G4', 'E4'], l: [2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 8] },
+];
+const SONG = { mel: [], total: 192, roots: ['E2', 'E2', 'E2', 'E2', 'C2', 'B1', 'A1', 'A1', 'G1', 'E2', 'E2', 'E2'] };
+(() => { let st = 32; LYR.forEach((L, li) => { L.x = []; L.s.forEach((s, i) => { SONG.mel.push({ st, len: L.l[i], f: N2F(L.n[i]), li, si: i }); st += L.l[i]; }); }); })();
+const BASSP = [0, null, 0, null, 7, null, 0, 12, null, 7, null, 0, null, 7, 12, null];
+const MU = { on: false, step: 0, next: 0, t0: 0, vol: 1, mel: true };
+let MOUT = null;
+function musicStart(mel = true, vol = 1) { initAudio(); if (!AC) return; if (!MOUT) { MOUT = AC.createGain(); MOUT.connect(MG); } MOUT.gain.value = vol; MU.on = true; MU.mel = mel; MU.step = 0; MU.next = AC.currentTime + 0.12; MU.t0 = MU.next; }
+function musicStop() { MU.on = false; }
+function musicVol(v) { if (MOUT) MOUT.gain.setTargetAtTime(v, AC.currentTime, 0.2); }
+function musicTick() {
+  if (!MU.on || !AC) return;
+  while (MU.next < AC.currentTime + 0.2) {
+    const s = MU.step, t = MU.next, bar = (s / 16) | 0, i = s % 16;
+    const off = BASSP[i]; if (off !== null) tone(N2F(SONG.roots[bar]) * Math.pow(2, off / 12), t, STEP * 1.6, 'square', 0.07, 0, MOUT);
+    if (i === 0 || i === 8 || i === 10) tone(110, t, 0.12, 'sine', 0.35, 0.35, MOUT);
+    if (i === 4 || i === 12) noise(t, 0.12, 0.16, 1500, MOUT);
+    if (i % 2 === 0) noise(t, 0.03, 0.04, 7000, MOUT);
+    if (MU.mel) { const m = SONG.mel.find(q => q.st === s); if (m) { tone(m.f, t, Math.min(m.len * STEP * 0.95, 1.2), 'square', 0.08, 0, MOUT); tone(m.f * 2, t, Math.min(m.len * STEP * 0.5, 0.4), 'triangle', 0.035, 0, MOUT); } }
+    else if (bar >= 2 && bar < 10 && (i === 3 || i === 11)) tone(N2F(SONG.roots[bar]) * 4 * Math.pow(2, 7 / 12), t, 0.08, 'square', 0.03, 0, MOUT);
+    MU.next += STEP; MU.step = (s + 1) % SONG.total;
+  }
+}
+function songPos() { if (!MU.on || !AC) return -1; const p = (AC.currentTime - MU.t0) / STEP; return p < 0 ? -1 : p % SONG.total; }
+
+// ---------------------------------------------------------------- input
+const KEYMAP = { L: ['ArrowLeft', 'KeyA'], R: ['ArrowRight', 'KeyD'], U: ['ArrowUp', 'KeyW'], D: ['ArrowDown', 'KeyS'], F: ['Space', 'Enter', 'KeyZ', 'ControlLeft', 'NumpadEnter'], B: ['KeyB', 'KeyX'], M: ['KeyM'] };
+const KD = {}, KP = {}, TD = {}, TP = {};
+let dlgOpen = false;
+addEventListener('keydown', e => { if (dlgOpen) return; if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space'].includes(e.code)) e.preventDefault(); if (!KD[e.code]) KP[e.code] = true; KD[e.code] = true; initAudio(); });
+addEventListener('keyup', e => { KD[e.code] = false; });
+const held = n => KEYMAP[n].some(c => KD[c]) || !!TD[n];
+const pressed = n => KEYMAP[n].some(c => KP[c]) || !!TP[n];
+function clearPress() { for (const k in KP) delete KP[k]; for (const k in TP) delete TP[k]; TAP = null; }
+// pads / gamepad
+function pollPad() { const ps = navigator.getGamepads ? navigator.getGamepads() : []; for (const p of ps) { if (!p) continue; const ax = p.axes[0] || 0, ay = p.axes[1] || 0, b = i => p.buttons[i] && p.buttons[i].pressed; const st = { L: ax < -0.4 || b(14), R: ax > 0.4 || b(15), U: ay < -0.4 || b(12), D: ay > 0.4 || b(13), F: b(0) || b(1), B: b(2) || b(3) }; for (const k in st) { if (st[k] && !TD['pad' + k]) TP[k] = true; TD['pad' + k] = st[k]; TD[k] = st[k] || TD['t' + k]; } } }
+if (matchMedia('(pointer:coarse)').matches) document.body.classList.add('touch');
+document.querySelectorAll('.tb').forEach(el => { const k = el.dataset.k; const on = e => { e.preventDefault(); initAudio(); TD[k] = true; TD['t' + k] = true; TP[k] = true; el.classList.add('dn'); }; const off = e => { TD[k] = false; TD['t' + k] = false; el.classList.remove('dn'); }; el.addEventListener('pointerdown', on); el.addEventListener('pointerup', off); el.addEventListener('pointercancel', off); el.addEventListener('pointerleave', off); });
+let TAP = null; // a tap/click on the screen, in game coordinates
+cv.addEventListener('pointerdown', e => { initAudio(); const r = cv.getBoundingClientRect(); TAP = { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; });
+function resize() { const s0 = Math.min(innerWidth / W, innerHeight / H) * 0.96; const s = s0 >= 2 ? Math.floor(s0) : s0; cv.style.width = W * s + 'px'; cv.style.height = H * s + 'px'; }
+addEventListener('resize', resize); resize();
+// dialog for name and account number
+function ask(q, cb, buttons) { const d = document.getElementById('dlg'), i = document.getElementById('di'), bx = document.getElementById('dbtn'); document.getElementById('dq').textContent = q; i.value = ''; bx.innerHTML = ''; dlgOpen = true; d.classList.add('on');
+  const done = v => { dlgOpen = false; d.classList.remove('on'); for (const k in KD) KD[k] = false; clearPress(); cb(v); };
+  if (buttons) { i.style.display = 'none'; buttons.forEach(b => { const e = document.createElement('button'); e.textContent = b; e.onclick = () => done(b); bx.appendChild(e); }); i.onkeydown = null; d.onkeydown = e => { const b = buttons.find(b => b[0] === e.key.toUpperCase()); if (b) done(b); }; setTimeout(() => bx.firstChild.focus(), 30); }
+  else { i.style.display = 'block'; d.onkeydown = null; const e = document.createElement('button'); e.textContent = 'OK'; e.onclick = () => done(i.value.trim()); bx.appendChild(e); i.onkeydown = ev => { if (ev.key === 'Enter') done(i.value.trim()); }; setTimeout(() => i.focus(), 30); } }
+
+// ---------------------------------------------------------------- game data
+const CARS = [
+  { n: 'UTILITARIA', p: 2000, sp: 75, cap: 5, c: K.y, len: 16 },
+  { n: 'FURGONCINO', p: 4800, sp: 90, cap: 9, c: K.l, len: 20 },
+  { n: 'STATION WAGON', p: 6000, sp: 110, cap: 11, c: K.o, len: 20 },
+  { n: 'PULMINO DEI CUSTODI', p: 15000, sp: 160, cap: 7, c: K.B, len: 22 },
+];
+const EQ = [
+  { k: 'det', n: 'RILEVATORE PK', p: 400, m: 1, d: 'Fa lampeggiare gli edifici dove sta per arrivare un pregiudizio.' },
+  { k: 'vis', n: 'VISORE', p: 800, m: 1, d: 'Rende ben visibili i pregiudizi durante la cattura.' },
+  { k: 'sen', n: 'SENSORE GIGANTE', p: 800, m: 1, d: 'Avvisa in anticipo che sta arrivando il Gigante delle Etichette.' },
+  { k: 'bait', n: 'ESCA', p: 400, m: 9, d: 'Ferma il Gigante quando scatta l\'allarme: premi B (ESCA).' },
+  { k: 'trap', n: 'TRAPPOLA', p: 600, m: 9, d: 'Contiene un pregiudizio. Quando sono piene svuotale al Laboratorio.' },
+  { k: 'vac', n: 'ASPIRATORE', p: 500, m: 1, d: 'Aspira i pregiudizi vaganti mentre guidi: tieni premuto FUOCO.' },
+  { k: 'cont', n: 'CONTENITORE PORTATILE', p: 8000, m: 1, d: 'Svuota le trappole da solo: niente piu\' ritorni al Laboratorio.' },
+];
+// the city: streets on a grid, one building per block
+const XS = [10, 70, 130, 190, 250, 310], YS = [8, 52, 96, 140];
+const TOWER = { c: 2, r: 1 }, LAB = { c: 2, r: 2 };
+const BCOL = [[K.r, K.R], [K.b, K.B], [K.o, K.y], [K.p, K.R], [K.d, K.l], [K.n, K.o], [K.g, K.G]];
+const BLD = [];
+for (let r = 0; r < 3; r++) for (let c = 0; c < 5; c++) { const b = { c, r, x0: XS[c] + 4, x1: XS[c + 1] - 4, y0: YS[r] + 4, y1: YS[r + 1] - 4, door: { x: (XS[c] + XS[c + 1]) / 2, y: YS[r + 1] } }; b.type = (c === TOWER.c && r === TOWER.r) ? 'tower' : (c === LAB.c && r === LAB.r) ? 'lab' : 'bld'; b.col = BCOL[(c * 3 + r * 2) % BCOL.length]; b.floors = 2 + ((c + r * 2) % 3); b.id = BLD.length; BLD.push(b); }
+const TOWERB = BLD.find(b => b.type === 'tower'), LABB = BLD.find(b => b.type === 'lab');
+
+// ---------------------------------------------------------------- state
+const S = { mode: 'title', t: 0, name: '', money: 10000, start: 10000, car: null, eq: {}, filled: 0, fuel: 100, pk: 0, msg: '', msgT: 0, msgC: K.y };
+function resetGame(money) { Object.assign(S, { money, start: money, car: null, eq: { det: 0, vis: 0, sen: 0, bait: 0, trap: 0, vac: 0, cont: 0 }, filled: 0, fuel: 100, pk: 0, haunted: new Set(), pending: [], destroyed: new Set(), roamers: [], onRoad: 0, cur: { x: LABB.door.x, y: LABB.door.y }, dist: 0, route: null, hauntT: 4, roamT: 3, giantT: 50, alarm: null, giantFx: null, open: false, caught: 0, vacuumed: 0, lost: 0, stored: 0, flash: 0 }); }
+resetGame(10000);
+function say(m, c = K.y, t = 3.2) { S.msg = m; S.msgC = c; S.msgT = t; }
+function pay(v) { S.money += v; }
+const fmt = v => (v < 0 ? '-' : '') + '€' + Math.abs(Math.round(v)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+function nameHash(n) { let h = 7; for (const ch of norm(n)) h = (h * 31 + ch.charCodeAt(0)) % 9973; return h % 97; }
+function accountCode() { return String(Math.max(0, Math.floor(S.money / 100)) * 97 + nameHash(S.name)); }
+function readCode(code, name) { const n = parseInt(String(code).replace(/\D/g, ''), 10); if (!n || n % 97 !== nameHash(name)) return null; return Math.floor(n / 97) * 100; }
+function slotsUsed() { return EQ.reduce((a, e) => a + (S.eq[e.k] || 0), 0); }
+let MODE_T = 0;
+function go(m) { S.mode = m; MODE_T = 0; clearPress(); setBorder(K.k); if (MODES[m] && MODES[m].enter) MODES[m].enter(); }
+
+// ---------------------------------------------------------------- TITLE (song + bouncing ball)
+let titleStarted = false;
+const TITLE = {
+  enter() { },
+  update(dt) {
+    if (pressed('F') || TAP || pressed('B')) {
+      if (!titleStarted) { titleStarted = true; musicStart(true, 1); }
+      else { musicVol(0.5); startNewGame(); }
+    }
+  },
+  draw() {
+    rect(0, 0, W, H, K.k);
+    // stars and skyline
+    for (let i = 0; i < 40; i++) rect((i * 73) % W, (i * 37) % 70, 1, 1, i % 3 ? K.m : K.w);
+    const sky = [[0, 30, K.b], [26, 46, K.b], [60, 24, K.b], [86, 54, K.b], [126, 34, K.b], [166, 60, K.b], [200, 28, K.b], [232, 48, K.b], [270, 36, K.b], [300, 52, K.b]];
+    sky.forEach(([x, h, c], i) => { rect(x, 148 - h, 32, h, c); for (let y = 148 - h + 4; y < 144; y += 6) for (let xx = x + 3; xx < x + 29; xx += 6) if ((xx * 7 + y * 3 + i) % 5 < 2) rect(xx, y, 2, 3, K.y); });
+    // the Tower of Stigma in the middle with its glow
+    rect(150, 104, 20, 44, K.p); rect(146, 100, 28, 5, K.p); rect(156, 94, 8, 6, K.p); circ(160, 92, 2 + Math.sin(S.t * 4), K.R);
+    rect(0, 148, W, 52, K.k);
+    // emblem: a DNA helix inside a shield
+    const ex = 160, ey = 34; circ(ex, ey, 21, K.w); circ(ex, ey, 18, K.b);
+    for (let i = 0; i < 13; i++) { const y = ey - 15 + i * 2.5, a = i * 0.62 + S.t * 2; const x1 = ex + Math.sin(a) * 9, x2 = ex - Math.sin(a) * 9; line(x1, y, x2, y, Math.cos(a) > 0 ? K.B : K.c); rect(x1 - 1, y - 1, 3, 3, K.y); rect(x2 - 1, y - 1, 3, 3, K.R); }
+    ctext('CUSTODI DEL DNA', 64, K.w, 2, K.b);
+    ctext('ACCHIAPPA-PREGIUDIZI', 84, K.y, 1, K.n);
+    // karaoke
+    const p = songPos();
+    if (p < 0) { if (((S.t * 2) | 0) % 2) ctext('PREMI FUOCO (SPAZIO) O TOCCA', 160, K.w); ctext('PER LA CANZONE', 172, K.w); ctext('(C) I CUSTODI DEL DNA', 188, K.m); return; }
+    let cur = SONG.mel.find(m => p >= m.st && p < m.st + m.len); let li = cur ? cur.li : (p < 32 ? 0 : p >= 160 ? 3 : -1);
+    if (li < 0) { const prev = SONG.mel.filter(m => m.st <= p); li = prev.length ? prev[prev.length - 1].li : 0; }
+    const L = LYR[li]; const full = L.s.join(''); const x0 = Math.round((W - tw(full)) / 2), ly = 164;
+    let x = x0; const xs = []; L.s.forEach(s => { xs.push(x + tw(s.trim()) / 2); x += tw(s); });
+    let x2 = x0; L.s.forEach((s, i) => { const sung = cur && cur.li === li ? i <= cur.si : (p >= 160 && li === 3); text(s, x2, ly, sung ? K.w : K.m); x2 += tw(s); });
+    // the ball hops from syllable to syllable
+    if (cur) { const k = (p - cur.st) / Math.min(cur.len, 4); const nx = cur.si + 1 < L.s.length ? xs[cur.si + 1] : xs[cur.si]; const bx = k < 1 ? xs[cur.si] + (nx - xs[cur.si]) * Math.max(0, k - 0.5) * 2 * (k > 0.5 ? 1 : 0) : xs[cur.si]; const by = ly - 6 - Math.abs(Math.sin(Math.min(k, 1) * Math.PI)) * 12; circ(bx, by, 2.5, K.y); }
+    else if (p < 32) { const k = p / 32; circ(x0 + 3, ly - 6 - Math.abs(Math.sin(k * Math.PI * 8)) * 12, 2.5, K.y); }
+    if (((S.t * 2) | 0) % 2) ctext('FUOCO PER GIOCARE', 186, K.c);
+  }
+};
+
+// ---------------------------------------------------------------- start: name, account, bank
+function startNewGame() {
+  go('name');
+  ask('COME TI CHIAMI?', n => {
+    S.name = norm(n || 'CUSTODE').replace(/[^A-Z0-9 ']/g, '').slice(0, 12) || 'CUSTODE';
+    ask('HAI UN NUMERO DI CONTO?', a => {
+      if (a === 'SI') ask('SCRIVI IL NUMERO DI CONTO', c => { const m = readCode(c, S.name); if (m === null) { resetGame(10000); BANK.note = 'NUMERO NON VALIDO. LA BANCA TI PRESTA'; } else { resetGame(Math.max(m, 10000)); BANK.note = 'BENTORNATO! IL TUO CONTO RIPARTE DA'; } go('bank'); });
+      else { resetGame(10000); BANK.note = 'LA BANCA TI PRESTA'; go('bank'); }
+    }, ['SI', 'NO']);
+  });
+}
+const NAME = { update() { }, draw() { rect(0, 0, W, H, K.b); ctext('CUSTODI DEL DNA', 20, K.B, 2); } };
+const BANK = {
+  note: '',
+  update() { if (pressed('F') || TAP) go('car'); },
+  draw() {
+    rect(0, 0, W, H, K.b); rect(8, 8, W - 16, H - 16, K.k); rect(10, 10, W - 20, H - 20, K.b);
+    ctext('BANCA DELLA CITTA\'', 20, K.w, 1);
+    ctext('BENVENUTO, ' + S.name + '!', 40, K.y);
+    wrap('LA CITTA\' E\' PIENA DI PREGIUDIZI VAGANTI. VOLANO VERSO LA TORRE DELLO STIGMA E LA CARICANO DI ENERGIA PK. APRI UN LABORATORIO DEI CUSTODI E RIPULISCI LA CITTA\'!', 40).forEach((l, i) => ctext(l, 58 + i * 10, K.B));
+    ctext(BANK.note, 112, K.w); ctext(fmt(S.money), 126, K.y, 2);
+    wrap('PER VINCERE DEVI GUADAGNARE PIU\' DI QUANTO HAI RICEVUTO, PRIMA CHE L\'ENERGIA PK ARRIVI A 9999.', 40).forEach((l, i) => ctext(l, 150 + i * 10, K.l));
+    if (((S.t * 2) | 0) % 2) ctext('FUOCO PER CONTINUARE', 180, K.w);
+  }
+};
+
+// ---------------------------------------------------------------- CAR SELECTION
+const CAR = {
+  sel: 0,
+  enter() { this.sel = 0; },
+  update() {
+    if (pressed('U')) { this.sel = (this.sel + 3) % 4; SFX.blip(); } if (pressed('D')) { this.sel = (this.sel + 1) % 4; SFX.blip(); }
+    let buy = pressed('F');
+    if (TAP) { const i = Math.floor((TAP.y - 36) / 36); if (i >= 0 && i < 4) { if (i === this.sel) buy = true; else { this.sel = i; SFX.blip(); } } }
+    if (buy) { const c = CARS[this.sel]; if (S.money < c.p) { SFX.no(); say('NON HAI ABBASTANZA SOLDI', K.R); } else { pay(-c.p); S.car = c; SFX.buy(); go('shop'); } }
+  },
+  draw() {
+    rect(0, 0, W, H, K.k); ctext('SCEGLI IL VEICOLO', 8, K.w, 1); rtext('CONTO ' + fmt(S.money), 314, 22, K.y); text(S.name, 6, 22, K.B);
+    CARS.forEach((c, i) => { const y = 36 + i * 36, on = i === this.sel; rect(4, y, W - 8, 32, on ? K.b : K.k); if (on) { rect(4, y, W - 8, 1, K.B); rect(4, y + 31, W - 8, 1, K.B); }
+      g.save(); g.translate(30, y + 16); g.rotate(-Math.PI / 2); g.translate(-30, -(y + 16)); drawCar(30, y + 16, c.c, c.len, false); g.restore();
+      text(c.n, 56, y + 4, on ? K.w : K.l); text(fmt(c.p), 56, y + 18, S.money >= c.p ? K.y : K.R); text('VELOCITA\' ' + c.sp, 160, y + 18, K.c); text('POSTI ' + c.cap, 262, y + 18, K.G); });
+    if (S.msgT > 0) ctext(S.msg, 184, S.msgC); else ctext('SU/GIU\' SCEGLI - FUOCO COMPRA', 184, K.m);
+  }
+};
+
+// ---------------------------------------------------------------- EQUIPMENT SHOP
+const SHOP = {
+  sel: 0,
+  enter() { this.sel = 0; },
+  act(i, buy) {
+    if (i === EQ.length) { if (!S.eq.trap) { SFX.no(); say('TI SERVE ALMENO UNA TRAPPOLA!', K.R); return; } SFX.buy(); go('map'); return; }
+    const e = EQ[i];
+    if (buy) { if ((S.eq[e.k] || 0) >= e.m) { SFX.no(); say('NE HAI GIA\' ABBASTANZA', K.R); } else if (slotsUsed() >= S.car.cap) { SFX.no(); say('IL VEICOLO E\' PIENO', K.R); } else if (S.money < e.p) { SFX.no(); say('NON HAI ABBASTANZA SOLDI', K.R); } else { S.eq[e.k]++; pay(-e.p); SFX.buy(); } }
+    else if (S.eq[e.k] > 0) { S.eq[e.k]--; pay(e.p); SFX.blip(); }
+  },
+  update() {
+    const n = EQ.length + 1;
+    if (pressed('U')) { this.sel = (this.sel + n - 1) % n; SFX.blip(); } if (pressed('D')) { this.sel = (this.sel + 1) % n; SFX.blip(); }
+    if (pressed('F') || pressed('R')) this.act(this.sel, true); if (pressed('B') || pressed('L')) this.act(this.sel, false);
+    if (TAP) { const i = Math.floor((TAP.y - 30) / 13); if (i >= 0 && i < n) { if (i < EQ.length && TAP.x > 268 && TAP.x < 284) this.act(i, false); else if (i < EQ.length && TAP.x >= 284) this.act(i, true); else if (i === this.sel) this.act(i, true); else { this.sel = i; SFX.blip(); } } }
+  },
+  draw() {
+    rect(0, 0, W, H, K.k); text('ATTREZZATURA', 6, 6, K.w); rtext(fmt(S.money), 314, 6, K.y);
+    text('SPAZIO ' + slotsUsed() + '/' + S.car.cap, 6, 18, K.G); rtext(S.car.n, 314, 18, K.m);
+    EQ.forEach((e, i) => { const y = 30 + i * 13, on = i === this.sel; if (on) rect(2, y - 2, W - 4, 12, K.b); text(e.n, 6, y, on ? K.w : K.l); rtext(fmt(e.p), 228, y, K.y); text(String(S.eq[e.k] || 0), 240, y, K.G); text('-', 272, y, K.R); text('+', 288, y, K.G); });
+    const y = 30 + EQ.length * 13, on = this.sel === EQ.length; if (on) rect(2, y - 2, W - 4, 12, K.b); text('FINE: VAI IN CITTA\'!', 6, y, on ? K.y : K.c);
+    // the car with its slots filled
+    const cy = 142; rect(6, cy, 150, 30, S.car.c); rect(10, cy + 4, 20, 22, K.c); rect(146, cy - 2, 6, 34, K.k); circ(30, cy + 32, 5, K.k); circ(130, cy + 32, 5, K.k); circ(30, cy + 32, 2, K.m); circ(130, cy + 32, 2, K.m);
+    let k = 0; EQ.forEach(e => { for (let j = 0; j < (S.eq[e.k] || 0); j++) { const sx = 36 + (k % 9) * 12, sy = cy + 4 + ((k / 9) | 0) * 11; rect(sx, sy, 10, 9, [K.y, K.c, K.R, K.o, K.l, K.G, K.p][EQ.indexOf(e)]); rect(sx + 2, sy + 3, 6, 1, K.k); k++; } });
+    for (; k < S.car.cap; k++) { const sx = 36 + (k % 9) * 12, sy = cy + 4 + ((k / 9) | 0) * 11; rect(sx, sy, 10, 9, K.d); }
+    const d = this.sel < EQ.length ? EQ[this.sel].d : 'Quando sei pronto, parti!';
+    wrap(d, 22).slice(0, 4).forEach((l, i) => text(l, 164, 140 + i * 10, K.B));
+    if (S.msgT > 0) ctext(S.msg, 190, S.msgC); else ctext('FUOCO/+ COMPRA   B/- RESTITUISCI', 190, K.m);
+  }
+};
+
+// ---------------------------------------------------------------- CITY MAP
+function nearDoor() { for (const b of BLD) if (Math.hypot(b.door.x - S.cur.x, b.door.y - S.cur.y) < 7 && b.type !== 'tower' || (b.type === 'tower' && Math.hypot(b.door.x - S.cur.x, b.door.y - S.cur.y) < 7)) return b; return null; }
+function routeTo(b) { const d = b.door, c = S.cur, pts = []; const onV = XS.some(v => Math.abs(v - c.x) < 0.6); if (!onV) { if (Math.abs(c.y - d.y) < 0.6) pts.push({ x: d.x, y: d.y }); else { const nx = XS.reduce((a, v) => Math.abs(v - c.x) < Math.abs(a - c.x) ? v : a); pts.push({ x: nx, y: c.y }, { x: nx, y: d.y }, { x: d.x, y: d.y }); } } else pts.push({ x: c.x, y: d.y }, { x: d.x, y: d.y }); S.route = { pts, b }; }
+function moveCursor(dt) {
+  const sp = 58 * dt, c = S.cur; const ox = c.x, oy = c.y;
+  const onH = () => YS.some(v => Math.abs(c.y - v) < 0.6), onV = () => XS.some(v => Math.abs(c.x - v) < 0.6);
+  const dx = (held('R') ? 1 : 0) - (held('L') ? 1 : 0), dy = (held('D') ? 1 : 0) - (held('U') ? 1 : 0);
+  if (dx || dy) S.route = null;
+  if (S.route) { const p = S.route.pts[0]; const ddx = p.x - c.x, ddy = p.y - c.y, d = Math.hypot(ddx, ddy); if (d <= sp) { c.x = p.x; c.y = p.y; S.route.pts.shift(); if (!S.route.pts.length) { const b = S.route.b; S.route = null; enterBuilding(b); } } else { c.x += ddx / d * sp; c.y += ddy / d * sp; } }
+  else if (dx || dy) {
+    if (dx && onH()) c.x = clamp(c.x + dx * sp, XS[0], XS[5]);
+    else if (dy && onV()) c.y = clamp(c.y + dy * sp, YS[0], YS[3]);
+    else if (dx && onV()) { const ty = YS.reduce((a, v) => Math.abs(v - c.y) < Math.abs(a - c.y) ? v : a); c.y += Math.sign(ty - c.y) * Math.min(sp, Math.abs(ty - c.y)); }
+    else if (dy && onH()) { const tx = XS.reduce((a, v) => Math.abs(v - c.x) < Math.abs(a - c.x) ? v : a); c.x += Math.sign(tx - c.x) * Math.min(sp, Math.abs(tx - c.x)); }
+  }
+  const m = Math.hypot(c.x - ox, c.y - oy); S.dist += m;
+  // passing through a wandering pregiudizio: it will show up on the road
+  if (m > 0) S.roamers.forEach(r => { if (!r.gone && Math.hypot(r.x - c.x, r.y - c.y) < 7) { r.gone = true; S.onRoad++; SFX.zap(); say('PREGIUDIZIO SULLA STRADA! ' + (S.eq.vac ? 'ASPIRALO GUIDANDO' : 'SERVE L\'ASPIRATORE'), K.G, 2.5); } });
+}
+function enterBuilding(b) {
+  if (b.type === 'tower') { if (!S.open) { say('LA TORRE DELLO STIGMA E\' CHIUSA... PER ORA', K.R); return; } startDrive('tower'); return; }
+  if (b.type === 'lab') { startDrive('lab'); return; }
+  if (S.destroyed.has(b.id)) { say('QUI IL GIGANTE HA DISTRUTTO TUTTO', K.R); return; }
+  if (!S.haunted.has(b.id)) { say('QUI E\' TUTTO TRANQUILLO', K.l); return; }
+  if (!S.eq.trap) { say('NON HAI TRAPPOLE!', K.R); return; }
+  if (!S.eq.cont && S.filled >= S.eq.trap) { say('TRAPPOLE PIENE: TORNA AL LABORATORIO', K.R); return; }
+  startDrive('bust', b);
+}
+function worldTick(dt) { // the city keeps living while you are on the map
+  if (S.open) return;
+  S.pk = Math.min(9999, S.pk + dt * 3.2);
+  // new hauntings (with the detector the building flashes before)
+  S.hauntT -= dt; if (S.hauntT <= 0) { S.hauntT = rnd(8, 13); const free = BLD.filter(b => b.type === 'bld' && !S.haunted.has(b.id) && !S.destroyed.has(b.id) && !S.pending.some(p => p.b === b)); if (free.length && S.haunted.size + S.pending.length < 4) S.pending.push({ b: pick(free), t: 6 }); }
+  S.pending.forEach(p => { p.t -= dt; if (p.t <= 0) { S.haunted.add(p.b.id); SFX.zap(); } }); S.pending = S.pending.filter(p => p.t > 0);
+  // wandering pregiudizi drift toward the Tower
+  S.roamT -= dt; if (S.roamT <= 0) { S.roamT = rnd(5, 8.5); const e = (Math.random() * 4) | 0; const x = e === 0 ? 4 : e === 1 ? 316 : rnd(10, 310), y = e === 2 ? 2 : e === 3 ? 146 : rnd(8, 140); S.roamers.push({ x, y, ph: rnd(0, 6), sp: rnd(6, 9), tried: new Set() }); }
+  const tx = 160, ty = 74;
+  S.roamers.forEach(r => { if (r.gone) return; const dx = tx - r.x, dy = ty - r.y, d = Math.hypot(dx, dy); r.x += (dx / d * r.sp + Math.cos(S.t * 1.7 + r.ph) * 4) * dt; r.y += (dy / d * r.sp + Math.sin(S.t * 2.1 + r.ph) * 4) * dt;
+    if (d < 8) { r.gone = true; S.pk = Math.min(9999, S.pk + 150); S.flash = 0.5; }
+    const b = BLD.find(b => b.type === 'bld' && r.x > b.x0 && r.x < b.x1 && r.y > b.y0 && r.y < b.y1); if (b && !r.tried.has(b.id)) { r.tried.add(b.id); if (!S.haunted.has(b.id) && !S.destroyed.has(b.id) && S.haunted.size < 4 && Math.random() < 0.3) { r.gone = true; S.haunted.add(b.id); } } });
+  S.roamers = S.roamers.filter(r => !r.gone);
+  // the Giant of Labels
+  if (S.pk > 1500 && !S.alarm && !S.giantFx) { S.giantT -= dt; if (S.giantT <= 0) { S.alarm = { t: S.eq.sen ? 9 : 4, warn: !!S.eq.sen }; if (S.eq.sen) say('SENSORE: STA ARRIVANDO IL GIGANTE!', K.c, 4); else { SFX.alarm(); say('ALLARME GIGANTE! PREMI B (ESCA)!', K.R, 4); } } }
+  if (S.alarm) { const a = S.alarm; a.t -= dt; if (a.warn && a.t <= 4) { a.warn = false; SFX.alarm(); say('ALLARME GIGANTE! PREMI B (ESCA)!', K.R, 4); }
+    if (pressed('B')) { if (S.eq.bait > 0) { S.eq.bait--; S.alarm = null; S.giantFx = { t: 0, bait: true, x: 160, y: 96 }; pay(1500); SFX.cash(); say('ESCA! IL GIGANTE SI E\' FERMATO: +€1.500', K.G, 4); S.giantT = rnd(55, 85); } else { SFX.no(); say('NON HAI ESCHE!', K.R); } }
+    else if (a.t <= 0) { S.alarm = null; const live = BLD.filter(b => b.type === 'bld' && !S.destroyed.has(b.id)); const b = pick(live); S.giantFx = { t: 0, bait: false, x: (b.x0 + b.x1) / 2, y: b.y1, b }; S.giantT = rnd(55, 85); } }
+  if (S.giantFx) { const f = S.giantFx; f.t += dt; if (!f.bait && !f.done && f.t > 1.4) { f.done = true; SFX.thump(); S.destroyed.add(f.b.id); S.haunted.delete(f.b.id); pay(-4000); say('IL GIGANTE HA SCHIACCIATO UN PALAZZO: -€4.000', K.R, 4); } if (f.t > 2.6) S.giantFx = null; }
+  if (S.pk >= 9999 && !S.open) openTower();
+  if (S.money < 0) endGame('broke');
+}
+function openTower() { S.open = true; S.pk = 9999; S.roamers = []; S.haunted.clear(); S.pending = []; S.alarm = null; SFX.boom(); say('LA TORRE DELLO STIGMA SI E\' APERTA! CORRI ALLA TORRE!', K.R, 99); }
+const MAP = {
+  enter() { musicVol(MUTE ? 0 : 0.45); },
+  update(dt) {
+    worldTick(dt); if (S.mode !== 'map') return; moveCursor(dt); if (S.mode !== 'map') return;
+    if (pressed('F')) { const b = nearDoor(); if (b) enterBuilding(b); }
+    if (TAP && TAP.y < 148) { const b = BLD.find(b => TAP.x > b.x0 - 4 && TAP.x < b.x1 + 4 && TAP.y > b.y0 - 4 && TAP.y < b.y1 + 4); if (b) routeTo(b); }
+    if (S.flash > 0) S.flash -= dt;
+  },
+  draw() {
+    rect(0, 0, W, 150, K.g);
+    // streets
+    XS.forEach(x => rect(x - 3, YS[0] - 3, 7, YS[3] - YS[0] + 7, K.m)); YS.forEach(y => rect(XS[0] - 3, y - 3, XS[5] - XS[0] + 7, 7, K.m));
+    XS.forEach(x => { for (let y = YS[0]; y < YS[3]; y += 6) rect(x, y, 1, 3, K.l); }); YS.forEach(y => { for (let x = XS[0]; x < XS[5]; x += 6) rect(x, y, 3, 1, K.l); });
+    const hv = nearDoor();
+    BLD.forEach(b => drawBlock(b, b === hv));
+    S.roamers.forEach(r => drawRoamer(r.x, r.y, S.t + r.ph));
+    // the Giant on the map
+    if (S.giantFx) { const f = S.giantFx; const k = f.t; const jump = Math.abs(Math.sin(k * 3.2)) * 10 * (k < 1.4 || f.bait ? 1 : 0); const sc = f.bait ? Math.max(0, 0.42 - Math.max(0, k - 1) * 0.3) : 0.42; if (sc > 0) drawGiant(f.x, f.y - jump, sc, S.t); if (f.bait && k > 1) for (let i = 0; i < 10; i++) rect(f.x + Math.cos(i + k * 5) * k * 12, f.y - 20 + Math.sin(i * 2 + k * 5) * k * 10, 2, 2, [K.y, K.R, K.c][i % 3]); }
+    if (S.open) drawGiant(176, 90 - Math.abs(Math.sin(S.t * 3)) * 6, 0.32, S.t);
+    // the cursor (the Custodi badge)
+    const c = S.cur; const bl = ((S.t * 6) | 0) % 2; circ(c.x, c.y, 4, bl ? K.w : K.y); circ(c.x, c.y, 2, K.b); rect(c.x - 1, c.y - 3, 1, 7, K.R); rect(c.x + 1, c.y - 3, 1, 7, K.c);
+    if (S.route) S.route.pts.forEach(p => rect(p.x - 1, p.y - 1, 3, 3, K.y));
+    if (S.alarm && !S.alarm.warn && ((S.t * 8) | 0) % 2) { rect(0, 0, W, 3, K.R); rect(0, 147, W, 3, K.R); setBorder(K.r); } else setBorder(S.flash > 0 && ((S.t * 10) | 0) % 2 ? K.p : K.k);
+    drawStatus(hv);
+  }
+};
+function drawBlock(b, hl) {
+  const { x0, y0, x1, y1 } = b; const w = x1 - x0, h = y1 - y0;
+  if (b.type === 'tower') { rect(x0, y0, w, h, K.k); const fl = S.open ? (((S.t * 8) | 0) % 2 ? K.R : K.p) : K.p; rect(x0 + w / 2 - 8, y0 + 6, 16, h - 6, fl); rect(x0 + w / 2 - 12, y0 + 10, 24, 4, fl); rect(x0 + w / 2 - 3, y0, 6, 6, K.R); circ(x0 + w / 2, y0 + 2, 2 + (S.t * 4 % 2), S.flash > 0 ? K.w : K.R); rect(x0 + w / 2 - 3, y1 - 8, 6, 8, K.k); return; }
+  if (b.type === 'lab') { rect(x0, y0, w, h, K.w); rect(x0, y0, w, 6, K.r); rect(x0 + w / 2 - 4, y1 - 10, 8, 10, K.r); for (let i = 0; i < 4; i++) rect(x0 + 5 + i * 12, y0 + 10, 7, 6, K.c); text('LAB', x0 + w / 2 - 10, y0 + 19, K.b); if (hl) { rect(x0 - 2, y0 - 2, w + 4, 1, K.y); rect(x0 - 2, y1 + 1, w + 4, 1, K.y); } return; }
+  if (S.destroyed.has(b.id)) { for (let i = 0; i < 7; i++) rect(x0 + 4 + i * 7, y1 - 4 - ((i * 5) % 9), 8, 4 + ((i * 5) % 9), i % 2 ? K.m : K.d); return; }
+  const haunted = S.haunted.has(b.id), pend = S.eq.det && S.pending.some(p => p.b === b);
+  const [c1, c2] = b.col; const bh = Math.min(h, 12 + b.floors * 7); const by = y1 - bh;
+  rect(x0 + 6, by, w - 12, bh, c1); rect(x0 + 6, by, w - 12, 2, c2);
+  const lit = haunted && ((S.t * 6) | 0) % 2 ? K.R : pend && ((S.t * 4) | 0) % 2 ? K.y : K.k;
+  for (let yy = by + 5; yy < y1 - 3; yy += 7) for (let xx = x0 + 10; xx < x1 - 10; xx += 7) rect(xx, yy, 3, 4, haunted ? lit : (xx + yy + b.id) % 3 ? K.y : K.k);
+  rect(x0 + w / 2 - 2, y1 - 5, 5, 5, K.k);
+  if (haunted) drawRoamer(x0 + w / 2, by - 5 + Math.sin(S.t * 4 + b.id) * 2, S.t);
+  if (pend) { rect(x0 + 2, y0 + 1, 3, 3, K.y); }
+  if (hl) { rect(x0 - 2, y0 - 2, w + 4, 1, K.y); rect(x0 - 2, y1 + 1, w + 4, 1, K.y); }
+}
+function drawStatus(hv) {
+  rect(0, 150, W, 50, K.k); rect(0, 150, W, 1, K.B);
+  text('CONTO ' + fmt(S.money), 4, 154, K.w); const pk = 'PK ' + String(Math.floor(S.pk)).padStart(4, '0'); rtext(pk, 316, 154, S.pk > 8000 && ((S.t * 4) | 0) % 2 ? K.R : K.y);
+  rect(200, 164, 116, 5, K.d); rect(200, 164, 116 * S.pk / 9999, 5, S.pk > 8000 ? K.R : K.y);
+  text('TRAPPOLE ' + S.filled + '/' + S.eq.trap + (S.eq.cont ? '+C' : '') + '  ESCHE ' + S.eq.bait, 4, 164, K.l);
+  text('BENZINA', 4, 174, K.l); rect(58, 175, 60, 5, K.d); rect(58, 175, 60 * S.fuel / 100, 5, S.fuel < 25 ? K.R : K.G);
+  text((S.eq.vac ? 'ASP ' : '') + (S.eq.det ? 'RIL ' : '') + (S.eq.vis ? 'VIS ' : '') + (S.eq.sen ? 'SEN' : ''), 200, 174, K.c);
+  if (S.msgT > 0) ctext(S.msg.length > 45 ? S.msg.slice(0, 45) : S.msg, 188, S.msgC);
+  else if (hv) ctext(hv.type === 'lab' ? 'FUOCO: ENTRA NEL LABORATORIO' : hv.type === 'tower' ? 'FUOCO: VAI ALLA TORRE' : S.haunted.has(hv.id) ? 'FUOCO: CATTURA IL PREGIUDIZIO!' : 'NESSUN PREGIUDIZIO QUI', 188, K.y);
+  else ctext('VAI AI PALAZZI CHE LAMPEGGIANO IN ROSSO', 188, K.m);
+}
+
+// ---------------------------------------------------------------- DRIVING
+const DRV = { };
+function startDrive(dest, b) {
+  const dist = Math.max(30, S.dist); S.dist = 0;
+  const cost = 2 + dist * 0.11;
+  Object.assign(DRV, { dest, b, t: 0, T: clamp(2.5 + dist / S.car.sp * 3.2, 3.5, 13), x: 160, scroll: 0, traffic: [], ghosts: [], toSpawn: S.onRoad, spawnAt: [], fx: [], shake: 0, out: false, cost });
+  for (let i = 0; i < S.onRoad; i++) DRV.spawnAt.push(rnd(0.6, DRV.T - 2.2));
+  S.onRoad = 0; if (S.msgT > 5) S.msgT = 0;
+  if (S.fuel - cost < 0) { DRV.out = true; }
+  go('drive');
+}
+const DRIVE = {
+  enter() { },
+  update(dt) {
+    const D = DRV; D.t += dt; const v = 70 + S.car.sp * 0.9; D.scroll += v * dt;
+    if (held('L')) D.x -= 85 * dt; if (held('R')) D.x += 85 * dt; D.x = clamp(D.x, 108, 212);
+    // traffic
+    if (Math.random() < dt * 0.7) D.traffic.push({ x: pick([124, 160, 196]), y: -20, v: rnd(0.3, 0.6) * v, c: pick([K.r, K.p, K.n, K.G, K.c, K.d]) });
+    D.traffic.forEach(c => { c.y += (v - c.v) * dt; if (!c.hit && Math.abs(c.x - D.x) < 12 && Math.abs(c.y - 160) < 18) { c.hit = true; D.shake = 0.4; pay(-50); SFX.crash(); say('BOTTA! -€50', K.R, 1.5); } });
+    D.traffic = D.traffic.filter(c => c.y < 230);
+    // pregiudizi on the road
+    D.spawnAt = D.spawnAt.filter(s => { if (D.t >= s) { D.ghosts.push({ x: rnd(115, 205), y: -10, ph: rnd(0, 6) }); return false; } return true; });
+    const vac = S.eq.vac && held('F');
+    D.ghosts.forEach(gh => { if (gh.caught) return; if (gh.suck) { gh.x += (D.x - gh.x) * dt * 6; gh.y += (156 - gh.y) * dt * 6; if (Math.abs(gh.y - 156) < 4) { gh.caught = true; S.vacuumed++; pay(300); SFX.cash(); say('ASPIRATO! +€300', K.G, 1.6); } return; }
+      gh.y += 32 * dt; gh.x += Math.sin(D.t * 2 + gh.ph) * 30 * dt; gh.x = clamp(gh.x, 110, 210);
+      if (vac && Math.abs(gh.x - D.x) < 16 && gh.y > 70 && gh.y < 150) { gh.suck = true; } });
+    if (vac && Math.random() < dt * 10) SFX.vac();
+    if (pressed('F') && !S.eq.vac && D.ghosts.some(gh => !gh.caught && gh.y > 0)) say('NON HAI L\'ASPIRATORE', K.R, 1.5);
+    D.ghosts = D.ghosts.filter(gh => { if (!gh.caught && gh.y > 210) { S.pk = Math.min(9999, S.pk + 150); return false; } return !gh.caught; });
+    if (D.shake > 0) D.shake -= dt;
+    if (D.out && D.t > D.T * 0.6) { // ran out of fuel
+      S.fuel = 100; pay(-400); say('BENZINA FINITA! CARRO ATTREZZI: -€400', K.R, 4); S.cur = { x: LABB.door.x, y: LABB.door.y }; go('map'); return; }
+    if (D.t >= D.T) { S.fuel = Math.max(0, S.fuel - D.cost); D.ghosts.forEach(() => S.pk = Math.min(9999, S.pk + 150)); arrive(D.dest, D.b); }
+  },
+  draw() {
+    const D = DRV; const sh = D.shake > 0 ? rnd(-2, 2) : 0; g.save(); g.translate(sh, 0);
+    rect(-4, 0, W + 8, H, K.g);
+    // sidewalks, trees, houses scrolling
+    rect(96, 0, 6, H, K.l); rect(218, 0, 6, H, K.l); rect(102, 0, 116, H, K.d);
+    for (let i = -1; i < 8; i++) { const y = ((i * 32 + D.scroll * 1) % 256) - 32; rect(141, y, 2, 14, K.w); rect(177, y, 2, 14, K.w); }
+    for (let i = -1; i < 6; i++) { const y = ((i * 46 + D.scroll) % 276) - 46; circ(84, y + 10, 7, K.G); circ(84, y + 10, 4, K.g); circ(236, y + 30, 7, K.G); circ(236, y + 30, 4, K.g); rect(20, y, 44, 34, BCOL[(i + 7) % 7][0]); rect(256, y + 12, 50, 30, BCOL[(i + 3) % 7][0]); for (let k = 0; k < 3; k++) { rect(26 + k * 13, y + 6, 6, 6, K.y); rect(262 + k * 15, y + 18, 6, 6, K.y); } }
+    D.traffic.forEach(c => { g.save(); g.translate(c.x, c.y); g.rotate(Math.PI); g.translate(-c.x, -c.y); drawCar(c.x, c.y, c.c, 18, false); g.restore(); });
+    // vacuum beam
+    if (S.eq.vac && held('F')) { for (let i = 0; i < 6; i++) { const yy = 150 - i * 12; const ww = 3 + i * 3; rect(D.x - ww / 2 + rnd(-1, 1), yy, ww, 2, i % 2 ? K.c : K.w); } }
+    D.ghosts.forEach(gh => drawGhost(gh.x, gh.y, S.t + gh.ph, gh.suck ? 0.6 : 1));
+    drawCar(D.x, 160, S.car.c, S.car.len, S.eq.vac && held('F') && ((S.t * 10) | 0) % 2);
+    g.restore();
+    rect(0, 0, W, 11, K.k); text(fmt(S.money), 4, 2, K.w); rtext('PK ' + Math.floor(S.pk), 316, 2, K.y);
+    const dn = D.dest === 'lab' ? 'LABORATORIO' : D.dest === 'tower' ? 'TORRE DELLO STIGMA' : 'PALAZZO STREGATO'; ctext(dn, 2, K.c);
+    rect(4, 192, 312 * Math.min(1, D.t / D.T), 3, K.y);
+    if (S.msgT > 0) ctext(S.msg, 180, S.msgC); else if (D.ghosts.length) ctext(S.eq.vac ? 'TIENI PREMUTO FUOCO SOTTO IL PREGIUDIZIO' : 'SENZA ASPIRATORE NON PUOI PRENDERLO', 180, K.y);
+  }
+};
+function arrive(dest, b) { if (dest === 'lab') { S.cur = { x: LABB.door.x, y: LABB.door.y }; go('lab'); } else if (dest === 'tower') { S.cur = { x: TOWERB.door.x, y: TOWERB.door.y }; if (S.money <= S.start) endGame('noprofit'); else go('tower'); } else { BUST.b = b; go('bust'); } }
+
+// ---------------------------------------------------------------- LAB (empty traps, refuel)
+const LAB_ = {
+  enter() { const n = S.filled; S.stored += n; S.filled = 0; const fuelCost = Math.round((100 - S.fuel) * 4); S.fuel = 100; pay(-fuelCost); this.n = n; this.fc = fuelCost; SFX.door(); },
+  update() { if (pressed('F') || TAP) go('map'); },
+  draw() {
+    rect(0, 0, W, H, K.w); rect(0, 0, W, 30, K.r); ctext('LABORATORIO DEI CUSTODI', 11, K.w, 1, K.k);
+    // Prof K (a dog with glasses) and the bee Riff
+    const px = 60, py = 110; circ(px, py, 22, K.o); circ(px - 18, py - 14, 8, K.n); circ(px + 18, py - 14, 8, K.n); circ(px - 8, py - 4, 6, K.w); circ(px + 8, py - 4, 6, K.w); circ(px - 8, py - 4, 3, K.k); circ(px + 8, py - 4, 3, K.k); line(px - 2, py - 4, px + 2, py - 4, K.k); circ(px, py + 8, 4, K.k); rect(px - 4, py + 14, 8, 2, K.k); rect(px - 26, py + 22, 52, 30, K.w); rect(px - 26, py + 22, 52, 2, K.l); text('PROF K', px - 21, py + 34, K.b);
+    const rx = 112 + Math.sin(S.t * 3) * 6, ry = 70 + Math.cos(S.t * 5) * 4; circ(rx, ry, 5, K.y); rect(rx - 3, ry - 1, 6, 2, K.k); circ(rx - 3, ry - 7, 3, K.c); circ(rx + 3, ry - 7, 3, K.c);
+    // the containment unit, full of captured pregiudizi
+    rect(236, 50, 60, 110, K.m); rect(242, 58, 48, 70, K.k); for (let i = 0; i < Math.min(12, S.stored); i++) drawRoamer(250 + (i % 4) * 11, 120 - ((i / 4) | 0) * 14 - Math.sin(S.t * 3 + i) * 2, S.t + i); rect(240, 132, 52, 8, K.R); text(String(S.stored), 252, 146, K.k);
+    const lines = (this.n ? 'OTTIMO LAVORO! ' + this.n + ' PREGIUDIZI MESSI AL SICURO NEL CONTENITORE.' : 'NIENTE DA SVUOTARE. LE TRAPPOLE SONO VUOTE.') + ' ' + (this.fc ? 'PIENO DI BENZINA: -€' + this.fc + '.' : '');
+    wrap('PROF K: ' + lines, 18).forEach((l, i) => text(l, 104, 96 + i * 10, K.b));
+    if (S.pk > 6000) text('RIFF: BZZ! LA TORRE E\' CARICA!', 6, 168, K.r);
+    rtext(fmt(S.money), 316, 186, K.b); if (((S.t * 2) | 0) % 2) text('FUOCO: TORNA IN CITTA\'', 6, 186, K.r);
+  }
+};
+
+// ---------------------------------------------------------------- BUSTING (two rays and the trap)
+const GY = 178;
+const BUST = {
+  b: null,
+  enter() { const p = pick(PREJ); Object.assign(this, { ph: 'trap', trapX: 160, b1: 30, b2: 290, gx: 160, gy: 60, vx: 0, vy: 0, t: 0, tb: 0, res: null, resT: 0, prej: p, walk: 0, trapOpen: 0, slimed: -1, kick: 0 }); musicVol(MUTE ? 0 : 0.18); },
+  update(dt) {
+    const B = this; B.t += dt; B.walk += dt;
+    if (B.res) { B.resT += dt; if (B.resT > 3 && (pressed('F') || TAP || B.resT > 6)) { go('map'); } return; }
+    const mv = (held('R') ? 1 : 0) - (held('L') ? 1 : 0);
+    if (B.ph === 'trap' || B.ph === 'b1' || B.ph === 'b2') { // ghost wanders around the facade
+      B.gx += Math.cos(B.t * 0.9) * 50 * dt + Math.sin(B.t * 2.3) * 20 * dt; B.gy = 62 + Math.sin(B.t * 1.4) * 30; B.gx = clamp(B.gx, 40, 280);
+    }
+    if (B.ph === 'trap') { B.trapX = clamp(B.trapX + mv * 70 * dt, 30, 290); if (pressed('F')) { B.ph = 'b1'; SFX.blip(); } }
+    else if (B.ph === 'b1') { B.b1 = clamp(B.b1 + mv * 60 * dt, 10, 310); if (pressed('F')) { B.ph = 'b2'; SFX.blip(); } }
+    else if (B.ph === 'b2') { B.b2 = clamp(B.b2 + mv * 60 * dt, 10, 310); if (pressed('F')) { if (B.b2 - B.b1 < 22) { this.fail('MAI INCROCIARE I RAGGI!', true); SFX.boom(); return; } B.ph = 'beam'; B.tb = 0; SFX.zap(); } }
+    else if (B.ph === 'beam') {
+      B.tb += dt; const sp = B.b2 - B.b1; let nb1 = clamp(B.b1 + mv * 55 * dt, 10, 310 - sp); B.b1 = nb1; B.b2 = nb1 + sp;
+      const tx = (B.b1 + B.b2) / 2, ty = GY - 26;
+      B.kick -= dt; if (B.kick <= 0) { B.kick = rnd(0.35, 0.8); B.vx += rnd(-42, 42); B.vy += rnd(-40, 10); }
+      B.vx += (tx - B.gx) * 2.6 * dt; B.vy += (ty - B.gy) * 1.6 * dt; B.vx *= Math.pow(0.35, dt); B.vy *= Math.pow(0.4, dt);
+      B.gx += B.vx * dt; B.gy += B.vy * dt; B.gx = clamp(B.gx, 8, 312); B.gy = clamp(B.gy, 20, GY - 10);
+      if (Math.random() < dt * 14) SFX.zap();
+      for (const [i, bx] of [[0, B.b1], [1, B.b2]]) if (Math.abs(B.gx - bx) < 7 && B.gy > GY - 24) { B.slimed = i; SFX.slime(); this.fail(TEAM[i].n + ' E\' STATO IMPIASTRICCIATO!'); return; }
+      if (pressed('F')) { B.trapOpen = 1; SFX.trap(); if (Math.abs(B.gx - B.trapX) < 14 && B.gy > GY - 48) { B.ph = 'suck'; B.ts = 0; } else { this.fail('TRAPPOLA VUOTA: IL PREGIUDIZIO E\' SCAPPATO'); } }
+      if (B.tb > 25) this.fail('TROPPO TEMPO: IL PREGIUDIZIO E\' SCAPPATO');
+    }
+    else if (B.ph === 'suck') { B.ts += dt; B.gx += (B.trapX - B.gx) * dt * 5; B.gy += (GY - 4 - B.gy) * dt * 3; if (B.ts > 1.1) { const pay_ = Math.round((500 + S.pk / 12) / 10) * 10; pay(pay_); S.caught++; if (!S.eq.cont) S.filled++; else S.stored++; S.haunted.delete(B.b.id); B.res = { ok: true, msg: 'PREGIUDIZIO CATTURATO! +' + fmt(pay_) }; SFX.capture(); B.trapOpen = 0; } }
+    if (B.trapOpen > 0) B.trapOpen = Math.max(0, B.trapOpen - dt);
+  },
+  fail(m, boom) { this.res = { ok: false, msg: m, boom }; this.ph = 'fail'; S.haunted.delete(this.b.id); S.pk = Math.min(9999, S.pk + 100); },
+  draw() {
+    const B = this, bc = B.b ? B.b.col : [K.r, K.R];
+    // facade
+    rect(0, 0, W, GY, bc[0]); for (let y = 4; y < GY; y += 6) for (let x = ((y / 6) | 0) % 2 ? 0 : 6; x < W; x += 12) rect(x, y, 11, 1, K.k);
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) { const x = 14 + c * 52, y = 10 + r * 38; rect(x - 2, y - 2, 28, 26, bc[1]); rect(x, y, 24, 22, (r + c + ((S.t * 2) | 0)) % 7 === 0 ? K.y : K.k); rect(x + 11, y, 2, 22, bc[1]); }
+    rect(140, GY - 40, 40, 40, K.k); rect(144, GY - 36, 32, 36, K.n); rect(0, GY, W, H - GY, K.m); rect(0, GY, W, 2, K.l);
+    // trap
+    const tx = B.trapX; rect(tx - 7, GY - 3, 14, 5, K.d); rect(tx - 7, GY - 3, 14, 1, K.y); rect(tx - 5, GY, 2, 2, K.y); rect(tx + 3, GY, 2, 2, K.y);
+    if (B.trapOpen > 0 || B.ph === 'suck') { const hh = B.ph === 'suck' ? 120 : 60 * B.trapOpen; for (let i = 0; i < 8; i++) rect(tx - 8 + i * 2, GY - 3 - hh, 1, hh, i % 2 ? K.w : K.c); }
+    if (B.ph === 'trap') { rect(tx - 1, GY - 14, 3, 8, K.y); rect(tx - 3, GY - 9, 7, 2, K.y); }
+    // busters
+    const fr = held('L') || held('R') ? 1 + (((B.walk * 6) | 0) % 2) : 0;
+    const showB1 = B.ph !== 'trap', showB2 = showB1 && B.ph !== 'b1';
+    if (showB1) drawBuster(0, B.b1, GY, B.ph === 'b1' ? fr : 0, false, B.slimed === 0);
+    if (showB2) drawBuster(1, B.b2, GY, B.ph === 'b2' || B.ph === 'beam' ? fr : 0, true, B.slimed === 1);
+    // rays
+    if (B.ph === 'beam' || B.ph === 'suck') { [[B.b1 + 5, 0], [B.b2 - 5, 1]].forEach(([x, k]) => { const x0 = x, y0 = GY - 11; const n = 9; let px = x0, py = y0; for (let i = 1; i <= n; i++) { const t = i / n; const nx = x0 + (B.gx - x0) * t + (i < n ? rnd(-4, 4) : 0), ny = y0 + (B.gy - y0) * t + (i < n ? rnd(-4, 4) : 0); line(px, py, nx, ny, [K.y, K.R, K.w, K.o][(i + k + ((S.t * 20) | 0)) % 4]); px = nx; py = ny; } }); }
+    // the pregiudizio
+    if (B.ph === 'suck') { const s = Math.max(0.1, 1 - B.ts); drawGhost(B.gx, B.gy, S.t, s); }
+    else if (B.ph !== 'fail' || !B.res) drawGhost(B.gx, B.gy, S.t, 1, !S.eq.vis);
+    if (B.res && !B.res.ok && !B.res.boom && B.slimed < 0) drawGhost(B.gx, B.gy - B.resT * 60, S.t, 1);
+    if (B.res && B.res.boom && B.resT < 0.6) { rect(0, 0, W, H, ((B.resT * 20) | 0) % 2 ? K.w : K.R); }
+    if (B.slimed >= 0 && B.res) for (let i = 0; i < 8; i++) rect((B.slimed ? B.b2 : B.b1) - 6 + i * 1.6, GY - 20 + ((B.resT * 30 + i * 7) % 18), 2, 3, K.G);
+    // texts
+    rect(0, 188, W, 12, K.k);
+    const tips = { trap: 'METTI LA TRAPPOLA E PREMI FUOCO', b1: 'POSIZIONA SUPER K E PREMI FUOCO', b2: 'POSIZIONA SUPER X E PREMI FUOCO', beam: 'PORTALO SULLA TRAPPOLA: FUOCO LA APRE', suck: 'DENTRO!' };
+    if (B.res) { rect(20, 70, 280, 50, K.k); rect(22, 72, 276, 46, B.res.ok ? K.b : K.r); ctext(B.res.msg, 80, K.w); if (B.res.ok) ctext('"' + B.prej + '"', 94, K.y); else ctext('IL PREGIUDIZIO VOLA VERSO LA TORRE', 94, K.l); if (B.resT > 3 && ((S.t * 2) | 0) % 2) ctext('FUOCO', 106, K.c); }
+    else ctext(tips[B.ph] || '', 190, K.y);
+    if (B.ph === 'beam') { rect(0, 0, W, 10, K.k); text('PREGIUDIZIO: "' + B.prej + '"', 4, 1, K.l); rtext(String(Math.max(0, Math.ceil(25 - B.tb))), 316, 1, K.y); }
+  }
+};
+
+// ---------------------------------------------------------------- THE TOWER (sneak in under the Giant)
+const TOWER_ = {
+  enter() { S.msgT = 0; Object.assign(this, { t: 0, i: 0, x: 8, inside: 0, lost: [], squash: 0, gx: 160, prevS: 0, done: null, dT: 0, parts: [], walk: 0 }); musicVol(MUTE ? 0 : 0.25); },
+  update(dt) {
+    const T = this; T.t += dt;
+    if (T.done) { T.dT += dt; T.parts.forEach(p => { p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 30 * dt; }); if (T.dT > 5 && (pressed('F') || TAP || T.dT > 9)) endGame(T.done); return; }
+    T.gx = 160 + Math.sin(T.t * 0.8) * 78; const s = Math.sin(T.t * 2.6); T.jump = Math.abs(s) * 48;
+    if (Math.sign(s) !== Math.sign(T.prevS) && T.t > 0.2) { SFX.thump(); T.shake = 0.25; if (T.i < 3 && Math.abs(T.x - T.gx) < 22 && !T.squash) { T.squash = 1; T.lost.push(T.i); say(TEAM[T.i].n + ' E\' STATO SCHIACCIATO!', K.R, 2.5); SFX.slime(); } }
+    T.prevS = s; if (T.shake > 0) T.shake -= dt;
+    if (T.squash) { T.squash += dt; if (T.squash > 1.6) { T.squash = 0; this.next(); } return; }
+    if (T.i < 3) { const mv = (held('R') ? 1 : 0) - (held('L') ? 1 : 0); T.x = clamp(T.x + mv * 48 * dt, 6, 160); if (mv) T.walk += dt; if (T.x >= 158) { T.inside++; SFX.door(); say(TEAM[T.i].n + ' E\' ENTRATO NELLA TORRE!', K.G, 2.5); this.next(); } }
+  },
+  next() { const T = this; T.i++; T.x = 8; if (T.inside >= 2) { T.done = 'win'; T.dT = 0; SFX.win(); for (let i = 0; i < 70; i++) T.parts.push({ x: T.gx + rnd(-20, 20), y: 100 + rnd(-30, 30), vx: rnd(-60, 60), vy: rnd(-70, -10), c: pick([K.y, K.R, K.c, K.G, K.B, K.o]) }); } else if (T.i >= 3) { T.done = 'lose'; T.dT = 0; SFX.no(); } },
+  draw() {
+    const T = this; const sh = T.shake > 0 ? rnd(-2, 2) : 0; g.save(); g.translate(0, sh);
+    rect(0, -4, W, H + 8, K.k); for (let i = 0; i < 50; i++) rect((i * 97) % W, (i * 31) % 90, 1, 1, i % 4 ? K.m : K.w);
+    rect(0, 40, 90, 140, K.b); rect(230, 30, 90, 150, K.b); for (let y = 48; y < 170; y += 12) for (let x = 8; x < 84; x += 14) { rect(x, y, 6, 7, (x + y) % 3 ? K.y : K.k); rect(x + 230, y - 6, 6, 7, (x * y) % 4 ? K.y : K.k); }
+    // the tower
+    const glow = T.done === 'win' ? (((T.dT * 10) | 0) % 2 ? K.w : K.y) : (((S.t * 3) | 0) % 2 ? K.p : K.R);
+    rect(120, 20, 80, 160, K.p); rect(112, 14, 96, 8, K.p); rect(146, 0, 28, 14, glow); for (let y = 30; y < 140; y += 18) { rect(132, y, 10, 12, K.R); rect(178, y, 10, 12, K.R); }
+    rect(148, 140, 24, 40, T.done === 'win' ? K.k : glow); rect(144, 136, 32, 4, K.l); for (let i = 0; i < 3; i++) rect(138 - i * 6, 172 + i * 3, 44 + i * 12, 3, K.l);
+    rect(0, 180, W, 20, K.m); rect(0, 180, W, 1, K.l);
+    if (T.done === 'win') { const k = Math.min(1, T.dT / 1.5); [[100, 180], [220, 180]].forEach(([x, y], j) => { for (let i = 0; i < 12; i++) { const t = i / 12 * k; line(x + (160 - x) * t + rnd(-3, 3), y + (8 - y) * t + rnd(-3, 3), x + (160 - x) * (t + 1 / 12 * k), y + (8 - y) * (t + 1 / 12 * k), [K.y, K.R, K.w][(i + j) % 3]); } }); drawBuster(0, 100, 180, 0, false); drawBuster(1, 220, 180, 0, true); }
+    // the Giant of Labels
+    if (T.done !== 'win') drawGiant(T.gx, 180 - T.jump, 1, S.t);
+    else if (T.dT < 1.2) drawGiant(T.gx, 180, 1 + T.dT * 0.3, S.t, 1);
+    T.parts.forEach(p => { rect(p.x, p.y, 4, 3, p.c); rect(p.x + 1, p.y + 1, 2, 1, K.k); });
+    // the runner
+    if (!T.done && T.i < 3) { if (T.squash) { rect(T.x - 6, 177, 12, 3, TEAM[T.i].S); } else drawBuster(T.i, T.x, 180, held('L') || held('R') ? 1 + (((T.walk * 7) | 0) % 2) : 0, false, false); }
+    g.restore();
+    rect(0, 0, W, 10, K.k); text('ENTRATI ' + T.inside + '/2', 4, 1, K.G); rtext(T.i < 3 ? 'TOCCA A ' + TEAM[Math.min(2, T.i)].n : '', 316, 1, K.y);
+    for (let i = 0; i < 3; i++) { const c = T.lost.includes(i) ? K.d : i < T.i ? K.G : TEAM[i].S; drawBuster(i, 120 + i * 14, 198, 0, false, false, 0.45); if (T.lost.includes(i)) line(115 + i * 14, 190, 125 + i * 14, 198, K.R); }
+    if (T.done === 'win') { ctext('LA TORRE DELLO STIGMA SI E\' CHIUSA!', 60, K.y, 1, K.k); if (T.dT > 1.5) ctext('IL GIGANTE E\' SCOPPIATO IN ADESIVI!', 74, K.w, 1, K.k); }
+    else if (T.done === 'lose') ctext('NON CE L\'AVETE FATTA A ENTRARE...', 70, K.R, 1, K.k);
+    else if (S.msgT > 0) ctext(S.msg, 30, S.msgC); else ctext('CORRI ALLA PORTA QUANDO IL GIGANTE SALTA', 30, K.l);
+  }
+};
+
+// ---------------------------------------------------------------- ENDINGS
+function endGame(kind) { END.kind = kind; go('end'); musicVol(MUTE ? 0 : 0.6); }
+const END = {
+  kind: 'win',
+  update() { if (MODE_T > 2 && (pressed('F') || TAP)) { titleStarted = true; go('title'); musicVol(MUTE ? 0 : 1); } },
+  draw() {
+    const win = this.kind === 'win'; rect(0, 0, W, H, win ? K.b : K.k);
+    if (win) { for (let i = 0; i < 40; i++) { const x = (i * 53 + S.t * 30 * (1 + i % 3)) % W, y = (i * 29 + S.t * 40 * (1 + i % 2)) % H; rect(x, y, 4, 3, [K.y, K.R, K.c, K.G][i % 4]); } }
+    const L = win ? ['CONGRATULAZIONI, ' + S.name + '!', '', 'LA TORRE DELLO STIGMA E\' CHIUSA', 'E IL GIGANTE DELLE ETICHETTE', 'E\' DIVENTATO UNA PIOGGIA DI ADESIVI.', '', 'NESSUNO E\' LA SUA ETICHETTA.']
+      : this.kind === 'broke' ? ['SEI IN BANCAROTTA, ' + S.name + '.', '', 'LA BANCA HA CHIUSO IL TUO', 'LABORATORIO DEI CUSTODI.', '', 'RIPROVA: I PREGIUDIZI NON', 'SI SCONFIGGONO IN UN GIORNO.']
+      : this.kind === 'noprofit' ? ['LA TORRE SI E\' APERTA, MA...', '', 'NON HAI GUADAGNATO PIU\' DI QUANTO', 'TI HA PRESTATO LA BANCA.', 'IL FRANCHISING CHIUDE.', '', 'CATTURA PIU\' PREGIUDIZI LA PROSSIMA VOLTA!']
+      : ['IL GIGANTE HA FERMATO I CUSTODI', 'DAVANTI ALLA TORRE.', '', 'MA IL TUO CONTO E\' SALVO:', 'RIPROVA CON PIU\' CORAGGIO!'];
+    L.forEach((l, i) => ctext(l, 18 + i * 11, i === 0 ? K.y : K.w, 1, K.k));
+    ctext('CATTURATI ' + S.caught + '   ASPIRATI ' + S.vacuumed, 104, K.c);
+    ctext('CONTO FINALE ' + fmt(S.money), 120, K.y, 1, K.k);
+    if (this.kind !== 'broke') { ctext('NUMERO DI CONTO', 140, K.l); ctext(accountCode(), 152, K.w, 2, K.k); ctext('SCRIVILO PER LA PROSSIMA PARTITA', 172, K.l); }
+    if (MODE_T > 2 && ((S.t * 2) | 0) % 2) ctext('FUOCO', 188, K.c);
+  }
+};
+const MODES = { title: TITLE, name: NAME, bank: BANK, car: CAR, shop: SHOP, map: MAP, drive: DRIVE, lab: LAB_, bust: BUST, tower: TOWER_, end: END };
+
+// ---------------------------------------------------------------- loop
+let last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame); if (window.__PAUSE) return;
+  const dt = Math.min(0.05, (now - last) / 1000); last = now; step(dt);
+}
+function step(dt) {
+  pollPad();
+  if (pressed('M')) { MUTE = !MUTE; if (MG) MG.gain.value = MUTE ? 0 : 0.22; }
+  S.t += dt; MODE_T += dt; if (S.msgT > 0 && !(S.open && S.mode === 'map')) S.msgT -= dt;
+  const M = MODES[S.mode]; if (!dlgOpen) M.update(dt);
+  musicTick();
+  MODES[S.mode].draw(); clearPress();
+}
+requestAnimationFrame(frame);
+// test hooks
+window.GB = { S, go, step, BUST, TOWER_, DRV, startDrive, enterBuilding, BLD, resetGame, openTower, KD, TP, TD, set: (k, v) => { TD[k] = v; }, press: k => { TP[k] = true; } };
+</script>
+</body>
+</html>
