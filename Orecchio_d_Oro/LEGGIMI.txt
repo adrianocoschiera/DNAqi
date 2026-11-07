@@ -1,0 +1,58 @@
+ORECCHIO D'ORO - Indagini a Custopoli (I Custodi del DNA)
+=========================================================
+Un giallo da risolvere SOLO ASCOLTANDO. Per ragazzi ciechi e ipovedenti
+(dai 14 anni), ma divertente per tutti. Servono le CUFFIE.
+
+L'IDEA
+Sei il detective dell'agenzia Orecchio d'Oro: niente telecamere, solo
+microfoni. Ogni prova e' una REGISTRAZIONE 3D: tu sei il microfono, al
+centro della scena. Puoi fermarla, riavvolgerla e GIRARE LA TESTA dentro la
+registrazione: quando non capisci se un suono e' davanti o dietro, ti giri
+e ascolti come si sposta (e' il trucco che usano le orecchie vere).
+Poi rispondi alle domande: da dove e' entrato il ladro? Quante volte ha
+suonato il campanile? Quale testimone mente?
+Narratore: Adriano. Con Prof K, Riff, CUSTODE, tre testimoni, il Silenzio
+Grigio e un Grigino.
+
+I 4 CASI (una sola storia)
+1. La capsula d'oro - nel laboratorio di Prof K: da dove entra il ladro,
+   da dove scappa, se cammina o corre.
+2. I tre testimoni - la piazza del mercato all'alba: conta i rintocchi,
+   scopri chi mente confrontando le testimonianze con i suoni, segui il
+   tintinnio dei braccialetti.
+3. I messaggi di Riff - due messaggi vocali: capisci dove si trova Riff
+   dai rumori di fondo e conta la sirena della nave per trovare il molo.
+4. Il magazzino del porto - quante persone ci sono (una non parla mai),
+   dove nascondono la capsula (dove gocciola l'acqua), chi l'ha presa.
+   Finale a sorpresa.
+Ogni caso da' da 1 a 3 stelle (meno errori = piu' stelle). Se sbagli, Riff
+ti da' un suggerimento. Non si perde mai. I progressi vengono salvati.
+
+COMANDI DURANTE LA REGISTRAZIONE (tutto lo schermo)
+- Un tocco: pausa / riprendi
+- Scorri in giu': indietro di 5 secondi
+- Scorri in su: dall'inizio
+- Trascina a destra/sinistra: giri la testa dentro la scena
+- Doppio tocco: vai alle domande
+- Due dita: menu di pausa
+Tastiera: spazio pausa, frecce giu'/su indietro/inizio, frecce
+destra/sinistra gira la testa, Invio domande, R ripeti, Esc pausa.
+
+DOMANDE E MENU
+- Tocca un pulsante: CUSTODE lo legge. Tocca due volte: lo scegli.
+- In ogni domanda ci sono anche "Riascolta la registrazione" (e nel caso 2
+  "Riascolta i testimoni").
+- Con TalkBack acceso i menu funzionano normalmente; per ascoltare le
+  registrazioni con i gesti sospendi TalkBack (i due tasti del volume
+  premuti 3 secondi). Il gioco te lo ricorda.
+
+PER CHI AIUTA / INSEGNANTI
+- "Radar per chi aiuta" (menu): mostra in un cerchio dove sono i suoni
+  durante la registrazione, cosi' un accompagnatore vedente puo' seguire.
+- Allena: localizzazione dei suoni, distinzione davanti/dietro con il
+  movimento della testa, conteggio, memoria uditiva, ascolto critico.
+
+AVVIO
+- Android: installa Orecchio_d_Oro.apk.
+- PC: doppio clic su Orecchio_d_Oro.exe o apri gioco.html con Chrome/Edge.
+  Funziona senza internet.
