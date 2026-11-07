@@ -1,0 +1,32 @@
+CUSTODI ROLL - come si gioca
+========================================
+
+COME AVVIARLO
+- Doppio clic su "Custodi_Roll.exe", oppure apri "gioco.html" con Chrome,
+  Edge o Firefox. Funziona anche senza internet.
+- Serve una scheda grafica normale (va bene quella di qualsiasi PC recente,
+  tablet o telefono).
+
+COMANDI
+- Dito o mouse: tieni premuto e trascina a destra o a sinistra. La biglia
+  segue il dito. Se tieni fermo il dito, la biglia va dritta.
+- Tastiera: frecce sinistra/destra (o A e D). Freccia su: un po' più veloce,
+  freccia giù: frena.
+- Esc o P o il tasto II in alto: pausa.   M: audio sì/no.
+- La biglia va avanti da sola, sempre più veloce.
+
+COSE DA SAPERE
+- Pedana arancione con le frecce: TURBO.
+- Pedana rosa rotonda: SALTO, ti fa volare sopra il vuoto.
+- Rampe: prendile dritte e veloci per arrivare dall'altra parte.
+- Barre rosse che girano e Grigini (i cubi grigi con gli occhi) ti spingono
+  via: aggirali.
+- Bandierine verdi: checkpoint. Se cadi, riparti da lì.
+- Stelle: 3 stelle se prendi almeno l'80% delle basi del DNA e cadi al
+  massimo una volta; 2 stelle con almeno la metà delle basi.
+- I mondi si sbloccano uno dopo l'altro. Le stelle sbloccano le biglie:
+  Lenticchia (4 stelle), Bolla del Prof K (8), Grigino pentito (14),
+  Biglia K-Pop (18), Biglia Anni '80 (25), Biglia Casa delle Bambole (32).
+- 16 mondi: ognuno ha la sua musica e i suoi ostacoli (casse, cassette,
+  cubi giocattolo, caramelle, forzieri...).
+- I progressi restano salvati nel browser.
