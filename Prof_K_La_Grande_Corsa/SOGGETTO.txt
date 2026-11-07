@@ -1,0 +1,20 @@
+PROF K - LA GRANDE CORSA - un gioco de I Custodi del DNA
+
+I Grigini hanno rubato le Gemme del DNA, quelle che danno a ogni cosa il suo
+colore unico. Il Prof K, il cane scienziato con il camice, gli occhiali tondi e
+la K sul petto, parte di corsa per riprenderle. Sulle spalle porta Riff, la sua
+assistente ape con le cuffie rosa: quando lei c'e', il Prof ha un cuore in piu'
+e puo' planare battendo le sue ali.
+
+Cinque mondi in 3D, visti di lato come i grandi platform:
+1. LA GIUNGLA DEI GENI - alberi giganti, liane, raggi di sole, cannoni K.
+2. LA SPIAGGIA DELLE PROVETTE - palme, mare, granchi grigi, zattere e pontili
+   che crollano.
+3. IL TRAMONTO DELLE OMBRE - tutto diventa una silhouette nera davanti a un
+   tramonto rosa e viola.
+4. LA MINIERA GRIGIA - corsa a perdifiato sul carrello tra cristalli luminosi.
+5. IL GRIGIOTRON - la macchina che aspira i colori. Saltagli in testa quando
+   apre il coperchio. Sconfitto, i colori tornano e diventa un robot amico.
+
+In ogni livello: ossi da raccogliere (100 = una vita), le lettere P-R-O-F e
+3 Gemme del DNA nascoste.

@@ -1,0 +1,24 @@
+PROF K - LA GRANDE CORSA - come si gioca
+=========================================
+
+AVVIO
+- Doppio clic su "Prof_K_La_Grande_Corsa.exe", oppure apri "gioco.html" con
+  Chrome o Edge. Funziona senza internet.
+- E' un gioco in 3D: su PC vecchi o tablet economici, se va a scatti, apri la
+  pausa e metti "Grafica: media".
+
+COMANDI
+- Frecce (o A/D): corri.        Spazio (o Z): salta, tieni premuto = piu' alto.
+- Shift (o X): rotola. Travolge i Grigini. Salta mentre rotoli = salto lungo.
+- Salta in testa ai Grigini per schiacciarli (quelli con le spine rosse no!).
+- Cannoni K: ci entri dentro, premi Salto per sparare. Se il cannone gira,
+  aspetta che punti nella direzione giusta.
+- Funghi rosa: rimbalzi in alto (tieni premuto Salto per andare ancora piu' su).
+- Bolla con Riff: un cuore in piu'; in aria tieni premuto Salto per planare.
+- Bandiera K: punto di controllo.   Ruota colorata: fine del livello.
+- Esc o P: pausa.
+- Joypad (Xbox/PlayStation/Switch Pro collegato al PC): levetta o croce per
+  muoverti, A salta, X rotola, Start pausa.
+- Tablet: pulsanti sullo schermo (frecce, ROTOLA, SALTA).
+
+I progressi (livelli sbloccati, ossi, lettere, gemme) restano salvati.
