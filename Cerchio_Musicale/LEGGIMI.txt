@@ -1,0 +1,49 @@
+IL CERCHIO MUSICALE DI RIFF - come si gioca
+========================================
+COME SI GIOCA
+- Girati (frecce, dito, testa o telefono): lo strumento davanti a te si
+  sente meglio e la voce dice il suo nome.
+- Barra spaziatrice o tocco: accendi o spegni lo strumento davanti a te.
+- Freccia su / scorri in su: più forte. Freccia giù / scorri in giù: più piano.
+- H: la voce dice dove sono tutti gli strumenti.
+- Nel menu: "Musica" (Allegra, Calma, Misteriosa) e "Strumenti disposti"
+  (in cerchio, tutti davanti, mescolata: ogni volta in posti diversi, così
+  si gioca a indovinare dove sono).
+- Per uscire: Esc o tieni premuto lo schermo, poi "Torna al menu".
+
+PER INIZIARE
+- Metti le CUFFIE (anche quelle normali del telefono): senza cuffie si
+  sentono solo destra e sinistra, non davanti e dietro.
+- Doppio clic su "Cerchio_Musicale.exe", oppure apri "gioco.html" con Chrome o Edge.
+  Funziona anche senza internet.
+- Tocca lo schermo o premi un tasto: da lì in poi una voce guida tutto.
+  Nel menu c'è "Prova le cuffie": Riff ronza a sinistra, a destra, dietro.
+
+COMANDI (tutto si può fare senza vedere)
+Tastiera:  frecce sinistra/destra = girarsi (nei menu: scegliere)
+           frecce su/giù = nei menu: scegliere; nei giochi dove si cammina:
+           avanti e indietro
+           Barra spaziatrice o Invio = azione / conferma
+           Esc = pausa e menu      H = aiuto      R = ripeti l'ultima frase
+           M = audio acceso/spento
+Tocco:     trascina il dito a destra o a sinistra = girarsi
+           tocca una volta = azione / conferma
+           scorri su o giù = nei menu: scegliere; camminare avanti/indietro
+           tieni premuto un secondo = pausa
+Testa:     nel menu "Come girare" scegli "girando la testa, con la webcam":
+           i suoni restano fermi nello spazio mentre giri la testa, come nella
+           realtà. Se tieni la testa girata a lungo, continui a ruotare.
+Telefono:  "girando il telefono o il tablet": tieni il dispositivo davanti a
+           te e ruota su te stesso (usa il giroscopio).
+
+LETTORE DI SCHERMO
+- Il gioco parla da solo con la voce italiana del dispositivo. Se usi già
+  NVDA, JAWS, VoiceOver o TalkBack, nel menu scegli "Voce del gioco: spenta":
+  i testi passano al lettore di schermo.
+
+PER CHI VEDE
+- Sullo schermo c'è un "radar" visto dall'alto: la freccia gialla sei tu.
+  "Mostra i suoni sullo schermo: no" nasconde i suoni, così anche chi vede
+  gioca solo con le orecchie (provate a occhi chiusi!).
+
+NOTA: i suoni sono creati dal computer in tempo reale (non registrati).
