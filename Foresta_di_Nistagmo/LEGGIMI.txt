@@ -1,0 +1,58 @@
+LA FORESTA DI NISTAGMO - come si gioca
+========================================
+I CAPITOLI
+1. Il prato fiorito: trova Lenticchia che abbaia. Nessun ostacolo.
+2. Il ruscello: l'acqua taglia la strada. Il ponte è segnato da campanelli
+   a vento ai due lati. Sul ponte i passi suonano di legno e c'è il
+   corrimano: non si cade.
+3. Il bosco degli alberi: quando un albero è vicino davanti a te, senti un
+   fruscio. Se lo urti, "Toc!": giragli intorno.
+4. La palude dei Grigini: due Grigini girano brontolando. Se ti avvicini
+   troppo ti spingono indietro (non si perde mai).
+5. La radura della festa: raccogli i 5 campanellini, poi segui il rumore di
+   bambù sgranocchiato per trovare tutti gli amici.
+
+COMANDI SPECIALI DI QUESTO GIOCO
+- Freccia su (tenuta): cammini. Freccia giù: passo indietro.
+  Sul tablet: scorri in su per fare qualche passo, in giù per arretrare.
+- Barra spaziatrice o tocco: "ascolta!" - l'amico e i campanellini
+  suonano subito.
+- H: Nistagmo dice dove andare ("Lenticchia è davanti a destra, vicino").
+- I bordi della foresta sono cespugli fitti: se li tocchi, torna indietro.
+
+PER INIZIARE
+- Metti le CUFFIE (anche quelle normali del telefono): senza cuffie si
+  sentono solo destra e sinistra, non davanti e dietro.
+- Doppio clic su "Foresta_di_Nistagmo.exe", oppure apri "gioco.html" con Chrome o Edge.
+  Funziona anche senza internet.
+- Tocca lo schermo o premi un tasto: da lì in poi una voce guida tutto.
+  Nel menu c'è "Prova le cuffie": Riff ronza a sinistra, a destra, dietro.
+
+COMANDI (tutto si può fare senza vedere)
+Tastiera:  frecce sinistra/destra = girarsi (nei menu: scegliere)
+           frecce su/giù = nei menu: scegliere; nei giochi dove si cammina:
+           avanti e indietro
+           Barra spaziatrice o Invio = azione / conferma
+           Esc = pausa e menu      H = aiuto      R = ripeti l'ultima frase
+           M = audio acceso/spento
+Tocco:     trascina il dito a destra o a sinistra = girarsi
+           tocca una volta = azione / conferma
+           scorri su o giù = nei menu: scegliere; camminare avanti/indietro
+           tieni premuto un secondo = pausa
+Testa:     nel menu "Come girare" scegli "girando la testa, con la webcam":
+           i suoni restano fermi nello spazio mentre giri la testa, come nella
+           realtà. Se tieni la testa girata a lungo, continui a ruotare.
+Telefono:  "girando il telefono o il tablet": tieni il dispositivo davanti a
+           te e ruota su te stesso (usa il giroscopio).
+
+LETTORE DI SCHERMO
+- Il gioco parla da solo con la voce italiana del dispositivo. Se usi già
+  NVDA, JAWS, VoiceOver o TalkBack, nel menu scegli "Voce del gioco: spenta":
+  i testi passano al lettore di schermo.
+
+PER CHI VEDE
+- Sullo schermo c'è un "radar" visto dall'alto: la freccia gialla sei tu.
+  "Mostra i suoni sullo schermo: no" nasconde i suoni, così anche chi vede
+  gioca solo con le orecchie (provate a occhi chiusi!).
+
+NOTA: i suoni sono creati dal computer in tempo reale (non registrati).
