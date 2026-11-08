@@ -1,0 +1,47 @@
+ORECCHIO D'ORO CON GLI OCCHI - Indagini a Custopoli (I Custodi del DNA)
+=======================================================================
+Lo stesso giallo sonoro di "Orecchio d'Oro", pensato per chi NON PUO' USARE
+LE MANI: si comanda solo con lo sguardo. Servono le cuffie.
+
+COME SI COMANDA
+- Ogni comando e' un grande pulsante. Guardalo e tienilo con lo sguardo:
+  si riempie di giallo e quando e' pieno si attiva (tempo regolabile:
+  0,8 / 1,2 / 1,8 / 2,5 secondi). Per riattivare lo stesso pulsante, guarda
+  altrove e poi di nuovo il pulsante.
+- Il tablet legge ad alta voce il pulsante che stai guardando (si puo'
+  disattivare).
+- RIPOSO: guardando "Riposo" niente si attiva piu' (gli occhi si possono
+  rilassare, anche durante la registrazione). Per ricominciare guarda
+  "Sblocca" per 2 secondi.
+
+DURANTE LA REGISTRAZIONE (griglia 3x3)
+  [Domande]          [Pausa/Riprendi]   [Menu]
+  [Gira a sinistra]  (la tua testa)     [Gira a destra]
+  [-5 secondi]       [Dall'inizio]      [Riposo]
+- Finche' guardi una freccia, la testa gira dentro la registrazione: cosi'
+  si capisce se un suono e' davanti o dietro. Al centro una bussola mostra
+  dove e' girata la testa (non mostra i suoni: sarebbe barare!).
+
+CON COSA SI USA
+1. Eye tracker (Tobii, Irisbond, Eye Control di Windows, ecc.) o puntatore
+   a testa: muovono il puntatore del computer, il gioco lo segue da solo.
+   Un clic (anche il clic a fissazione dell'eye tracker) attiva subito.
+2. Senza eye tracker: WEBCAM o fotocamera del tablet. Impostazioni ->
+   "Webcam come eye tracker": parte una calibrazione (guarda il pallino
+   giallo in 9 punti, tenendo la testa ferma). Il gioco usa la posizione
+   delle pupille e della testa. E' meno precisa di un eye tracker vero,
+   per questo i pulsanti sono molto grandi. Se cambia la luce o la
+   posizione, usa "Ricalibra lo sguardo".
+   Tutto avviene sul dispositivo: nessuna immagine viene salvata o inviata.
+3. Per chi aiuta: anche il mouse funziona (passandoci sopra, o cliccando).
+
+AVVIO
+- Android: installa Orecchio_d_Oro_occhi.apk (consenti la fotocamera se
+  vuoi usare lo sguardo con la webcam). La prima volta qualcuno deve
+  guardare o toccare "Guarda qui per iniziare"; se la webcam era gia'
+  attiva, basta lo sguardo.
+- PC: doppio clic su Orecchio_d_Oro_occhi.exe o apri gioco.html con Chrome
+  o Edge. Funziona senza internet.
+
+I CASI: come in Orecchio d'Oro (la capsula d'oro, i tre testimoni, i
+messaggi di Riff, il magazzino del porto). I progressi sono salvati.
