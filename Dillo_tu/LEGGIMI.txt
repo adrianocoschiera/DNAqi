@@ -1,0 +1,60 @@
+DILLO TU! - filastrocche con la parola che manca
+================================================
+Un gioco de I Custodi del DNA per incoraggiare Emma a usare la voce.
+La voce che canta e' quella di papa' (Adriano).
+
+AVVIO
+- PC: doppio clic su "Dillo_tu.exe", oppure apri "gioco.html" con Chrome o
+  Edge. Funziona senza internet. Alla prima canzone il browser chiede il
+  microfono: "Consenti".
+- Tablet Android: installa Dillo_tu.apk e concedi il microfono.
+
+COME FUNZIONA
+- Papa' dice una filastrocca e si ferma prima dell'ultima parola
+  ("...e fa..."). Compare la figura con la parola scritta e l'orecchio rosa:
+  e' il turno di Emma. Il cerchio bianco intorno alla figura si allarga
+  quando il tablet la sente.
+- Attesa attiva: dopo qualche secondo papa' dice "Tocca a te!"; se Emma non
+  risponde, dice lui la parola e "Proviamo insieme!", poi aspetta ancora.
+  Non si sbaglia mai: alla fine la canzone va sempre avanti.
+- Ogni risposta con la voce vale una stella, papa' ripete la parola giusta
+  (cosi' Emma la sente bene) e la festeggia.
+- Alla fine papa' dice "Senti come abbiamo cantato insieme!" e la canzone
+  viene ripetuta con la VOCE DI EMMA al posto delle parole mancanti.
+  (La voce di Emma non viene salvata: resta solo finche' il gioco e' aperto.)
+
+LE CANZONI
+1. Gli animali cantano: bau bau, miao, muu, qua qua, zzz (filastrocca nuova)
+2. I suoni magici: oh!, aaah, uuuh, iiih, ciuf ciuf (vocali e suoni)
+3. Le parole di casa: pappa, nanna, mamma, papa', ciao
+   (in impostazioni si possono mettere le foto vere di mamma e papa')
+4. Fra Martino (tradizionale): din don dan
+5. Giro giro tondo (tradizionale): terra
+
+COSA CHIEDE IL GIOCO (livello che sale da solo)
+- 1 Qualsiasi suono: basta un suono anche breve.
+- 2 Suono lungo: un suono che dura almeno mezzo secondo ("aaaa").
+- 3 Parola intera: il tablet conta i "pezzetti" (le sillabe) del suono e li
+  confronta con la parola: "bau bau" sono 2 pezzetti, "din don dan" 3.
+  Non serve dirla perfetta: va bene un pezzetto in piu' o in meno.
+In "Automatico" sale di livello dopo 4 risposte giuste di fila e scende se
+fa fatica 3 volte. Si puo' anche fissare a mano in impostazioni.
+Se ci prova ma il suono non basta per il livello, papa' dice la parola e
+al secondo tentativo vale qualsiasi suono.
+
+CAA
+- Toccare la figura vale come risposta (si puo' disattivare). Dopo il tocco
+  papa' chiede gentilmente "E adesso, con la voce?" e aspetta ancora un po'.
+- Le parole sono scritte sotto: aiutano anche la lettura (si possono nascondere).
+
+DIARIO DEI SUONI (per i genitori e la logopedista)
+- Dalla schermata iniziale: quante risposte con la voce negli ultimi 14
+  giorni, e per ogni parola: voce, voce dopo l'aiuto, tocchi, nessuna
+  risposta, tempo medio di risposta, livello raggiunto.
+- "Copia per la logopedista" copia tutti i turni in formato testo/CSV da
+  incollare in un messaggio o in Excel.
+- Tutto resta sul dispositivo.
+
+NOTA
+Il gioco e' un aiuto per giocare con la voce, non sostituisce la terapia:
+conviene mostrarlo alla logopedista e scegliere con lei livello e canzoni.
